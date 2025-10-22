@@ -1,0 +1,27 @@
+[
+    {
+        "name": "facebook",
+        "url": "www.facebook.com/",
+        "icon_path": "/assets/icons/facebook/facebook.svg"
+    },
+    {
+        "name": "github",
+        "url": "www.linkedin.com/",
+        "icon_path": "/assets/icons/github/github.svg"
+    },
+    {
+        "name": "instagram",
+        "url": "www.instagram.com/",
+        "icon_path": "/assets/icons/instagram/instagram.svg"
+    },
+    {
+        "name": "linkedin",
+        "url": "www.linkedin.com/",
+        "icon_path": "/assets/icons/linkedin/linkedin.svg"
+    },
+    {
+        "name": "whatsapp",
+        "url": "www.whatsapp.com/",
+        "icon_path": "/assets/icons/whatsapp/whatsapp.svg"
+    }
+]

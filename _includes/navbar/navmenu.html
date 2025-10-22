@@ -1,0 +1,12 @@
+<div class="nav-menu-container">
+    <ul class="nav-menus">
+        {% for nav_menu in site.data.social_media_icons %}
+        <li class="nav-menu">
+            <a href="{{nav_menu.url}}">
+                <i class="icon-nav-menu-i" style="background-image: url('{{ nav_menu.icon_path }}');"></i>
+            </a>
+        </li>
+        {% endfor %} 
+    </ul>
+    <a href="" class="hire-me">Hire Me</a>
+</div>

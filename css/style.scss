@@ -1,0 +1,39 @@
+--- 
+--- 
+@import "grid";
+@import "mixin";
+
+// ---
+//Fonts
+@import url('/assets/fonts/respano-2023-11-27-05-36-57-utc/RESPANO.otf');
+font-face {
+    font-family: 'Respano';
+    src: url('/assets/fonts/respano-2023-11-27-05-36-57-utc/RESPANO.otf');
+}
+// ---
+
+// ---
+//Body
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+h2,h1,h3 {
+    margin: 0px;
+}
+
+p {
+    margin: 0;
+}
+
+ul, ol {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

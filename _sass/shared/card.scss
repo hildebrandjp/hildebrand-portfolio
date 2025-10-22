@@ -1,0 +1,84 @@
+$white: #ffffff;
+$default_margin: 30px;
+
+.card {
+    width: 430px;
+    height: 308px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    position:relative;
+
+    > .card-image-profile {
+        background-image: url('/assets/img/profile.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        width: 95%;
+        height: 120%;
+        position: absolute;
+        top: -62px;
+        left: 10px;
+    }
+
+    > .card-description-profile {
+        padding: 42px;
+
+        > .profile-name {
+            font-size: 24px;
+            font-family: 'Respano';
+            color: $white;
+        }
+
+        > .profile-job-title {
+            font-size: 20px;
+            color: $white;
+        }
+
+        > .profile-additional-info {
+            padding-top: 2rem;
+            color: $white;
+            list-style: none
+        }
+    }
+
+    .card-menu-profile {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+
+        > .img-menu-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+
+            > .img-menu {
+                display: flex;
+                width: 100%;
+                background-color: antiquewhite;
+                margin: $default_margin $default_margin 0px $default_margin;
+                border-radius: 20px;
+            }
+        }
+
+        > .card-menu-lower-part {
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            padding: 0 $default_margin;
+
+            > h4 {
+                font-size: 28px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    > .card-default {
+        height: 100%;
+        overflow: hidden;
+    }
+}

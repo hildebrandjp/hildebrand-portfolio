@@ -1,0 +1,14 @@
+--- 
+---
+
+
+.home-page {
+    margin-right: 20px;
+}
+
+.home-container {
+  display: grid;
+  grid-template-rows: repeat(2, auto);   /* 2 rows */
+  grid-auto-flow: column;                /* Fill by column instead of row */
+  gap: 1rem;
+}

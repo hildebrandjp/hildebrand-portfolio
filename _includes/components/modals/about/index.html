@@ -1,0 +1,77 @@
+<div class="modal-ext-container modal-about-container hidden">
+    <div class="about-me-container">
+        <div class="about-me-left-container">
+
+            <div class="about-me-left-uppermost-container">
+                {% include components/shared/profile_title_img.html %}
+            </div>
+
+            <div class="about-me-left-middle-container">
+                {% include components/shared/profile_description.html %}
+            </div>
+
+            <div class="about-me-left-low-container">
+                <div class="about-me-work-with-brands-container">
+                    <h6>Work With 60+ Brands Worldwide</h6>
+                    <div class="about-me-work-divider-hr">
+                        <span class="hr"></span>
+                    </div>
+                </div>
+                {% include components/shared/grid_images.html images=site.data.work_company %}
+            </div>
+
+            <div class="about-me-left-lowest-container">
+                {% for highlight_achievement in site.data.cards.cards.highlight_achievements %}
+                
+                    {% capture highlight_slot %}
+                        <div class="custom-sm-card">
+                            <h1 class="highlight-title">{{ highlight_achievement.title }}</h1>
+                            <p class="highlight-sub-title">{{ highlight_achievement.description }}</p>
+                        </div>
+                    {% endcapture %}
+
+                    {% include components/shared/card.html 
+                        type="default" style="width: 172px; height: 144px; overflow: hidden; background-color: var(--app-gray-darklight);"
+                        slot=highlight_slot
+                    %}
+                    
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div class="about-me-right-container">
+            <div class="about-me-right-uppermost-container">
+                <h3>Experience</h3>
+                <div class="amru-inner-container">
+                    {% for educ_experience in site.data.cards.cards.education_or_experience %}
+                    <div class="amru-item">
+                        <span class="amru-year">{{ educ_experience.year }}</span>
+                        <div>
+                        {% for job_pos in educ_experience.jobs %}
+                            <h4 class="amru-jobtitle">{{ job_pos.title }}</h4>
+                            <p class="amru-position">{{ job_pos.position }}</p>
+                        {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <br/><br/><br/>
+                <h3>Education</h3>
+                <div class="amru-inner-container">
+                    {% for educ_experience in site.data.cards.cards.education_or_experience %}
+                    <div class="amru-item">
+                        <span class="amru-year">{{ educ_experience.year }}</span>
+                        <div>
+                        {% for job_pos in educ_experience.jobs %}
+                            <h4 class="amru-jobtitle">{{ job_pos.title }}</h4>
+                            <p class="amru-position">{{ job_pos.position }}</p>
+                        {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

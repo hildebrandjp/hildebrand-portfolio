@@ -1,0 +1,16 @@
+--- 
+---
+
+@import "navbar/navmenu";
+@import "navbar/logo";
+
+.nav-inner-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.nav-container {
+    padding: 2rem 0px;;
+}

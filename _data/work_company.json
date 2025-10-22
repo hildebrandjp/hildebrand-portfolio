@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Pililokal",
+        "icon": "/assets/img/work/pililokal.png"
+    },
+    {
+        "name": "Walklog",
+        "icon": "/assets/img/work/walklog.png"
+    },
+    {
+        "name": "Askpro",
+        "icon": "/assets/img/work/askpro.png"
+    },
+    {
+        "name": "Datt Japan",
+        "icon": "/assets/img/work/datt_japan.png"
+    },
+    {
+        "name": "Contents Works",
+        "icon": "/assets/img/work/content_works.png"
+    },
+    {
+        "name": "Toyota Tsusho",
+        "icon": "/assets/img/work/toyota_tsuho.png"
+    }
+]

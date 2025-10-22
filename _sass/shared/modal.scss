@@ -1,0 +1,310 @@
+$modal_close_icon_size: 48px;
+
+.modal {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    height: fit-content;
+    top: 0;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+
+    > .modal-container {
+        margin: 100px 0;
+        height: calc(100% - 200px);
+        border-radius: 25px;
+        background-color: var(--app-dark);
+        position: relative;
+
+        left: 50%;
+        transform: translateX(-50%);
+
+        > .modal-close-icon {
+            background-image: url('/assets/icons/close.svg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            width: $modal_close_icon_size;
+            height: $modal_close_icon_size;
+            display: block;
+            right: -68px;
+            top: 15px;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        > .modal-ext-container {
+            padding: 48px;
+
+            > .about-me-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                column-gap: 2rem;
+
+                > .about-me-left-container {
+
+                    > .about-me-left-middle-container {
+                        padding-top: 32px;
+                    }
+
+                    > .about-me-left-low-container {
+                        color: var(--app-light);
+
+                        > .about-me-work-with-brands-container {
+                            display: flex;
+                            flex-direction: row;
+                            column-gap: 10px;
+
+                            > h6 {
+                                width: 100%;
+                                font-size: 14px;
+                                text-wrap-mode: nowrap;
+                            }
+
+                            > .about-me-work-divider-hr {
+                                width: 100%;
+
+                                > .hr {
+                                    position: relative;
+                                    top: 50%;
+                                    transform: translateY(-50%);
+                                    margin: 0px !important;
+                                    padding: 0px !important;
+                                    display: block;
+                                    width: 100%;
+                                }
+                                // Create a circle right side
+                                > .hr::after {
+                                    content: ""; /* Required for pseudo-elements */
+                                    position: absolute; /* Position the circle absolutely */
+                                    right: 0px; /* Center horizontally */
+                                    top: 50%; /* Center vertically */
+                                    transform: translateY(-50%); /* Adjust for perfect centering */
+                                    width: 10px; /* Circle width */
+                                    height: 10px; /* Circle height */
+                                    background-color: var(--app-gray-light); /* Circle color */
+                                    border-radius: 50%; /* Makes it a circle */
+                                }
+                                // Create a line in the middle
+                                > .hr::before {
+                                    content: "";        /* Required for pseudo-elements */
+                                    position: absolute; /* Position relative to <hr> */
+                                    left: 0;           /* Start from left edge */
+                                    top: 50%;          /* Center vertically */
+                                    width: 100%;       /* Full width of <hr> */
+                                    height: 1.3px;       /* Line thickness */
+                                    background: var(--app-gray);  /* Line color */
+                                }
+                            }
+                        }
+                    }
+
+                    > .about-me-left-lowest-container {
+                        display: flex;
+                        column-gap: 1.2rem;
+
+                        div > div > .custom-sm-card {
+                            background-color: var(--app-gray-darklight);
+                            padding: 20px 25px;
+                            height: 100%;
+
+                            > .highlight-title {
+                                color: var(--app-red);
+                            }
+
+                            > .highlight-sub-title {
+                                color: var(--app-gray-light);
+                            }
+                        }
+                    }
+                }
+
+                > .about-me-right-container::-webkit-scrollbar {
+                    width: 8px;   /* vertical scrollbar width */
+                    height: 8px;  /* horizontal scrollbar height */
+                }
+
+                > .about-me-right-container::-webkit-scrollbar-thumb {
+                    background: var(--app-darker);
+                    border-radius: 4px;
+                }
+
+                > .about-me-right-container::-webkit-scrollbar-track {
+                    background: var(--app-gray);
+                }
+
+                > .about-me-right-container {
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    padding-left: 12px;
+                    overflow-y: scroll;
+                    max-height: 500px;
+                    margin-top: 20px;
+
+                    > .about-me-right-uppermost-container{
+                        > h3 {
+                            color: var(--app-light);
+                            font-size: 1.5rem;
+                        }
+
+                        > .amru-inner-container{
+                            position: relative;
+
+                            > .amru-item{
+                                padding-left: 24px;
+
+                                > .amru-year {
+                                    color: var(--app-red);
+                                    font-weight: 600;
+                                    font-size: 1rem;
+                                    padding-top: 20px;
+                                    display: block;
+                                }
+
+                                .amru-jobtitle {
+                                    color: var(--app-light);
+                                    font-weight: 600;
+                                    font-size: 1.1rem;
+                                }
+                                .amru-position {
+                                    color: var(--app-red);
+                                    font-weight: 500;
+                                    font-size: 0.8rem;
+                                    padding-left: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                @media screen and (max-width: 992px) {
+                    flex-direction: column;
+                    row-gap: 1.25rem;
+
+                    > .about-me-right-container {
+                        padding-left: 0;
+                        max-height: 230px;
+                        overflow-y: scroll;
+                        margin-top: 12px;
+                    }
+
+                    > .about-me-right-container::-webkit-scrollbar {
+                        width: 1px;
+                        height: 1px;
+                    }
+
+                    > .about-me-left-container {
+                        > .about-me-left-middle-container {
+                            padding-top: 16px;
+                        }
+
+                        > .about-me-left-low-container {
+                            > .about-me-work-with-brands-container {
+                                column-gap: 8px;
+
+                                > h6 {
+                                    font-size: 12px;
+                                }
+                            }
+                        }
+
+                        > .about-me-left-lowest-container {
+                            column-gap: 0.8rem;
+
+                            div > div > .custom-sm-card {
+                                padding: 16px 18px;
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            > .skill-container {
+                display: flex;
+                flex-direction: column;
+                column-gap: 2rem;
+                color: var(--app-light);
+
+                .upper-skill-container {
+                    display: flex;
+                    column-gap: 40px;
+
+                    div:nth-child(2) > p {
+                        padding-top: 5px;
+                    }
+                }
+
+                .mid-pos-skill-container {
+                    display: flex;
+                    border-top: 2px solid var(--app-gray-light);
+                    margin-top: 32px;
+                    padding-top: 32px;
+                    gap: 32px;
+
+                    > div {
+                        flex: 1;
+                    }
+
+                    .raw-skill-container, .coding-skill-container {
+                        h4 {
+                            font-size: 24px;
+                            font-weight: 600;
+                            margin: 0 !important;
+                            padding-bottom: 16px;
+                        }
+                    }
+
+                    .coding-skill-container {
+                        .inner-coding-skill {
+                            padding: 32px;
+                            background: var(--app-darker);
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 10px;
+                        }
+                    }
+
+                    .raw-skill-container {
+                        .inner-raw-skill {
+                            padding-top: 32px;
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                            gap: 32px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .mid-pos-skill-container {
+        flex-direction: column;
+
+        .coding-skill-container {
+            padding-top: 32px;
+        }
+
+        .raw-skill-container > .inner-raw-skill {
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .upper-skill-container {
+        flex-direction: column;
+
+        .about-me-left-middle-container {
+            padding-top: 32px;
+        }
+    }
+}

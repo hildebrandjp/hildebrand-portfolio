@@ -1,0 +1,13 @@
+{
+    "profile_image": "profile-image",
+    "pages": {
+        "home": "home",
+        "about": "about-me",
+        "portfolio": "my-portfolio",
+        "skill": "my-skill",
+        "contact": "contact-me"
+    },
+    "colors": {
+        "dark": "#1F1F1F"
+    }
+}

@@ -1,0 +1,63 @@
+{
+    "tags": [
+        {
+            "title": "Mobile App",
+            "color": "#D7EEFE",
+            "tag": "mobile_app"
+        },
+        {
+            "title": "Video Chatting",
+            "color": "#F6EDFF",
+            "tag": "video_chatting"
+        },
+        {
+            "title": "Chatting",
+            "color": "#D7EEFE",
+            "tag": "chatting"
+        }
+    ],
+    "data": [
+        [
+            {
+                "title": "Easy Chat UI 1",
+                "subtitle": "Video Meeting",
+                "description": "lorem ipsum",
+                "thumbnail": "",
+                "url": "",
+                "tag": "mobile_app",
+                "color": "#fff",
+                "video_url": ""
+            },
+            {
+                "title": "Easy Chat UI 2",
+                "subtitle": "Video Meeting",
+                "description": "lorem ipsum",
+                "thumbnail": "",
+                "url": "",
+                "tag": "mobile_app",
+                "color": "#fff",
+                "video_url": ""
+            },
+            {
+                "title": "Easy Chat UI 3",
+                "subtitle": "Video Meeting",
+                "description": "lorem ipsum",
+                "thumbnail": "",
+                "url": "",
+                "tag": "mobile_app",
+                "color": "#fff",
+                "video_url": ""
+            },
+            {
+                "title": "Easy Chat UI 4",
+                "subtitle": "Video Meeting",
+                "description": "lorem ipsum",
+                "thumbnail": "",
+                "url": "",
+                "tag": "mobile_app",
+                "color": "#fff",
+                "video_url": ""
+            }
+        ]
+    ]
+}

@@ -1,0 +1,7 @@
+<div class="grid-images-container">
+    {% for image in include.images %}
+        <div class="grid-image">
+            <img src="{{image.icon}}" alt="{{image.alt_text}}" title="{{image.name}}">
+        </div>
+    {% endfor %}
+</div>

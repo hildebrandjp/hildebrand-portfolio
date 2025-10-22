@@ -1,0 +1,60 @@
+.progress-container {
+    position: relative;
+    width: var(--size);
+    height: var(--size);
+}
+
+.progress-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(var(--color) var(--percent),
+        #333 var(--percent));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(calc(1 * var(--rotation)));
+}
+
+  /* Inner circle = cut-out */
+.progress-circle::before {
+    content: "";
+    position: absolute;
+    width: calc(var(--size) - (2 * var(--thickness)));
+    height: calc(var(--size) - (2 * var(--thickness)));
+    background: #1a1a1a;
+    border-radius: 50%;
+}
+
+  /* Center content (icon) */
+.center-content {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    transform: rotate(calc(-1 * var(--rotation)));
+}
+
+.center-content img {
+    width: 45px;
+    height: 45px;
+}
+
+/* Percentage label */
+.progress-label {
+    position: absolute;
+    top: 49%;
+    right: -7px;
+    background: var(--color);
+    color: white;
+    font-size: 9px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* transform: translateY(-50%); */
+}

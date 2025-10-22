@@ -1,0 +1,28 @@
+{% comment %}
+Parameters:
+- percent: percentage value (default: 95)
+- color: progress bar color (default: #a855f7)
+- size: circle size (default: 120px)
+- thickness: progress bar thickness (default: 12px)
+- rotation: rotation angle (default: 90deg)
+- icon: icon URL (default: Figma logo)
+- alt: icon alt text (default: icon)
+{% endcomment %}
+
+{% assign percent = include.percent | default: 95 %}
+{% assign color = include.color | default: "#a855f7" %}
+{% assign thickness = include.thickness | default: "12px" %}
+{% assign rotation = include.rotation | default: "90deg" %}
+{% assign icon = include.icon | default: "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" %}
+{% assign alt = include.alt | default: "icon" %}
+{% assign size = include.size | default: "120px" %}
+
+<div class="progress-container"
+  style="--size: {{ size }}; --thickness: {{ thickness }}; --percent: {{ percent }}%; --rotation: {{ rotation }}; --color: {{ color }};">
+  <div class="progress-circle">
+    <div class="center-content">
+      <img src="{{ icon }}" alt="{{ alt }}">
+    </div>
+  </div>
+  <div class="progress-label">{{ percent }}%</div>
+</div>

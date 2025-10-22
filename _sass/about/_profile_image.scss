@@ -1,0 +1,15 @@
+
+
+.profile-image-container {
+    @include make-dflex-center();
+    
+    
+    > .picture-src {
+        display: block;
+        background-image: url('/assets/img/hildebrandpro.png');
+        background-position: center;
+        background-size: 100% 100%;
+        width: 300px;
+        height: 300px;
+    }
+}

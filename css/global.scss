@@ -1,0 +1,36 @@
+---
+---
+
+
+.bg-image-mask {
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('/assets/img/bg_mask.png');
+    background-repeat: no-repeat;
+    height: 100%;
+    background-size: 100% 100%;
+}
+
+.vert-line {
+    position: relative;
+    padding-left: 1rem;
+}
+
+.vert-line .line {
+  position: absolute;
+  left: 0;
+  width: 2px;
+  background-color: var(--app-gray);
+  border-radius: 2px;
+}
+
+.bullet {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: var(--app-gray-light);
+  border-radius: 50%;
+}

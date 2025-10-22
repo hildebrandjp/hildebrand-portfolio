@@ -1,0 +1,17 @@
+{% comment %}
+Parameters:
+- percent: percentage value (default: 95)
+- label: label value (default: 95)
+{% endcomment %}
+
+{% assign percent = include.percent | default: 95 %}
+{% assign label = include.label | default: "HTML5" %}
+
+<div class="progress-horizontal-container">
+    <span class="progress-horizontal-label">{{ label }}</span>
+    <div class="progress-horizontal-bar">
+      <div class="progress-horizontal-fill" style="width: {{ percent }}%;">
+        <span class="progress-horizontal-percent">{{ percent }}%</span>
+      </div>
+    </div>
+</div>

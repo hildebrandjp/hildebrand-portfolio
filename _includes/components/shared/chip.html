@@ -1,0 +1,14 @@
+{% comment %}
+Parameters:
+- title: title name (default: Title)
+- tag: tag name (default: Tag)
+- color: color name or hex (default: #D7EEFE)
+{% endcomment %}
+
+{% assign title = include.title | default: "Chip_Title" %}
+{% assign tag = include.tag | default: "mobile_app" %}
+{% assign color = include.color | default: "#D7EEFE" %}
+
+<a href="javascript:void(0)" class="chip-component" data-chip-tag="{{tag}}" style="background-color: {{color}};">
+    {{title}}
+</a>

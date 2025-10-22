@@ -1,0 +1,17 @@
+<div class="card" style="background-color: {{ include.bg_color | default: '#ffffff' }}; {{include.style}}">
+    {% if include.type == "profile-image" %}
+        {% include components/pages/home/card_image_profile.html %}
+    {% elsif include.type == "profile-description" %}
+        {% include components/pages/home/card_description_profile.html
+            profile=include.profile
+        %}
+    {% elsif include.type == "menu" %}
+        {% include components/pages/home/card_menu_profile.html data=include.data %}
+    {% else %}
+    <div class="card-default">
+        {% if include.slot %}
+            {{ include.slot }}
+        {% endif %}
+    </div>
+    {% endif %}
+</div>

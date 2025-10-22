@@ -1,0 +1,36 @@
+{
+  "name": "profile-jekyll",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "node -e \"require('fs').mkdirSync('_site/assets/js', {recursive: true})\"",
+    "build-js:dev": "npm run prebuild && cross-env NODE_ENV=development rspack --config rspack.config.js",
+    "build-js:prod": "npm run prebuild && cross-env NODE_ENV=production rspack --config rspack.config.js",
+    "watch-js:dev": "npm run prebuild && cross-env NODE_ENV=development rspack --watch --config rspack.config.js",
+    "serve": "bundle exec jekyll serve",
+    "docker:build": "docker build -t hildebrand .",
+    "docker:app": "docker run -p 4000:4000 hildebrand",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@rspack/cli": "^1.0.5",
+    "@rspack/core": "^1.0.5",
+    "@types/jquery": "^3.5.33",
+    "@types/three": "^0.175.0",
+    "babel-loader": "^9.1.3",
+    "cross-env": "^7.0.3",
+    "terser-webpack-plugin": "^5.3.10",
+    "ts-checker-rspack-plugin": "^1.1.1",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "three": "^0.175.0"
+  }
+}

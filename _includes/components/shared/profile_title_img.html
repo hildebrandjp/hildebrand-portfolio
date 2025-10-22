@@ -1,0 +1,16 @@
+<div class="profile-title-img-container">
+    {% assign size = include.size | default: 32 %}
+    {% assign object = include.data | default: {} %}
+
+    {% assign backgroundSize = size | plus: 20 %}
+    {% assign name = object.name | default: "Full Name" %}
+    {% assign position = object.position | default: "Position" %}
+
+    <div class="prof-img-info-container" style="width: {{backgroundSize}}px; height: {{backgroundSize}}px;">
+        <div class="prof-img-info" style="width: {{size}}px; height: {{size}}px;"></div>
+    </div>
+    <div class="prof-name-position">
+        <h3>{{name}}</h3>
+        <p>{{position}}</p>
+    </div>
+</div>

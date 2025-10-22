@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "NodeNext",
+    "strict": true,
+    "outDir": "assets/js",
+    "rootDir": "_assets",
+    "esModuleInterop": true,
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "types": [
+      "@rspack/core/module",
+      "jquery"
+    ],
+    "paths": {
+      "@/*": ["_assets/js/*"]
+    },
+    "baseUrl": ".",
+  },
+  "include": [
+    "_assets/**/*",
+  ],
+  "exclude": [
+    "node_modules",
+  ]
+}

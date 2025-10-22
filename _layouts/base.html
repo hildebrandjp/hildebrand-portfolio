@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title }}</title>
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+    <meta name="generator" content="{{ page.generator | default: site.generator}}" />
+    <meta property="og:title" content="{{ page.og_title | default: site.og_title }}" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="description"
+        content="{{ page.description | default: site.description }}" />
+    <meta property="og:description"
+        content="{{ page.description | default: site.description }}" />
+    <link rel="canonical" href="{{ page.canonical | default: site.canonical }}" />
+    <meta property="og:url" content="{{ page.og_url | default: site.og_url }}" />
+    <meta property="og:site_name" content="{{ page.og_site_name | default: site.og_site_name }}" />
+    <meta property="og:type" content="{{ page.og_type | default: site.og_type }}" />
+    <meta name="twitter:card" content="{{ page.twitter_card | default: site.twitter_card }}" />
+    <meta property="twitter:title" content="{{ page.og_title | default: site.og_title }}" />
+    <script type="application/ld+json">
+        {{ page.script_json | default: site.script_json }}
+    </script>
+    <!-- End Jekyll SEO tag -->
+    {% for css_import in site.data.css %}
+    <link rel="stylesheet" href="/css/{{css_import}}.css">
+    {% endfor %}
+    <link type="application/atom+xml" rel="alternate" href="{{ page.site_url | default: site.site_url }}/feed.xml" title="{{ page.og_title | default: site.og_title }}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="/assets/js/dist/app.js"></script>
+</head>
+<body>
+    {{ content }}
+    {% if page.scripts %}{{ page.scripts | safe }}{% endif %}
+</body>
+</html>

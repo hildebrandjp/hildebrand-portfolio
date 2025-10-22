@@ -1,0 +1,17 @@
+$grid_image_size: 100px;
+
+.grid-images-container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+
+    > .grid-image > img {
+        width: $grid_image_size;
+        height: $grid_image_size;
+    }
+
+    > .grid-image:nth-child(4) > img,
+    > .grid-image:nth-child(5) > img,
+    > .grid-image:nth-child(6) > img {
+        scale: 1.4;
+    }
+}

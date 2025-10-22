@@ -1,0 +1,33 @@
+<div class="card-description-profile relative">
+    <h2 class="profile-name">{{ include.profile.name | default: "Profile Name" }}</h2>
+    <p class="profile-job-title">{{ include.profile.position | default: "This is a default profile job title." }}</p>
+
+    {% include components/shared/edge_icon.html 
+        size=140 
+        style="top: 2.5rem; left: 0rem;"
+    %}
+
+    <ul class="profile-additional-info">
+        {% assign age_text = "Age: " | append: include.profile.age %}
+        {% assign job_text = "Job: " | append: include.profile.job_title %}
+        {% assign citizenship_text = "Citizenship: " | append: include.profile.citizenship %}
+        {% assign phone_text = "Phone: " | append: include.profile.phone %}
+        {% assign email_text = "Email: " | append: include.profile.email %}
+        
+        {% include components/pages/home/shared/li_tag_headline.html 
+            text=age_text
+        %}
+        {% include components/pages/home/shared/li_tag_headline.html 
+            text=job_text
+        %}
+        {% include components/pages/home/shared/li_tag_headline.html 
+            text=citizenship_text
+        %}
+        {% include components/pages/home/shared/li_tag_headline.html 
+            text=phone_text
+        %}
+        {% include components/pages/home/shared/li_tag_headline.html 
+            text=email_text
+        %}
+    </ul>
+</div>

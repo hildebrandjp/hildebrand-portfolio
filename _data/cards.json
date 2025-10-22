@@ -1,0 +1,91 @@
+{
+    "cards": {
+        "profile": {
+            "name": "John Doe",
+            "title": "Web Developer",
+            "description": "A passionate web developer with a knack for creating dynamic and responsive websites.",
+            "age": "27 Years",
+            "job_title": "Software Engineer",
+            "citizenship": "USA",
+            "email": "hildebrandlig11@gmail.com",
+            "phone": "+1 234 567 890",
+            "image_path": "/assets/images/profile.jpg",
+            "position": "UX/UI Designer & Front-end Developer",
+            "color_background": {
+                "profile_img": "#ffffff",
+                "description": "#151211"
+            }
+        },
+        "screens": [
+            {
+                "title": "About Me",
+                "color": "#02B6A3",
+                "metadata": {}
+            },
+            {
+                "title": "My Skills",
+                "color": "#B63902",
+                "metadata": {}
+            },
+            {
+                "title": "My Portfolio",
+                "color": "#028EB6",
+                "metadata": {}
+            },
+            {
+                "title": "Contact Me",
+                "color": "#FE4835",
+                "metadata": {}
+            }
+        ],
+        "highlight_achievements": [
+            {
+                "title": "10+",
+                "description": "Years of Experience"
+            },
+            {
+                "title": "155+",
+                "description": "Project Completed On 15 Countries"
+            },
+            {
+                "title": "10+",
+                "description": "Project Completed 15 Countries"
+            }
+        ],
+        "education_or_experience": [
+            {
+                "year": "2020 - Present",
+                "jobs": [
+                    {
+                        "title": "Bachelor of Science in Computer Science",
+                        "institution": "University of Technology",
+                        "position":"UX/UI Designer & Front-end Developer",
+                        "description": "Graduated with honors, specializing in software development and web technologies."
+                    },
+                    {
+                        "title": "Bachelor of Science in Computer Science",
+                        "institution": "University of Technology",
+                        "position":"UX/UI Designer & Front-end Developer",
+                        "description": "Graduated with honors, specializing in software development and web technologies."
+                    }
+                ]
+            },
+            {
+                "year": "2015 - 2019",
+                "jobs": [
+                    {
+                        "title": "Bachelor of Science in Computer Science",
+                        "institution": "University of Technology",
+                        "position":"UX/UI Designer & Front-end Developer",
+                        "description": "Graduated with honors, specializing in software development and web technologies."
+                    }
+                ]
+            }
+        ],
+        "default": {
+            "inner_color": "#797979",
+            "header_color": "#ffffff",
+            "arrow_right": "/assets/icons/right-arrow.svg"
+        }
+    }
+}

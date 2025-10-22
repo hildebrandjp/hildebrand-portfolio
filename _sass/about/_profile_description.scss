@@ -1,0 +1,9 @@
+
+
+.profile-description-container {
+    @include make-dflex-center();   
+}
+
+.profile-description {
+    font-size: 24px;
+}

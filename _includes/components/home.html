@@ -1,0 +1,45 @@
+<!-- Start of Home -->
+<div id="home" class="relative">
+    <div class="container home-container relative">
+        <div>
+            {% include components/shared/card.html 
+                bg_color=site.data.cards.cards.profile.color_background.profile_img 
+                type="profile-image"
+            %}
+        </div>
+        <div>
+            {% include components/shared/card.html 
+                bg_color=site.data.cards.cards.profile.color_background.description
+                type="profile-description"
+                profile=site.data.cards.cards.profile 
+            %}
+        </div>
+        {% for nav_menu in site.data.cards.cards.screens %}
+           {% include 
+                components/shared/card.html 
+                bg_color=nav_menu.color 
+                type="menu"
+                data=nav_menu
+                style="overflow: hidden;"
+            %}
+        {% endfor %}
+    </div>
+    {% include components/shared/star_icon.html 
+        size=70 
+        style="top: 17.5rem; left: 0rem;"
+        class="star-1"
+    %}
+    {% include components/shared/star_icon.html 
+        size=20 
+        style="top: 18.8rem; left: 0rem;"
+        class="star-2"
+    %}
+    {% include components/shared/star_icon.html 
+        size=50 
+        style="top: 18.2rem; left: 0rem;"
+        class="star-3"
+    %}
+</div>
+
+{% include components/shared/modal.html %}
+<!-- End of Home -->

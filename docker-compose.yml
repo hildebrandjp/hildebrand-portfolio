@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  app:
+    platform: linux/x86_64
+    build:
+      context: .
+      dockerfile: docker/dev/Dockerfile
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    tty: true
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true

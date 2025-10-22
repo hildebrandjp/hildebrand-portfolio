@@ -1,0 +1,36 @@
+.nav-menus {
+    list-style-type: none;
+    display: flex;
+    column-gap: 1rem;
+    font-size: 26px;
+
+    > li {
+
+        > a {
+            text-decoration: none;
+        }
+
+        .icon-nav-menu-i {
+            width: 32px;
+            height: 32px;
+            box-sizing: border-box;
+            display: block;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    }
+}
+
+.nav-menu-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 2rem;
+
+    > .hire-me {
+        font-size: 25px;
+        font-weight: 600;
+        color: #fff;
+    }
+}
