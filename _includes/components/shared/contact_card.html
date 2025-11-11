@@ -1,0 +1,20 @@
+{% comment %}
+Parameters:
+- label_title: title name (default: "")
+- label_value: value under title name (default: "")
+- img_src: source image file (default: "" )
+{% endcomment %}
+
+{% assign label_title = include.label_title | default: "" %}
+{% assign label_value = include.label_value | default: "" %}
+{% assign img_src = include.img_src | default: "https://cdn-icons-png.flaticon.com/512/561/561127.png" %}
+
+<div class="contact-card">
+  <div class="icon">
+    <img src="{{img_src}}" alt="Email Icon">
+  </div>
+  <div class="info">
+    <h4>{{ label_title }}</h4>
+    <p>{{ label_value }}</p>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="modal-ext-container modal-portfolio-container hidden">
+    <div class="portfolio-container">
+        <div class="portfolio-show-wrapper">
+            <div class="portfolio-img-src">
+                <img src="" alt="">
+            </div>
+
+            <div class="portfolio-divider-2">
+                <div class="portfolio-show-content-wrapper">
+                    <h4 class="portfolio-title">Business Analysis</h4>
+                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nostrum et sapiente? Aliquam neque ipsa necessitatibus modi aspernatur sit expedita!</span>
+                </div>
+
+                <div class="portfolio-useful-links-wrapper">
+                    <h4 class="portfolio-useful-links">USEFUL LINKS</h4>
+                    <ul class="ul-useful-links">
+                        {% for portfolio in site.data.portfolio.data %}
+                        <li><a href="javascript: (0);">{{ portfolio.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+</script>

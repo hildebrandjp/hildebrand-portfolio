@@ -7,7 +7,7 @@ $(function() {
     starIcon.autoRunPlaceOnEdgesOfSquaresWithResize();
     cardMenuProfile.attachClickEvent();
     
-    window.pages = {};
+    window.pages = window.pages || {};
 
     window.pages.StarIcon = starIcon;
     window.pages.CardMenuProfile = cardMenuProfile;

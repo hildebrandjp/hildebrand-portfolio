@@ -1,0 +1,26 @@
+{% comment %}
+Parameters:
+- label: label name (default: "")
+- name: input name (default: "")
+- id: input id (default: "")
+- placeholder: input placeholder (default: "")
+- default_value: input default_value (default: "")
+- autocomplete: input autocomplete (default: "additional-name")
+- img_icon: source image icon file (default: "https://cdn-icons-png.flaticon.com/512/561/561127.png" )
+{% endcomment %}
+
+{% assign label = include.label | default: "" %}
+{% assign name = include.name | default: "" %}
+{% assign id = include.id | default: "" %}
+{% assign type = include.type | default: "" %}
+
+{% if type == 'submit' %}
+<input 
+    type="submit" id="{{id}}" name="{{name}}" class="common-button"
+    value="{{ label }}"
+/>
+{% else %}
+<button id="{{id}}" name="{{name}}" class="common-button">
+    {{ label }}
+</button>
+{% endif %}

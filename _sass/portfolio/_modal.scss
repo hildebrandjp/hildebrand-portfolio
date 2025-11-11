@@ -1,0 +1,129 @@
+
+$card_width: 220px;
+
+.portfolio-container {
+
+    .chip-tags-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+
+        .chip-component {
+            transition: transform 0.3s ease;
+        }
+
+        .chip-component:hover {
+            transform: translateY(-4px);
+        }
+    }
+}
+.portfolio-content {
+    padding-top: 32px;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 100%;
+    gap: 32px;
+}
+.portfolio-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.card-margin-top-fix {
+    margin-top: 50px !important;
+}
+.card {
+    width: $card_width;
+    background-color: #d9e9f9;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+    min-height: 70px;
+    height: 230px;
+}
+
+.card-preview {
+    top: 10px;
+    height: 170px;
+    width: calc($card_width * .9);
+    position: absolute;
+    background-color: #9a9797;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-radius: 16px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.card-preview .overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  transition: background 0.3s ease;
+  z-index: -1;
+}
+
+.card-preview:hover .overlay {
+  background: rgba(46, 45, 45, 0.6); /* darken on hover */
+}
+
+.icon-btn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.icon-btn:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+}
+
+.card-body {
+    background: #d9e9f9;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    position: relative;
+    top: 150px;
+    width: 100%;
+    height: 100%;
+    max-height: 60px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+
+    .card-body-wrapper {
+        padding: 2px 16px;
+    }
+}
+
+.subtitle {
+    font-size: 12px;
+    font-weight: 600;
+    color: #4a4a4a;
+    margin-bottom: 6px;
+}
+
+.title {
+    font-size: 16px;
+    color: #001a33;
+    font-weight: 700;
+}
+
+.hide {
+    display: none;
+}

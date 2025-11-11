@@ -20,6 +20,7 @@
   },
   "include": [
     "_assets/**/*",
+    "_assets/declaration.d.ts"
   ],
   "exclude": [
     "node_modules",

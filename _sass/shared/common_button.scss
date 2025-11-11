@@ -1,0 +1,20 @@
+.common-button {
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--app-light);
+    background-color: var(--app-red);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: var(--app-light-red);
+    }
+
+    &:disabled {
+        background-color: var(--app-gray-dark);
+        cursor: not-allowed;
+    }
+}

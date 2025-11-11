@@ -1,0 +1,40 @@
+{
+    "services_options": [
+        {
+            "label": "Web Development",
+            "value": "web_development"
+        },
+        {
+            "label": "Mobile App Development",
+            "value": "mobile_app_development"
+        },
+        {
+            "label": "Cloud Solutions",
+            "value": "cloud_solutions"
+        },
+        {
+            "label": "Cybersecurity",
+            "value": "cybersecurity"
+        },
+        {
+            "label": "Scripting Automation",
+            "value": "scripting_automation"
+        },
+        {
+            "label": "SEO Optimization",
+            "value": "seo_optimization"
+        },
+        {
+            "label": "Content Creation",
+            "value": "content_creation"
+        },
+        {
+            "label": "AI/Machine Learning Integration",
+            "value": "ai_integration"
+        },
+        {
+            "label": "Other",
+            "value": "other"
+        }
+    ]
+}

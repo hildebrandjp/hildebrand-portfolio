@@ -1,0 +1,27 @@
+.common-textarea-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--app-light);
+    }
+
+    textarea {
+        padding: 12px 2px;
+        border: 1px solid var(--app-gray-dark);
+        font-size: 16px;
+        color: var(--app-light);
+        background-color: var(--app-gray-darker);
+        border-bottom: 2px solid var(--app-gray-light);
+        font-family: sans-serif;
+
+        &:focus {
+            outline: none;
+            border-color: var(--app-blue);
+            box-shadow: 0 0 0 2px var(--app-blue-light);
+        }
+    }
+}

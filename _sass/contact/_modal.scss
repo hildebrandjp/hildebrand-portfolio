@@ -1,0 +1,70 @@
+.contact-container {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    color: var(--app-light);
+    width: 100%;
+}
+
+.contact-info-aboutme, .contact-send-inquiry-container {
+    border-radius: 20px;
+    background-color: black;
+    padding: 32px;
+}
+
+.contact-info-aboutme {
+    flex: 0.4;
+    flex-grow: 1;
+}
+
+.contact-space-between {
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.add-attachment-contact {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.contact-send-inquiry-container {
+    flex: 0.6;
+    flex-grow: 2;
+
+    .contact-send-inquiry-row {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 32px;
+        margin-bottom: 32px;
+
+        div {
+            flex: 1;
+        }
+    }
+}
+
+.contact-img-and-pinfo-wrapper {
+    display: flex;
+    align-items: center;
+
+    .profile-title-img-container {
+        align-items: center !important;
+    }
+}
+
+.contact-personal-info-wrapper {
+    padding-top: 16px;
+}
+
+.contact-more-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 32px;
+}

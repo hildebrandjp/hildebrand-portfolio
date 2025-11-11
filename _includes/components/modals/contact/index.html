@@ -1,0 +1,100 @@
+<div class="modal-ext-container modal-contact-container hidden">
+    <div class="contact-container">
+        <div class="contact-info-aboutme">
+            <div class="contact-img-and-name-wrapper">
+                <div class="contact-img-and-pinfo-wrapper">
+                    {% include components/shared/profile_title_img.html %}
+                </div>
+                <div class="contact-personal-info-wrapper">
+                    {% include components/shared/profile_description.html %}
+                </div>
+            </div>
+            <div class="contact-more-details">
+                {% include components/shared/contact_card.html label_title="Email" label_value="userthemes@gmail.com" img_src="/assets/icons/email.svg" %}
+                {% include components/shared/contact_card.html label_title="Phone" label_value="(888) 777-6666" img_src="/assets/icons/tel.svg" %}
+                {% include components/shared/contact_card.html label_title="Address" label_value="San Francisco, USA" img_src="/assets/icons/location.svg" %}
+            </div>
+        </div>
+        <form class="contact-send-inquiry-container">
+            <div class="contact-send-inquiry-row">
+                {% 
+                    include components/shared/common_input.html 
+                    label="Name" 
+                    name="name" 
+                    id="inquiryName" 
+                    placeholder="Type name" 
+                    default_value="" 
+                    autocomplete="name"  
+                %}
+                {% 
+                    include components/shared/common_input.html 
+                    label="Company" 
+                    name="company" 
+                    id="inquiryCompany" 
+                    placeholder="Type company name" 
+                    default_value="" 
+                    autocomplete="company"  
+                %}
+            </div>
+            <div class="contact-send-inquiry-row">
+                {% 
+                    include components/shared/common_input.html 
+                    label="Phone" 
+                    name="phone" 
+                    id="inquiryPhone" 
+                    placeholder="Type phone number" 
+                    default_value="" 
+                    autocomplete="tel"  
+                %}
+                {% 
+                    include components/shared/common_input.html 
+                    label="Email Address" 
+                    name="email" 
+                    id="inquiryEmail" 
+                    placeholder="Type email address" 
+                    default_value="" 
+                    autocomplete="email"  
+                %}
+            </div>
+
+            <div class="contact-send-inquiry-row">
+                {% 
+                    include components/shared/common_textarea.html 
+                    label="How can we help" 
+                    name="phone" 
+                    id="inquiryPhone" 
+                    placeholder="A brief description here..." 
+                    default_value="" 
+                    autocomplete="tel"  
+                %}
+            </div>
+
+            <div class="contact-send-inquiry-row">
+                {% 
+                    include components/shared/common_multiple_checkboxes.html 
+                    label="What Services do you need for Your Project?" 
+                    name="services[]" 
+                    id="inquiryServices" 
+                    options=site.data.contact.services_options
+                    default_value=""
+                %}
+            </div>
+
+            <div class="contact-send-inquiry-row contact-space-between">
+                <div>
+                    <label class="add-attachment-contact" for="inquiryAttachment">ADD AN ATTACHMENT <span class="required-asterisk">*</span></label>
+                    <input style="display: none;" type="file" id="inquiryAttachment" name="attachment" />
+                </div>
+                <div style="display: flex; justify-content: flex-end;">
+                    {% 
+                        include components/shared/common_button.html 
+                        label="HIRE ME" 
+                        name="hire_me" 
+                        id="hire_me_btn" 
+                        type="submit"
+                    %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

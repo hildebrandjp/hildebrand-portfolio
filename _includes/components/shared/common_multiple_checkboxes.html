@@ -1,0 +1,35 @@
+{% comment %}
+Parameters:
+- label: label name (default: "")
+- name: input name (default: "")
+- id: input id (default: "")
+- default_value: input default_value (default: "")
+- options: array options format ([{label, value}]) (default: [])
+- img_icon: source image icon file (default: "https://cdn-icons-png.flaticon.com/512/561/561127.png" )
+{% endcomment %}
+
+{% assign label = include.label | default: "" %}
+{% assign name = include.name | default: "" %}
+{% assign id = include.id | default: "" %}
+{% assign default_value = include.default_value | default: "" %}
+{% assign options = include.options | default: [] %}
+{% assign img_icon = include.img_icon | default: "https://cdn-icons-png.flaticon.com/512/561/561127.png" %}
+
+<div class="common-multi-checkboxes-wrapper">
+    <span class="common-multi-checkboxes-title" for="{{id}}">
+        <div class="common-icon-input"></div>
+        {{ label }} <span class="required-asterisk">*</span>
+    </span>
+    <div class="common-checkboxes-choice-wrapper">
+        {% for opt in options %}
+        <div class="common-mutiple-input-wrapper">
+            <input 
+                type="checkbox" id="{{id}}_{{opt.value}}" name="{{name}}"
+                value="{{opt.value}}"
+                {% if opt.checked %} checked {% endif %}
+            />
+            <label for="{{id}}_{{opt.value}}">{{opt.label}}</label>
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -2,7 +2,9 @@
     "style",
     "shared",
     "global",
+    "portfolio",
     "navbar",
     "home",
+    "contact",
     "about"
 ]

@@ -17,47 +17,105 @@
         }
     ],
     "data": [
-        [
-            {
-                "title": "Easy Chat UI 1",
-                "subtitle": "Video Meeting",
-                "description": "lorem ipsum",
-                "thumbnail": "",
-                "url": "",
-                "tag": "mobile_app",
-                "color": "#fff",
-                "video_url": ""
-            },
-            {
-                "title": "Easy Chat UI 2",
-                "subtitle": "Video Meeting",
-                "description": "lorem ipsum",
-                "thumbnail": "",
-                "url": "",
-                "tag": "mobile_app",
-                "color": "#fff",
-                "video_url": ""
-            },
-            {
-                "title": "Easy Chat UI 3",
-                "subtitle": "Video Meeting",
-                "description": "lorem ipsum",
-                "thumbnail": "",
-                "url": "",
-                "tag": "mobile_app",
-                "color": "#fff",
-                "video_url": ""
-            },
-            {
-                "title": "Easy Chat UI 4",
-                "subtitle": "Video Meeting",
-                "description": "lorem ipsum",
-                "thumbnail": "",
-                "url": "",
-                "tag": "mobile_app",
-                "color": "#fff",
-                "video_url": ""
-            }
-        ]
+        {
+            "title": "Easy Chat UI 1",
+            "subtitle": "Video Meeting",
+            "description": "lorem ipsum",
+            "thumbnail": "",
+            "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSw2dAVNmBhqVvNPAs7LJHnumSH3pHdoWP0bg&s",
+            "tag": "mobile_app",
+            "color": "#f5ecfe",
+            "video_url": ""
+        },
+        {
+            "title": "Easy Chat UI 2",
+            "subtitle": "Video Meeting",
+            "description": "lorem ipsum",
+            "thumbnail": "",
+            "url": "",
+            "tag": "mobile_app",
+            "color": "#d5ecfc",
+            "video_url": ""
+        },
+        {
+            "title": "Easy Chat UI 3",
+            "subtitle": "Video Meeting",
+            "description": "lorem ipsum",
+            "thumbnail": "",
+            "url": "",
+            "tag": "mobile_app",
+            "color": "#f8de89",
+            "video_url": ""
+        },
+        {
+            "title": "Easy Chat UI 4",
+            "subtitle": "Video Meeting",
+            "description": "lorem ipsum",
+            "thumbnail": "",
+            "url": "",
+            "tag": "mobile_app",
+            "color": "#d4f4fa",
+            "video_url": ""
+        },
+        {
+            "title": "Easy Chat UI 4",
+            "subtitle": "Video Meeting",
+            "description": "lorem ipsum",
+            "thumbnail": "",
+            "url": "",
+            "tag": "mobile_app",
+            "color": "#d4f4fa",
+            "video_url": ""
+        },
+        {
+            "title": "Easy Chat UI 4",
+            "subtitle": "Video Meeting",
+            "description": "lorem ipsum",
+            "thumbnail": "",
+            "url": "",
+            "tag": "mobile_app",
+            "color": "#d4f4fa",
+            "video_url": ""
+        },
+        {
+            "title": "Easy Chat UI 4",
+            "subtitle": "Video Meeting",
+            "description": "lorem ipsum",
+            "thumbnail": "",
+            "url": "",
+            "tag": "mobile_app",
+            "color": "#d4f4fa",
+            "video_url": ""
+        },
+        {
+            "title": "Easy Chat UI 4",
+            "subtitle": "Video Meeting",
+            "description": "lorem ipsum",
+            "thumbnail": "",
+            "url": "",
+            "tag": "mobile_app",
+            "color": "#d4f4fa",
+            "video_url": ""
+        },
+        {
+            "title": "Easy Chat UI 4",
+            "subtitle": "Video Meeting",
+            "description": "lorem ipsum",
+            "thumbnail": "",
+            "url": "",
+            "tag": "mobile_app",
+            "color": "#d4f4fa",
+            "video_url": ""
+        },
+        {
+            "title": "Easy Chat UI 4",
+            "subtitle": "Video Meeting",
+            "description": "lorem ipsum",
+            "thumbnail": "",
+            "url": "",
+            "tag": "mobile_app",
+            "color": "#d4f4fa",
+            "video_url": ""
+        }
     ]
 }

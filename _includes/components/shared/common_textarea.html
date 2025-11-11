@@ -1,0 +1,30 @@
+{% comment %}
+Parameters:
+- label: label name (default: "")
+- name: input name (default: "")
+- id: input id (default: "")
+- placeholder: input placeholder (default: "")
+- default_value: input default_value (default: "")
+- autocomplete: input autocomplete (default: "additional-name")
+- img_icon: source image icon file (default: "https://cdn-icons-png.flaticon.com/512/561/561127.png" )
+{% endcomment %}
+
+{% assign label = include.label | default: "" %}
+{% assign name = include.name | default: "" %}
+{% assign id = include.id | default: "" %}
+{% assign placeholder = include.placeholder | default: "" %}
+{% assign default_value = include.default_value | default: "" %}
+{% assign autocomplete = include.autocomplete | default: "additional-name" %}
+{% assign img_icon = include.img_icon | default: "https://cdn-icons-png.flaticon.com/512/561/561127.png" %}
+
+<div class="common-textarea-wrapper">
+    <label for="{{id}}">
+        <div class="common-icon-input"></div>
+        {{ label }} <span class="required-asterisk">*</span>
+    </label>
+    <textarea
+        type="text" id="{{id}}" placeholder="{{placeholder}}" 
+        name="{{name}}"
+        autocomplete="{{autocomplete}}"
+    >{{default_value}}</textarea>
+</div>
