@@ -33,7 +33,7 @@ $modal_close_icon_size: 48px;
             cursor: pointer;
         }
 
-        > .modal-ext-container {
+        .modal-container-wrapper > .modal-ext-container {
             padding: 48px;
 
             > .about-me-container {
@@ -281,6 +281,61 @@ $modal_close_icon_size: 48px;
                 }
             }
         }
+    }
+}
+
+#modalControllerWrapper .hidden {
+    display: none;
+}
+
+#modalControllerWrapper .show {
+    display: block;
+}
+
+@media (min-width: 1800px) {
+    .modal-container {
+        max-width: 1600px !important;
+    }
+}
+
+@media (min-width: 1600px) {
+    .modal-container {
+        max-width: 1400px !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    .modal-container {
+        max-width: 1200px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .modal-container {
+        max-width: 1000px !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .modal-close-icon {
+        right: 12px !important;
+        top: 10px !important;
+    }
+
+    .modal-container-wrapper {
+        padding: 16px 0px;
+    }
+
+    .modal-ext-container {
+        padding: 48px 16px !important;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .contact-container {
+        flex-direction: column !important;
     }
 }
 

@@ -41,3 +41,11 @@ a {
 .required-asterisk {
     color: var(--app-red);
 }
+
+.hidden {
+    display: none !important;
+}
+
+.show {
+    display: block !important;
+}
