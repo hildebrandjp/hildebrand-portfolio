@@ -9,7 +9,7 @@ declare global {
         modules: {
             ListBulletStyleHtml?: import("@/modules/ListBulletStyleHtml").default;
             CardAnimationEffect?: import("@/modules/CardAnimationEffect").default;
-            ModalNavigation?: import("@/modules/ModalNavigation").default;
+            Modal?: import("@/modules/Modal").default;
         }
     }
 }

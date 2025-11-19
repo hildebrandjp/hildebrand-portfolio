@@ -19,21 +19,25 @@
         "screens": [
             {
                 "title": "About Me",
+                "name": "about-index",
                 "color": "#02B6A3",
                 "metadata": {}
             },
             {
                 "title": "My Skills",
+                "name": "skill-index",
                 "color": "#B63902",
                 "metadata": {}
             },
             {
                 "title": "My Portfolio",
+                "name": "portfolio-index",
                 "color": "#028EB6",
                 "metadata": {}
             },
             {
                 "title": "Contact Me",
+                "name": "contact-index",
                 "color": "#FE4835",
                 "metadata": {}
             }

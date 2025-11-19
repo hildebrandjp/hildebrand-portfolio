@@ -29,10 +29,10 @@
                     {% endif %}
                 >
                     <div class="overlay"></div>
-                    <button class="icon-btn hide">
+                    <button class="icon-btn hide btnPlayIcon" data-portfolio-id="{{portfolio.id}}">
                         <i class="play-icon">▶</i>
                     </button>
-                    <button class="icon-btn hide">
+                    <button class="icon-btn hide btnShareIcon" data-portfolio-id="{{portfolio.id}}">
                         <i class="link-icon">🔗</i>
                     </button>
                 </div>
@@ -49,5 +49,29 @@
             window.modules.CardAnimationEffect.enableAnimationCardHover();
             window.modules.CardAnimationEffect.enableHoverShowButtonsCardPreview();
         }
-    })
+    });
+
+    (() => {
+        class PortfolioIndex {
+            constructor() {
+                this.buttonEvents();
+            }
+
+            buttonEvents() {
+                $('.btnPlayIcon').on('click', (event) => this.playButtonClicked(event));
+            }
+
+            playButtonClicked(event) {
+                const portfolioId = $(event.currentTarget).data('portfolio-id');
+                document.getElementById('modalOverlay2').classList.remove('hidden');
+                $('.modal-ext-container-2').removeClass('hidden');
+                console.log('Play portfolio video with ID:', portfolioId);
+            }
+        }
+
+        $(document).ready(() => {
+            window.modules = window.modules || {};
+            window.modules.PortfolioIndex = new PortfolioIndex();
+        });
+    })(); // <-- FIXED (added `()`)
 </script>

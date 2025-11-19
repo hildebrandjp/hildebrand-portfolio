@@ -1,17 +1,14 @@
-<div class="modal" id="modal-block">
-    <div class="modal-container container">
-        <i onclick="closeModal(event)" class="modal-close-icon" ></i>
-        <div id="modalControllerWrapper" class="modal-container-wrapper">
-            {% include components/modals/contact/index.html %}
-            {% include components/modals/skill/index.html %}
-            {% include components/modals/portfolio/index.html %}
-            {% include components/modals/portfolio/show.html %}
+<div id="modalOverlay1" class="modal-wrapper-overlay hidden">
+    <div class="modal hidden" id="modal-block">
+            <div class="modal-container container">
+                <i onclick="window.modules.Modal.close(event)" class="modal-close-icon" ></i>
+                <div id="modalControllerWrapper" class="modal-container-wrapper">
+                    {% include components/modals/contact/index.html %}
+                    {% include components/modals/about/index.html %}    
+                    {% include components/modals/skill/index.html %}
+                    {% include components/modals/portfolio/index.html %}
+                    {% include components/modals/portfolio/show.html %}
+                </div>
+            </div>
         </div>
-    </div>
 </div>
-
-<script>
-    function closeModal(e) {
-        document.getElementById('modal-block').classList.add('hidden');
-    }
-</script>

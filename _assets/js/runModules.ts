@@ -1,17 +1,17 @@
 import ListBulletStyleHtml from "@/modules/ListBulletStyleHtml";
 import CardAnimationEffect from "@/modules/CardAnimationEffect";
-import ModalNavigation from "./modules/ModalNavigation";
+import Modal from "./modules/Modal";
 
 $(function() {
     const listBulletStyleHtml = new ListBulletStyleHtml();
     const cardAnimationEffect = new CardAnimationEffect();
-    const modalNavigation = new ModalNavigation();
+    const modal = new Modal();
 
     listBulletStyleHtml.init();
-    modalNavigation.init();
+    modal.init();
     
     window.modules = window.modules || {};
     window.modules.ListBulletStyleHtml = listBulletStyleHtml;
     window.modules.CardAnimationEffect = cardAnimationEffect;
-    window.modules.ModalNavigation = modalNavigation;
+    window.modules.Modal = modal;
 });

@@ -1,4 +1,19 @@
-<div class="card" style="background-color: {{ include.bg_color | default: '#ffffff' }}; {{include.style}}">
+{% comment %}
+Parameters:
+- class: class name (default: "")
+- bg_color: background_color name (default: "#ffffff)
+- style: element style (default: "")
+- data_route: data route style (default: "")
+- data: data style (default: "")
+{% endcomment %}
+
+{% assign class = include.class | default: "" %}
+{% assign bg_color = include.bg_color | default: "#ffffff" %}
+{% assign style = include.style | default: "" %}
+{% assign data_route = include.data_route | default: "" %}
+{% assign data = include.data | default: "" %}
+
+<div class="card {{class}}" style="background-color: {{ bg_color }}; {{style}}" data-route-modal="{{data_route}}">
     {% if include.type == "profile-image" %}
         {% include components/pages/home/card_image_profile.html %}
     {% elsif include.type == "profile-description" %}
