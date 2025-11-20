@@ -12,6 +12,13 @@
             width: 100%;
             background-color: var(--app-gray);
             border-radius: 20px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: fill;
+                border-radius: 5px;
+            }   
         }
 
         .portfolio-divider-2 {
@@ -61,8 +68,12 @@
                 list-style: none;
                 padding-left: 0;
                 display: flex;
-                gap: 64px;
+                gap: 24px;
                 flex-wrap: wrap;
+            }
+
+            ul.ul-useful-links li a:hover {
+                text-decoration: underline;
             }
 
             ul.ul-useful-links li::before {

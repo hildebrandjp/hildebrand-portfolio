@@ -1,14 +1,15 @@
 <div class="modal-ext-container modal-ext-container-2 modal-portfolio-container hidden" data-modal-page="portfolio-show">
     <div class="portfolio-container">
+        <button onclick="window.modules.PortfolioShow.back()" class="btn-back-modal">< Back</button>
         <div class="portfolio-show-wrapper">
             <div class="portfolio-img-src">
-                <img src="" alt="">
+                <img id="portfolioInfoImg" src="" alt="">
             </div>
 
             <div class="portfolio-divider-2">
                 <div class="portfolio-show-content-wrapper">
-                    <h4 class="portfolio-title">Business Analysis</h4>
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nostrum et sapiente? Aliquam neque ipsa necessitatibus modi aspernatur sit expedita!</span>
+                    <h4 id="portfolioInfoTitle" class="portfolio-title">...</h4>
+                    <span id="portfolioInfoDesc">...</span>
                 </div>
 
                 <div class="portfolio-useful-links-wrapper">
@@ -26,4 +27,47 @@
 
 
 <script>
+    (() => {
+        const portfolios = {{ site.data.portfolio.data | jsonify }};
+        class PortfolioShow {
+            selectedPortfolioId = null;
+
+            constructor() {
+                this.selectedPortfolioId = null;
+                this.init();
+            }
+
+            back() {
+                document.getElementById('modalOverlay2').classList.add('hidden');
+            }
+
+            init() {
+                window.modules.State.on("stateChanged", (state) => {
+                    this.loadPortfolio(state);
+                    this.loadUsefulLinks();
+                });
+            }
+
+            loadPortfolio(state) {
+                const portfolio = portfolios.find(portfolio => portfolio.id == state.portfolioId);
+                this.selectedPortfolioId = portfolio.id;
+                $('#portfolioInfoImg').attr('src', portfolio.url);
+                $('#portfolioInfoTitle').text(portfolio.title);
+                $('#portfolioInfoDesc').text(portfolio.description);
+            }
+
+            loadUsefulLinks() {
+                const ul = $('.ul-useful-links');
+                ul.empty();
+                portfolios.filter(portfolio => portfolio.id != this.selectedPortfolioId).forEach(portfolio => {
+                    ul.append(`<li><a href="javascript: (0);">${portfolio.title}</a></li>`);
+                });
+            }
+        }
+
+        $(document).ready(() => {
+            window.modules = window.modules || {};
+            window.modules.PortfolioShow = new PortfolioShow();
+        });
+    })();
 </script>

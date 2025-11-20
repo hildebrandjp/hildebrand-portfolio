@@ -1,6 +1,11 @@
 {
     "tags": [
         {
+            "title": "All",
+            "color": "#D7EEFE",
+            "tag": "all"
+        },
+        {
             "title": "Mobile App",
             "color": "#D7EEFE",
             "tag": "mobile_app"
@@ -43,7 +48,7 @@
             "description": "lorem ipsum",
             "thumbnail": "",
             "url": "",
-            "tag": "mobile_app",
+            "tag": "chatting",
             "color": "#f8de89",
             "video_url": ""
         },
@@ -53,7 +58,7 @@
             "description": "lorem ipsum",
             "thumbnail": "",
             "url": "",
-            "tag": "mobile_app",
+            "tag": "chatting",
             "color": "#d4f4fa",
             "video_url": ""
         },
@@ -83,7 +88,7 @@
             "description": "lorem ipsum",
             "thumbnail": "",
             "url": "",
-            "tag": "mobile_app",
+            "tag": "video_chatting",
             "color": "#d4f4fa",
             "video_url": ""
         },
@@ -93,7 +98,7 @@
             "description": "lorem ipsum",
             "thumbnail": "",
             "url": "",
-            "tag": "mobile_app",
+            "tag": "video_chatting",
             "color": "#d4f4fa",
             "video_url": ""
         },
@@ -113,7 +118,7 @@
             "description": "lorem ipsum",
             "thumbnail": "",
             "url": "",
-            "tag": "mobile_app",
+            "tag": "video_chatting",
             "color": "#d4f4fa",
             "video_url": ""
         }

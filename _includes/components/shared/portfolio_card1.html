@@ -1,0 +1,36 @@
+{% comment %}
+Parameters:
+- portfolio: portfolio object (default: "")
+{% endcomment %}
+
+{% assign portfolio = include.portfolio | default: "" %}
+
+<div class="portfolio-item" data-tag="{{portfolio.tag}}">
+    {% assign card_color = portfolio.color | default: "" %}
+    <div class="card card-margin-top-fix"
+        {% if card_color != "" %}
+            style="background: {{ card_color }} !important;"
+        {% endif %}
+    >
+        <div class="card-body" style="background-color: inherit;"
+        >
+            <div class="card-body-wrapper">
+                <p class="subtitle">{{ portfolio.subtitle }}</p>
+                <h3 class="title">{{ portfolio.title }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-preview"
+        {% if portfolio.url and portfolio.url != '' %}
+            style="background-image: url('{{ portfolio.url }} !important;');"
+        {% endif %}
+    >
+        <div class="overlay"></div>
+        <button class="icon-btn hide btnPlayIcon" data-portfolio-id="{{portfolio.id}}">
+            <i class="play-icon">▶</i>
+        </button>
+        <button class="icon-btn hide btnShareIcon" data-portfolio-id="{{portfolio.id}}">
+            <i class="link-icon">🔗</i>
+        </button>
+    </div>
+</div>

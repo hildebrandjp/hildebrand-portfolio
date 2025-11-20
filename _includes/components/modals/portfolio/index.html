@@ -8,64 +8,76 @@
 
         <div class="portfolio-content">
             {% for portfolio in site.data.portfolio.data %}
-            <div class="portfolio-item" data-tag="{{portfolio.tag}}">
-                {% assign card_color = portfolio.color | default: "" %}
-                <div class="card card-margin-top-fix"
-                    {% if card_color != "" %}
-                        style="background: {{ card_color }} !important;"
-                    {% endif %}
-                >
-                    <div class="card-body" style="background-color: inherit;"
-                    >
-                        <div class="card-body-wrapper">
-                            <p class="subtitle">{{ portfolio.subtitle }}</p>
-                            <h3 class="title">{{ portfolio.title }}</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-preview"
-                    {% if portfolio.url and portfolio.url != '' %}
-                        style="background-image: url('{{ portfolio.url }} !important;');"
-                    {% endif %}
-                >
-                    <div class="overlay"></div>
-                    <button class="icon-btn hide btnPlayIcon" data-portfolio-id="{{portfolio.id}}">
-                        <i class="play-icon">▶</i>
-                    </button>
-                    <button class="icon-btn hide btnShareIcon" data-portfolio-id="{{portfolio.id}}">
-                        <i class="link-icon">🔗</i>
-                    </button>
-                </div>
-            </div>
+            {% include components/shared/portfolio_card1.html portfolio=portfolio %}
             {% endfor %}
         </div>
+    </div>
+    <div class="hidden" id="tempPortfolio">
+        {% assign portfolio = site.data.portfolio.data[0] %}
+        {% include components/shared/portfolio_card1.html portfolio=portfolio %}
     </div>
 </div>
 
 
 <script type="module">
-    $(document).ready(() => {
-        if (window?.modules?.CardAnimationEffect) {
-            window.modules.CardAnimationEffect.enableAnimationCardHover();
-            window.modules.CardAnimationEffect.enableHoverShowButtonsCardPreview();
-        }
-    });
-
     (() => {
+        const portfolios = {{ site.data.portfolio.data | jsonify }};
+        const tags = {{ site.data.portfolio.tags | jsonify }};
         class PortfolioIndex {
             constructor() {
+                this.init();
                 this.buttonEvents();
+                this.chipComponentEvent();
             }
 
             buttonEvents() {
                 $('.btnPlayIcon').on('click', (event) => this.playButtonClicked(event));
             }
 
+            cardAnimation() {
+                if (window?.modules?.CardAnimationEffect) {
+                    window.modules.CardAnimationEffect.enableAnimationCardHover();
+                    window.modules.CardAnimationEffect.enableHoverShowButtonsCardPreview();
+                }
+            }
+
+            chipComponentEvent() {
+                $('.chip-component').on('click', (event) => {
+                    const tag = $(event.currentTarget).data('chip-tag');
+                    console.log('Clicked tag: ', tag);
+                    this.sortCategory(tag);
+                });
+            }
+
+            init() {
+                $(document).ready(() => {
+                    this.cardAnimation();
+                });
+            }
+
             playButtonClicked(event) {
                 const portfolioId = $(event.currentTarget).data('portfolio-id');
                 document.getElementById('modalOverlay2').classList.remove('hidden');
                 $('.modal-ext-container-2').removeClass('hidden');
-                console.log('Play portfolio video with ID:', portfolioId);
+                window.modules.State.addObject('portfolioId', portfolioId);
+            }
+
+            sortCategory(tag = 'all') {
+                const portfolioContent = $('.portfolio-content');
+                portfolioContent.empty();
+                portfolios
+                    .filter(portfolio => portfolio.tag == tag || tag == 'all')
+                    .forEach(portfolio => {
+                        const portfolioHtmlClone = $('#tempPortfolio').children().clone()
+                        portfolioHtmlClone.find('.subtitle').text(portfolio.subtitle);
+                        portfolioHtmlClone.find('.title').text(portfolio.title);
+                        portfolioHtmlClone.find('.icon-btn').attr('data-portfolio-id', portfolio.id);
+                        portfolioHtmlClone.find('.card-preview').attr('style', `background-image: url('${ portfolio?.url ?? "" }');`);
+                        portfolioHtmlClone.find('.card').attr('style', `background-color: ${portfolio?.color};`);
+                        portfolioContent.append(portfolioHtmlClone);
+                });
+                this.cardAnimation();
+                this.buttonEvents();
             }
         }
 
@@ -73,5 +85,5 @@
             window.modules = window.modules || {};
             window.modules.PortfolioIndex = new PortfolioIndex();
         });
-    })(); // <-- FIXED (added `()`)
+    })();
 </script>

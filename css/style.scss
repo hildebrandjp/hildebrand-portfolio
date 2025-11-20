@@ -50,3 +50,11 @@ a {
 .show {
     display: block !important;
 }
+
+.btn-back-modal {
+    background-color: transparent;
+    color: var(--app-light);
+    border: 0px;
+    font-size: 16px;
+    cursor: pointer;
+}
