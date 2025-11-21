@@ -21,24 +21,28 @@
                 "title": "About Me",
                 "name": "about-index",
                 "color": "#02B6A3",
+                "img": "/assets/img/banner/about_me.png",
                 "metadata": {}
             },
             {
                 "title": "My Skills",
                 "name": "skill-index",
                 "color": "#B63902",
+                "img": "/assets/img/banner/skill_me.png",
                 "metadata": {}
             },
             {
                 "title": "My Portfolio",
                 "name": "portfolio-index",
                 "color": "#028EB6",
+                "img": "/assets/img/banner/portfolio_mee.png",
                 "metadata": {}
             },
             {
                 "title": "Contact Me",
                 "name": "contact-index",
                 "color": "#FE4835",
+                "img": "/assets/img/banner/contact_me.png",
                 "metadata": {}
             }
         ],

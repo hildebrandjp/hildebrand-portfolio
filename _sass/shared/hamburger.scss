@@ -1,0 +1,20 @@
+.hamburger {
+    width: 40px;
+    height: 30px;
+    display: none;
+}
+
+.hamburger span {
+    display: block;
+    height: 4px;
+    background: var(--app-light);
+    border-radius: 2px;
+}
+
+@media screen and (max-width: 1399px) {
+    .hamburger {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}

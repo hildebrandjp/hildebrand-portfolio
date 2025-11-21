@@ -1,0 +1,17 @@
+
+.hamburger-menubar {
+    height: 80vh;
+}
+
+.hamburger-menu-list {
+    padding-top: 16px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    
+    li {
+        padding: 5px;
+        color: var(--app-light);
+    }
+}

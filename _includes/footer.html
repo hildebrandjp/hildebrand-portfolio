@@ -1,7 +1,8 @@
 <!-- Start of Footer -->
 <div id="footer">
     <div class="container footer-container">
-        footer
+        {% assign full_name = site.data.cards.cards.profile.name || 'John Doe' %}
+        © 2025 {{full_name}}. Built with Jekyll.  All Rights Reserved.
     </div>
 </div>
 <!-- End of Footer -->

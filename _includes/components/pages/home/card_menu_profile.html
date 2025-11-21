@@ -1,7 +1,8 @@
 <div class="card-menu-profile">
     <div class="img-menu-container">
         {% assign background_color = site.data.cards.cards.default.inner_color %}
-        <div class="img-menu" style="background-color: {{background_color}} !important;"></div>
+        {% assign img_src = include.data.img || "" %}
+        <div class="img-menu" style="background-color: {{background_color}} !important; background-image: url('{{img_src}}');"></div>
     </div>
     <div class="card-menu-lower-part">
         {% assign text_color = site.data.cards.cards.default.header_color %}

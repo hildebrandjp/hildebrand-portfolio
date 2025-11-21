@@ -34,3 +34,9 @@
   background-color: var(--app-gray-light);
   border-radius: 50%;
 }
+
+@media screen and (max-width: 1399px) {
+    .bg-image-mask {
+      overflow-x: auto;
+    }
+}

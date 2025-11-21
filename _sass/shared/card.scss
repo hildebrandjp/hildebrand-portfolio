@@ -59,6 +59,8 @@ $default_margin: 30px;
                 background-color: antiquewhite;
                 margin: $default_margin $default_margin 0px $default_margin;
                 border-radius: 20px;
+                background-size: 100% 100%;
+                object-fit: fill;
             }
         }
 
@@ -80,5 +82,12 @@ $default_margin: 30px;
     > .card-default {
         height: 100%;
         overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 1399px) {
+    .card-route-name-cls[data-route-modal="portfolio-index"],
+    .card-route-name-cls[data-route-modal="contact-index"] {
+        display: none;
     }
 }

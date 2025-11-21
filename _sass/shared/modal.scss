@@ -181,12 +181,18 @@ $modal_close_icon_size: 48px;
                                     color: var(--app-light);
                                     font-weight: 600;
                                     font-size: 1.1rem;
+                                    padding-top: 16px;
                                 }
                                 .amru-position {
                                     color: var(--app-red);
                                     font-weight: 500;
                                     font-size: 0.8rem;
-                                    padding-left: 10px;
+                                    margin-left: 16px;
+                                    margin-top: 16px;
+                                    padding: 4px 14px;
+                                    background-color: #000000;
+                                    width: fit-content;
+                                    border-radius: 20px;
                                 }
                             }
                         }
