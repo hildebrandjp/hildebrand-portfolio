@@ -3,26 +3,37 @@
 @import "grid";
 @import "mixin";
 
-// ---
-//Fonts
-@import url('/assets/fonts/respano-2023-11-27-05-36-57-utc/RESPANO.otf');
-font-face {
-    font-family: 'Respano';
-    src: url('/assets/fonts/respano-2023-11-27-05-36-57-utc/RESPANO.otf');
-}
-// ---
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700&display=swap');
 
-// ---
-//Body
+@font-face {
+    font-family: 'Respano';
+    src: url('/assets/fonts/respano-2023-11-27-05-36-57-utc/RESPANO.otf') format('opentype');
+    font-display: swap;
+}
+
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    margin: 0px;
-    padding: 0px;
-    overflow-y: hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--app-text-primary);
+    background:
+        radial-gradient(80% 60% at 8% 10%, rgba(195, 172, 208, 0.46) 0%, rgba(255, 251, 245, 0) 70%),
+        radial-gradient(70% 55% at 92% 4%, rgba(119, 67, 219, 0.18) 0%, rgba(255, 251, 245, 0) 70%),
+        linear-gradient(145deg, var(--app-cream-50), var(--app-cream-100));
+    font-family: 'Outfit', 'Sora', sans-serif;
+    line-height: 1.45;
 }
 
-h2,h1,h3,h4,h5,h6 {
-    margin: 0px;
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-family: 'Sora', 'Respano', sans-serif;
+    letter-spacing: -0.02em;
+    color: var(--app-text-primary);
 }
 
 p {
@@ -53,12 +64,22 @@ a {
 
 .btn-back-modal {
     background-color: transparent;
-    color: var(--app-light);
-    border: 0px;
+    color: var(--app-text-secondary);
+    border: 0;
     font-size: 16px;
     cursor: pointer;
 }
 
 .hamburger-wrapper {
     cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
 }

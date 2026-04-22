@@ -1,23 +1,27 @@
 --- 
---- 
+---
 
 #footer {
-    position: absolute;
-    bottom: 0px;
+    position: relative;
     width: 100%;
+    margin-top: 1.5rem;
 
     .footer-container {
         text-align: center;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
-        color: var(--app-light);
+        letter-spacing: 0.03em;
+        color: var(--app-text-secondary);
+        padding-bottom: 1rem;
     }
 }
 
 @media screen and (max-width: 1399px) {
     #footer {
-        bottom: 16px;
+        margin-top: 24px;
 
-        .footer-container {}
+        .footer-container {
+            padding-bottom: 0;
+        }
     }
 }

@@ -1,0 +1,51 @@
+---
+---
+
+.section-page #footer {
+    position: relative;
+    margin-top: 1.5rem;
+}
+
+.section-view {
+    padding: 0.6rem 0 1.2rem;
+}
+
+.section-view .modal {
+    position: relative;
+    height: auto;
+    top: auto;
+}
+
+.section-view .modal > .modal-container {
+    margin: 0;
+    left: 0;
+    transform: none;
+    height: auto;
+}
+
+.section-view .modal-container-wrapper > .modal-ext-container {
+    display: block;
+}
+
+.section-view .modal-ext-container.hidden {
+    display: block !important;
+}
+
+.section-view .portfolio-content {
+    max-height: none;
+}
+
+.section-view #tempPortfolio {
+    display: none !important;
+}
+
+@media screen and (max-width: 1399px) {
+    .section-view {
+        padding-top: 0.3rem;
+    }
+
+    .section-view .modal > .modal-container {
+        margin: 0;
+        height: auto;
+    }
+}

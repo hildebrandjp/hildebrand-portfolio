@@ -8,25 +8,22 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: conic-gradient(var(--color) var(--percent),
-        #333 var(--percent));
+    background: conic-gradient(var(--color) var(--percent), rgba(119, 67, 219, 0.14) var(--percent));
     display: flex;
     justify-content: center;
     align-items: center;
     transform: rotate(calc(1 * var(--rotation)));
 }
 
-  /* Inner circle = cut-out */
 .progress-circle::before {
     content: "";
     position: absolute;
     width: calc(var(--size) - (2 * var(--thickness)));
     height: calc(var(--size) - (2 * var(--thickness)));
-    background: #1a1a1a;
+    background: #fff;
     border-radius: 50%;
 }
 
-  /* Center content (icon) */
 .center-content {
     position: absolute;
     display: flex;
@@ -41,13 +38,12 @@
     height: 45px;
 }
 
-/* Percentage label */
 .progress-label {
     position: absolute;
     top: 49%;
     right: -7px;
     background: var(--color);
-    color: white;
+    color: #fff;
     font-size: 9px;
     font-weight: bold;
     border-radius: 50%;
@@ -56,5 +52,4 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* transform: translateY(-50%); */
 }

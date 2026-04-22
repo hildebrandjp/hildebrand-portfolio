@@ -4,4 +4,10 @@
     background-size: 100% 100%;
     display: block;
     box-sizing: border-box;
+    filter: drop-shadow(0 6px 14px rgba(119, 67, 219, 0.2));
+    transition: transform 180ms ease;
+}
+
+.card:hover .arrow-icon {
+    transform: translateX(2px);
 }

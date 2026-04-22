@@ -1,0 +1,19 @@
+---
+layout: base
+---
+<div class="bg-image-mask section-page">
+    {% include navbar.html %}
+
+    <div class="container section-view">
+        <div class="modal section-modal-surface" id="section-modal-block">
+            <div class="modal-container section-modal-container">
+                <div id="sectionModalControllerWrapper" class="modal-container-wrapper">
+                    {{ content }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include components/shared/modal2.html %}
+    {% include footer.html %}
+</div>

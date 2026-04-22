@@ -1,7 +1,7 @@
 <div id="modalOverlay1" class="modal-wrapper-overlay hidden">
     <div class="modal hidden" id="modal-block">
             <div class="modal-container container">
-                <i onclick="window.modules.Modal.close(event)" class="modal-close-icon" ></i>
+                <button type="button" onclick="window.modules.Modal.close()" class="modal-close-icon" aria-label="Close modal"></button>
                 <div id="modalControllerWrapper" class="modal-container-wrapper">
                     {% include components/modals/contact/index.html %}
                     {% include components/modals/about/index.html %}    

@@ -1,52 +1,111 @@
-$modal_close_icon_size: 48px;
+$modal_close_icon_size: 42px;
 
 .modal-wrapper-overlay {
-    position: absolute;
+    position: fixed;
+    inset: 0;
     width: 100%;
     display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
-    top: 0;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px); /* Safari support */
-    z-index: 1;
+    padding: 28px 16px;
+    overflow-y: auto;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(46, 30, 78, 0.22);
+    z-index: 1100;
 }
 
 #modalOverlay2.modal-wrapper-overlay {
-    z-index: 2;
+    z-index: 1200;
 }
 
 .modal {
-    position: absolute;
+    position: relative;
     width: 100%;
     display: flex;
-    height: fit-content;
-    top: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    max-width: 1400px;
 
     > .modal-container {
-        margin: 100px 0;
-        height: calc(100% - 200px);
-        border-radius: 25px;
-        background-color: var(--app-dark);
+        margin: 0;
+        width: 100%;
+        max-height: calc(100vh - 76px);
+        border-radius: 28px;
+        background-color: var(--app-surface);
+        border: 1px solid var(--app-border);
+        box-shadow: 0 28px 60px rgba(46, 30, 78, 0.25);
         position: relative;
-
-        left: 50%;
-        transform: translateX(-50%);
+        left: auto;
+        transform: none;
+        overflow: hidden;
 
         > .modal-close-icon {
-            background-image: url('/assets/icons/close.svg');
-            background-size: 100% 100%;
-            background-repeat: no-repeat;
             width: $modal_close_icon_size;
             height: $modal_close_icon_size;
             display: block;
-            right: -68px;
-            top: 15px;
+            right: 14px;
+            top: 14px;
             position: absolute;
             cursor: pointer;
+            filter: none;
+            border: 1px solid var(--app-border);
+            border-radius: 999px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 22px rgba(46, 30, 78, 0.22);
+            z-index: 10;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            padding: 0;
+        }
+
+        > .modal-close-icon::before,
+        > .modal-close-icon::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 16px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--app-text-primary);
+            transform-origin: center;
+        }
+
+        > .modal-close-icon::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        > .modal-close-icon::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        > .modal-close-icon:hover {
+            transform: scale(1.04);
+            box-shadow: 0 14px 24px rgba(46, 30, 78, 0.28);
+            background-color: #fff;
+        }
+
+        > .modal-close-icon:focus-visible {
+            outline: 2px solid var(--app-violet-600);
+            outline-offset: 2px;
+        }
+
+        .modal-container-wrapper {
+            max-height: calc(100vh - 76px);
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .modal-container-wrapper::-webkit-scrollbar {
+            width: 0;
+            height: 0;
         }
 
         .modal-container-wrapper > .modal-ext-container {
-            padding: 48px;
+            padding: 42px;
 
             > .about-me-container {
                 display: flex;
@@ -55,14 +114,13 @@ $modal_close_icon_size: 48px;
                 column-gap: 2rem;
 
                 > .about-me-left-container {
-
                     > .about-me-left-middle-container {
-                        padding-top: 32px;
+                        padding-top: 28px;
                     }
 
                     > .about-me-left-low-container {
-                        color: var(--app-light);
-                        padding-top: 32px;
+                        color: var(--app-text-primary);
+                        padding-top: 28px;
 
                         > .about-me-work-with-brands-container {
                             display: flex;
@@ -73,6 +131,7 @@ $modal_close_icon_size: 48px;
                                 width: 100%;
                                 font-size: 14px;
                                 text-wrap-mode: nowrap;
+                                color: var(--app-text-secondary);
                             }
 
                             > .about-me-work-divider-hr {
@@ -82,32 +141,32 @@ $modal_close_icon_size: 48px;
                                     position: relative;
                                     top: 50%;
                                     transform: translateY(-50%);
-                                    margin: 0px !important;
-                                    padding: 0px !important;
+                                    margin: 0 !important;
+                                    padding: 0 !important;
                                     display: block;
                                     width: 100%;
                                 }
-                                // Create a circle right side
+
                                 > .hr::after {
-                                    content: ""; /* Required for pseudo-elements */
-                                    position: absolute; /* Position the circle absolutely */
-                                    right: 0px; /* Center horizontally */
-                                    top: 50%; /* Center vertically */
-                                    transform: translateY(-50%); /* Adjust for perfect centering */
-                                    width: 10px; /* Circle width */
-                                    height: 10px; /* Circle height */
-                                    background-color: var(--app-gray-light); /* Circle color */
-                                    border-radius: 50%; /* Makes it a circle */
+                                    content: "";
+                                    position: absolute;
+                                    right: 0;
+                                    top: 50%;
+                                    transform: translateY(-50%);
+                                    width: 10px;
+                                    height: 10px;
+                                    background-color: var(--app-violet-600);
+                                    border-radius: 50%;
                                 }
-                                // Create a line in the middle
+
                                 > .hr::before {
-                                    content: "";        /* Required for pseudo-elements */
-                                    position: absolute; /* Position relative to <hr> */
-                                    left: 0;           /* Start from left edge */
-                                    top: 50%;          /* Center vertically */
-                                    width: 100%;       /* Full width of <hr> */
-                                    height: 1.3px;       /* Line thickness */
-                                    background: var(--app-gray);  /* Line color */
+                                    content: "";
+                                    position: absolute;
+                                    left: 0;
+                                    top: 50%;
+                                    width: 100%;
+                                    height: 1.3px;
+                                    background: var(--app-border);
                                 }
                             }
                         }
@@ -119,33 +178,33 @@ $modal_close_icon_size: 48px;
                         column-gap: 1.2rem;
 
                         div > div > .custom-sm-card {
-                            background-color: var(--app-gray-darklight);
+                            background-color: var(--app-surface-muted);
                             padding: 20px 25px;
                             height: 100%;
 
                             > .highlight-title {
-                                color: var(--app-red);
+                                color: var(--app-violet-600);
                             }
 
                             > .highlight-sub-title {
-                                color: var(--app-gray-light);
+                                color: var(--app-text-secondary);
                             }
                         }
                     }
                 }
 
                 > .about-me-right-container::-webkit-scrollbar {
-                    width: 8px;   /* vertical scrollbar width */
-                    height: 8px;  /* horizontal scrollbar height */
+                    width: 4px;
+                    height: 4px;
                 }
 
                 > .about-me-right-container::-webkit-scrollbar-thumb {
-                    background: var(--app-darker);
-                    border-radius: 4px;
+                    background: rgba(119, 67, 219, 0.36);
+                    border-radius: 8px;
                 }
 
                 > .about-me-right-container::-webkit-scrollbar-track {
-                    background: var(--app-gray);
+                    background: rgba(119, 67, 219, 0.08);
                 }
 
                 > .about-me-right-container {
@@ -156,21 +215,23 @@ $modal_close_icon_size: 48px;
                     overflow-y: scroll;
                     max-height: 500px;
                     margin-top: 20px;
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(119, 67, 219, 0.36) rgba(119, 67, 219, 0.08);
 
-                    > .about-me-right-uppermost-container{
+                    > .about-me-right-uppermost-container {
                         > h3 {
-                            color: var(--app-light);
+                            color: var(--app-text-primary);
                             font-size: 1.5rem;
                         }
 
-                        > .amru-inner-container{
+                        > .amru-inner-container {
                             position: relative;
 
-                            > .amru-item{
+                            > .amru-item {
                                 padding-left: 24px;
 
                                 > .amru-year {
-                                    color: var(--app-red);
+                                    color: var(--app-violet-600);
                                     font-weight: 600;
                                     font-size: 1rem;
                                     padding-top: 20px;
@@ -178,19 +239,20 @@ $modal_close_icon_size: 48px;
                                 }
 
                                 .amru-jobtitle {
-                                    color: var(--app-light);
+                                    color: var(--app-text-primary);
                                     font-weight: 600;
                                     font-size: 1.1rem;
                                     padding-top: 16px;
                                 }
+
                                 .amru-position {
-                                    color: var(--app-red);
+                                    color: var(--app-violet-600);
                                     font-weight: 500;
                                     font-size: 0.8rem;
                                     margin-left: 16px;
                                     margin-top: 16px;
                                     padding: 4px 14px;
-                                    background-color: #000000;
+                                    background-color: rgba(119, 67, 219, 0.12);
                                     width: fit-content;
                                     border-radius: 20px;
                                 }
@@ -211,8 +273,8 @@ $modal_close_icon_size: 48px;
                     }
 
                     > .about-me-right-container::-webkit-scrollbar {
-                        width: 1px;
-                        height: 1px;
+                        width: 2px;
+                        height: 2px;
                     }
 
                     > .about-me-left-container {
@@ -239,14 +301,13 @@ $modal_close_icon_size: 48px;
                         }
                     }
                 }
-
             }
 
             > .skill-container {
                 display: flex;
                 flex-direction: column;
                 column-gap: 2rem;
-                color: var(--app-light);
+                color: var(--app-text-primary);
 
                 .upper-skill-container {
                     display: flex;
@@ -259,7 +320,7 @@ $modal_close_icon_size: 48px;
 
                 .mid-pos-skill-container {
                     display: flex;
-                    border-top: 2px solid var(--app-gray-light);
+                    border-top: 2px solid var(--app-border);
                     margin-top: 32px;
                     padding-top: 32px;
                     gap: 32px;
@@ -268,7 +329,8 @@ $modal_close_icon_size: 48px;
                         flex: 1;
                     }
 
-                    .raw-skill-container, .coding-skill-container {
+                    .raw-skill-container,
+                    .coding-skill-container {
                         h4 {
                             font-size: 24px;
                             font-weight: 600;
@@ -280,12 +342,13 @@ $modal_close_icon_size: 48px;
                     .coding-skill-container {
                         .inner-coding-skill {
                             padding: 32px;
-                            background: var(--app-darker);
+                            background: var(--app-surface-muted);
                             display: flex;
                             flex-direction: column;
                             justify-content: center;
                             align-items: center;
-                            border-radius: 10px;
+                            border-radius: 14px;
+                            border: 1px solid var(--app-border);
                         }
                     }
 
@@ -312,74 +375,74 @@ $modal_close_icon_size: 48px;
     display: block !important;
 }
 
+@media (max-width: 1399px) {
+    .modal-wrapper-overlay {
+        padding: 20px 12px;
+    }
+
+    .modal {
+        > .modal-container {
+            max-height: calc(100vh - 56px);
+            border-radius: 22px;
+
+            > .modal-close-icon {
+                right: 12px;
+                top: 12px;
+                width: 34px;
+                height: 34px;
+            }
+
+            > .modal-close-icon::before,
+            > .modal-close-icon::after {
+                width: 13px;
+            }
+
+            .modal-container-wrapper {
+                max-height: calc(100vh - 56px);
+            }
+
+            .modal-container-wrapper > .modal-ext-container {
+                padding: 28px 22px;
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .modal-wrapper-overlay {
+        padding: 12px;
+    }
+
+    .modal {
+        > .modal-container {
+            max-height: calc(100vh - 36px);
+            border-radius: 18px;
+
+            > .modal-close-icon {
+                width: 32px;
+                height: 32px;
+                right: 10px;
+                top: 10px;
+            }
+
+            > .modal-close-icon::before,
+            > .modal-close-icon::after {
+                width: 12px;
+            }
+
+            .modal-container-wrapper {
+                max-height: calc(100vh - 36px);
+            }
+
+            .modal-container-wrapper > .modal-ext-container {
+                padding: 22px 14px;
+            }
+        }
+    }
+}
+
 @media (min-width: 1800px) {
     .modal-container {
         max-width: 1600px !important;
-    }
-}
-
-@media (min-width: 1600px) {
-    .modal-container {
-        max-width: 1400px !important;
-    }
-}
-
-@media (min-width: 1400px) {
-    .modal-container {
-        max-width: 1200px !important;
-    }
-}
-
-@media (min-width: 1200px) {
-    .modal-container {
-        max-width: 1000px !important;
-    }
-}
-
-@media (max-width: 1200px) {
-    .modal-close-icon {
-        right: 12px !important;
-        top: 10px !important;
-    }
-
-    .modal-container-wrapper {
-        padding: 16px 0px;
-    }
-
-    .modal-ext-container {
-        padding: 48px 16px !important;
-        overflow-x: auto;
-    }
-}
-
-@media (max-width: 768px) {
-
-    .contact-container {
-        flex-direction: column !important;
-    }
-}
-
-@media screen and (max-width: 992px) {
-    .mid-pos-skill-container {
-        flex-direction: column;
-
-        .coding-skill-container {
-            padding-top: 32px;
-        }
-
-        .raw-skill-container > .inner-raw-skill {
-            justify-content: center;
-            align-items: center;
-        }
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .upper-skill-container {
-        flex-direction: column;
-
-        .about-me-left-middle-container {
-            padding-top: 32px;
-        }
     }
 }

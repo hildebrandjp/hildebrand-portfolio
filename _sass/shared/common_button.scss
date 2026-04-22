@@ -1,20 +1,25 @@
 .common-button {
-    padding: 14px 32px;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--app-light);
-    background-color: var(--app-red);
+    padding: 12px 26px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(135deg, var(--app-violet-600), #8f60e6);
     border: none;
-    border-radius: 20px;
+    border-radius: 999px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: transform 180ms ease, box-shadow 180ms ease;
 
     &:hover {
-        background-color: var(--app-light-red);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(119, 67, 219, 0.3);
     }
 
     &:disabled {
-        background-color: var(--app-gray-dark);
+        background: #d8c8f4;
         cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
     }
 }

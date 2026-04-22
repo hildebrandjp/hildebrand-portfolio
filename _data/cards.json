@@ -12,38 +12,42 @@
             "image_path": "/assets/images/profile.jpg",
             "position": "UX/UI Designer & Front-end Developer",
             "color_background": {
-                "profile_img": "#ffffff",
-                "description": "#151211"
+                "profile_img": "#F7EFE5",
+                "description": "#7743DB"
             }
         },
         "screens": [
             {
                 "title": "About Me",
                 "name": "about-index",
-                "color": "#02B6A3",
+                "color": "#F7EFE5",
                 "img": "/assets/img/banner/about_me.png",
-                "metadata": {}
+                "metadata": {},
+                "path": "/about/"
             },
             {
                 "title": "My Skills",
                 "name": "skill-index",
-                "color": "#B63902",
+                "color": "#C3ACD0",
                 "img": "/assets/img/banner/skill_me.png",
-                "metadata": {}
+                "metadata": {},
+                "path": "/skills/"
             },
             {
                 "title": "My Portfolio",
                 "name": "portfolio-index",
-                "color": "#028EB6",
+                "color": "#FFFBF5",
                 "img": "/assets/img/banner/portfolio_mee.png",
-                "metadata": {}
+                "metadata": {},
+                "path": "/portfolio/"
             },
             {
                 "title": "Contact Me",
                 "name": "contact-index",
-                "color": "#FE4835",
+                "color": "#F7EFE5",
                 "img": "/assets/img/banner/contact_me.png",
-                "metadata": {}
+                "metadata": {},
+                "path": "/contact/"
             }
         ],
         "highlight_achievements": [
@@ -67,13 +71,13 @@
                     {
                         "title": "Bachelor of Science in Computer Science",
                         "institution": "University of Technology",
-                        "position":"UX/UI Designer & Front-end Developer",
+                        "position": "UX/UI Designer & Front-end Developer",
                         "description": "Graduated with honors, specializing in software development and web technologies."
                     },
                     {
                         "title": "Bachelor of Science in Computer Science",
                         "institution": "University of Technology",
-                        "position":"UX/UI Designer & Front-end Developer",
+                        "position": "UX/UI Designer & Front-end Developer",
                         "description": "Graduated with honors, specializing in software development and web technologies."
                     }
                 ]
@@ -84,15 +88,15 @@
                     {
                         "title": "Bachelor of Science in Computer Science",
                         "institution": "University of Technology",
-                        "position":"UX/UI Designer & Front-end Developer",
+                        "position": "UX/UI Designer & Front-end Developer",
                         "description": "Graduated with honors, specializing in software development and web technologies."
                     }
                 ]
             }
         ],
         "default": {
-            "inner_color": "#797979",
-            "header_color": "#ffffff",
+            "inner_color": "#FFFBF5",
+            "header_color": "#2E1E4E",
             "arrow_right": "/assets/icons/right-arrow.svg"
         }
     }

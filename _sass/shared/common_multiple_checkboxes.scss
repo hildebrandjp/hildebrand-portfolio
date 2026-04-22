@@ -11,54 +11,42 @@
         margin-top: 8px;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 8px;
+        gap: 10px;
         width: 100%;
-        // display: flex;
-        // flex-direction: row;
-        // flex-wrap: wrap;
-        // column-gap: 32px;
-        // row-gap: 8px;
 
         .common-mutiple-input-wrapper {
             display: flex;
             flex-direction: row;
             align-items: center;
             gap: 8px;
+            padding: 0.5rem 0.65rem;
+            border-radius: 10px;
+            border: 1px solid var(--app-border);
+            background: var(--app-surface-strong);
 
             span {
-                font-size: 16px;
-                font-weight: 600;
-                color: var(--app-light);
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--app-text-primary);
             }
         }
 
         label {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
-            color: var(--app-light);
+            color: var(--app-text-secondary);
             text-wrap-mode: wrap;
         }
 
         input {
-            padding: 12px 2px;
-            border: 1px solid var(--app-gray-dark);
-            font-size: 16px;
-            color: var(--app-light);
-            background-color: var(--app-gray-darker);
-            border-bottom: 2px solid var(--app-gray-light);
-
-            &:focus {
-                outline: none;
-                border-color: var(--app-blue);
-                box-shadow: 0 0 0 2px var(--app-blue-light);
-            }
+            accent-color: var(--app-violet-600);
         }
     }
 
     .common-multi-checkboxes-title {
-        font-size: 18px;
+        font-size: 15px;
         font-weight: 600;
-        color: var(--app-light);
+        color: var(--app-text-secondary);
         display: flex;
         align-items: center;
         gap: 8px;

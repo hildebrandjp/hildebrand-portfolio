@@ -5,10 +5,28 @@
     display: block;
     box-sizing: border-box;
     position: absolute;
+    filter: drop-shadow(0 6px 16px rgba(119, 67, 219, 0.28));
+    animation: star-float 2.8s ease-in-out infinite;
+}
+
+@keyframes star-float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
 }
 
 @media screen and (max-width: 1399px) {
-  .star-2, .star-3 {
+  .star-2,
+  .star-3 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .star-1 {
     display: none;
   }
 }

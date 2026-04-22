@@ -1,4 +1,5 @@
-<div class="modal-ext-container modal-contact-container hidden" data-modal-page="contact-index">
+{% if include.visible %}{% assign visibility_class = "" %}{% else %}{% assign visibility_class = "hidden" %}{% endif %}
+<div class="modal-ext-container modal-contact-container {{ visibility_class }}" data-modal-page="contact-index">
     <div class="contact-container">
         <div class="contact-info-aboutme">
             <div class="contact-img-and-name-wrapper">

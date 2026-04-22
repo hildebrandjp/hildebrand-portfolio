@@ -1,4 +1,5 @@
-<div class="modal-ext-container modal-skill-container hidden" data-modal-page="skill-index">
+{% if include.visible %}{% assign visibility_class = "" %}{% else %}{% assign visibility_class = "hidden" %}{% endif %}
+<div class="modal-ext-container modal-skill-container {{ visibility_class }}" data-modal-page="skill-index">
     <div class="skill-container">
         <div class="upper-skill-container">
             <div class="about-me-left-uppermost-container">

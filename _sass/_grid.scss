@@ -48,18 +48,39 @@
     --hl-breakpoint-xl: 1200px;
     --hl-breakpoint-xxl: 1400px;
 
-    --app-darkest: #040303;
-    --app-dark: #1F1F1F;
-    --app-light: #FFFFFF;
-    --app-gray: #2E2E2E;
-    --app-gray-light: #656565;
-    --app-dim-dark: #1F1F1F;
-    --app-darker: #040303;
-    --app-gray-darklight: #2c2929;
-    --app-red: #FF4040;
-    --app-light-red: #f86565;
-    --app-dim-red: #591A1A;
-    --app-light-secondary: #c7c7c7;
+    /* Core palette from ColorHunt */
+    --app-cream-50: #FFFBF5;
+    --app-cream-100: #F7EFE5;
+    --app-lilac-300: #C3ACD0;
+    --app-violet-600: #7743DB;
+
+    /* Semantic colors */
+    --app-text-primary: #2e1e4e;
+    --app-text-secondary: #6c5798;
+    --app-surface: #fff7ee;
+    --app-surface-muted: #f5ebff;
+    --app-surface-strong: #ffffff;
+    --app-border: rgba(119, 67, 219, 0.22);
+    --app-shadow: rgba(89, 47, 162, 0.16);
+    --app-highlight: rgba(195, 172, 208, 0.42);
+
+    /* Backward-compatible tokens used in existing partials */
+    --app-darkest: #21153a;
+    --app-dark: var(--app-surface);
+    --app-light: var(--app-text-primary);
+    --app-gray: var(--app-lilac-300);
+    --app-gray-light: #8a70b3;
+    --app-dim-dark: #4e3b73;
+    --app-darker: #e9dcf8;
+    --app-gray-dark: #b7a6d0;
+    --app-gray-darker: #f4ecff;
+    --app-gray-darklight: #efe3fb;
+    --app-red: var(--app-violet-600);
+    --app-light-red: #8f60e6;
+    --app-dim-red: #54318f;
+    --app-light-secondary: #baa8d6;
+    --app-blue: var(--app-violet-600);
+    --app-blue-light: rgba(119, 67, 219, 0.24);
 }
 
 

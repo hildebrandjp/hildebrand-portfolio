@@ -6,31 +6,76 @@
 }
 
 .home-container {
-  display: grid;
-  grid-template-rows: repeat(2, auto);   /* 2 rows */
-  grid-auto-flow: column;                /* Fill by column instead of row */
-  gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    gap: 1.2rem;
+    padding-top: 1rem;
 }
 
-.home-container > div:nth-child(odd) {
-  display: flex;
+.home-container > div {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    min-height: 308px;
+    animation: card-entry 420ms ease both;
+}
+
+.home-container > div > .card {
+    width: 100%;
+    max-width: none;
+}
+
+.home-container > div:nth-child(2) {
+    animation-delay: 90ms;
+}
+
+.home-container > div:nth-child(3) {
+    animation-delay: 140ms;
+}
+
+.home-container > div:nth-child(4) {
+    animation-delay: 190ms;
+}
+
+.home-container > div:nth-child(5),
+.home-container > div:nth-child(6) {
+    animation-delay: 240ms;
+}
+
+@keyframes card-entry {
+    from {
+        transform: translateY(16px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 @media screen and (max-width: 1399px) {
-  .home-container {
-    grid-template-rows: auto;   
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-flow: row;
-  }
+    .home-container {
+        grid-template-rows: auto;
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+        grid-auto-flow: row;
+        gap: 1rem;
+    }
 
-  .home-container > div:nth-child(odd) {
-    justify-content: flex-end;
-    align-items: center;
-  }
+    .home-container > div {
+        min-height: 280px;
+    }
+}
 
-  .home-container > div:nth-child(even) {
-    justify-content: flex-start;
-    align-items: center;
-  }
+@media screen and (max-width: 992px) {
+    .home-container {
+        grid-template-columns: 1fr;
+        padding-top: 0.5rem;
+    }
+
+    .home-container > div {
+        min-height: auto;
+    }
 }

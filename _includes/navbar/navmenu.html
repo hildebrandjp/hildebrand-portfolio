@@ -2,11 +2,13 @@
     <ul class="nav-menus">
         {% for nav_menu in site.data.social_media_icons %}
         <li class="nav-menu">
-            <a href="{{nav_menu.url}}">
-                <i class="icon-nav-menu-i" style="background-image: url('{{ nav_menu.icon_path }}');"></i>
+            <a href="https://{{nav_menu.url}}" target="_blank" rel="noopener noreferrer" aria-label="{{ nav_menu.name }}">
+                <span class="icon-nav-menu-i">
+                    <img class="icon-nav-menu-img" src="{{ nav_menu.icon_path }}" alt="{{ nav_menu.name }} icon" />
+                </span>
             </a>
         </li>
         {% endfor %} 
     </ul>
-    <a href="" class="hire-me">Hire Me</a>
+    <a href="/contact/" class="hire-me">Hire Me</a>
 </div>

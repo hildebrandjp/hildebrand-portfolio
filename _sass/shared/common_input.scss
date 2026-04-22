@@ -4,23 +4,23 @@
     gap: 8px;
 
     label {
-        font-size: 18px;
+        font-size: 15px;
         font-weight: 600;
-        color: var(--app-light);
+        color: var(--app-text-secondary);
     }
 
     input {
-        padding: 12px 2px;
-        border: 1px solid var(--app-gray-dark);
+        padding: 12px 14px;
+        border: 1px solid var(--app-border);
+        border-radius: 12px;
         font-size: 16px;
-        color: var(--app-light);
-        background-color: var(--app-gray-darker);
-        border-bottom: 2px solid var(--app-gray-light);
+        color: var(--app-text-primary);
+        background-color: var(--app-surface-strong);
 
         &:focus {
             outline: none;
             border-color: var(--app-blue);
-            box-shadow: 0 0 0 2px var(--app-blue-light);
+            box-shadow: 0 0 0 3px var(--app-blue-light);
         }
     }
 }

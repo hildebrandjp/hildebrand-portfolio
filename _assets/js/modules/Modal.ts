@@ -5,11 +5,14 @@ export default class Modal {
 
     init() {
         this.enableClickButtonCls();
+        this.enableDismissBehavior();
     }
 
     close() {
-        document.getElementById('modal-block')!.classList.add('hidden');
-        document.getElementById('modalOverlay1')!.classList.add('hidden');
+        const modalBlock = document.getElementById('modal-block');
+        const modalOverlay = document.getElementById('modalOverlay1');
+        if (modalBlock) modalBlock.classList.add('hidden');
+        if (modalOverlay) modalOverlay.classList.add('hidden');
         const dataAttributes = this.getAllDataAttrbFromWrapper() as NodeListOf<HTMLElement>;
         
         dataAttributes.forEach((element) => {
@@ -19,26 +22,48 @@ export default class Modal {
     }
 
     open(name : ModalPage) {
+        const modalBlock = document.getElementById('modal-block');
+        const modalOverlay = document.getElementById('modalOverlay1');
+        if (!modalBlock || !modalOverlay) return;
+
         const dataAttributes = this.getAllDataAttrbFromWrapper() as NodeListOf<HTMLElement>;
         
         dataAttributes.forEach((element) => {
             const pageName = element.dataset.modalPage;
             if (pageName !== name) return;
 
-            document.getElementById('modalOverlay1')!.classList.remove('hidden');
-            document.getElementById('modal-block')!.classList.remove('hidden');
+            modalOverlay.classList.remove('hidden');
+            modalBlock.classList.remove('hidden');
             element.classList.remove('hidden');
             element.classList.add('show');
         });
     }
 
     protected enableClickButtonCls() {
-        $('.card-route-name-cls').on('click', (e: Event) => {
+        $(document).on('click', '.card-route-name-cls', (e: Event) => {
             const target = e.currentTarget as HTMLElement;
             const pageName = target.dataset.routeModal;
 
             if (!pageName) return;
             this.open(pageName as ModalPage);
+        });
+    }
+
+    protected enableDismissBehavior() {
+        const modalOverlay = document.getElementById('modalOverlay1');
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', (e: Event) => {
+                if (e.target !== modalOverlay) return;
+                this.close();
+            });
+        }
+
+        document.addEventListener('keydown', (e: KeyboardEvent) => {
+            if (e.key !== 'Escape') return;
+
+            const modalBlock = document.getElementById('modal-block');
+            if (!modalBlock || modalBlock.classList.contains('hidden')) return;
+            this.close();
         });
     }
 

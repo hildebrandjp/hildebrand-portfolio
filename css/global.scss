@@ -1,14 +1,15 @@
 ---
 ---
 
-
 .bg-image-mask {
+    position: relative;
     width: 100%;
     min-height: 100vh;
-    background-image: url('/assets/img/bg_mask.png');
-    background-repeat: no-repeat;
     height: 100%;
-    background-size: 100% 100%;
+    background:
+        radial-gradient(70% 45% at 10% 10%, rgba(195, 172, 208, 0.42) 0%, rgba(195, 172, 208, 0) 70%),
+        radial-gradient(60% 60% at 90% 15%, rgba(119, 67, 219, 0.2) 0%, rgba(119, 67, 219, 0) 70%),
+        linear-gradient(140deg, var(--app-cream-50), var(--app-cream-100));
 }
 
 .vert-line {
@@ -17,26 +18,27 @@
 }
 
 .vert-line .line {
-  position: absolute;
-  left: 0;
-  width: 2px;
-  background-color: var(--app-gray);
-  border-radius: 2px;
+    position: absolute;
+    left: 0;
+    width: 2px;
+    background-color: var(--app-border);
+    border-radius: 2px;
 }
 
 .bullet {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
-  background-color: var(--app-gray-light);
-  border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background-color: var(--app-violet-600);
+    border-radius: 50%;
 }
 
 @media screen and (max-width: 1399px) {
     .bg-image-mask {
-      overflow-x: auto;
+      overflow-x: hidden;
+      padding-bottom: 96px;
     }
 }
