@@ -10,7 +10,8 @@ declare global {
             ListBulletStyleHtml?: import("@/modules/ListBulletStyleHtml").default;
             CardAnimationEffect?: import("@/modules/CardAnimationEffect").default;
             Modal?: import("@/modules/Modal").default;
-            State?: import("@/modules/State").default;  
+            State?: import("@/modules/State").default;
+            HamburgerMenu?: import("@/modules/HamburgerMenu").default;
         }
         const: any;
     }

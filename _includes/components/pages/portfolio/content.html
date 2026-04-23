@@ -1,0 +1,232 @@
+<div class="portfolio-container">
+    <div class="chip-tags-title">
+        {% for portfolio_object in site.data.portfolio.tags %}
+            {% include components/shared/chip.html title=portfolio_object.title tag=portfolio_object.tag color=portfolio_object.color %}
+        {% endfor %}
+    </div>
+
+    <div class="portfolio-content">
+        {% for portfolio in site.data.portfolio.data %}
+        {% include components/shared/portfolio_card1.html portfolio=portfolio %}
+        {% endfor %}
+    </div>
+    <div class="portfolio-pagination hidden" aria-label="Portfolio pagination"></div>
+    <div id="portfolioCopyToast" class="portfolio-copy-toast" role="status" aria-live="polite">Project link copied</div>
+</div>
+<div class="hidden" id="tempPortfolio">
+    {% assign portfolio = site.data.portfolio.data[0] %}
+    {% include components/shared/portfolio_card1.html portfolio=portfolio %}
+</div>
+
+
+<script type="module">
+    (() => {
+        const portfolios = {{ site.data.portfolio.data | jsonify }};
+        class PortfolioIndex {
+            constructor() {
+                this.itemsPerPage = 10;
+                this.currentPage = 1;
+                this.currentTag = 'all';
+                this.copyToastTimer = null;
+                this.portfolioContent = $('.portfolio-content');
+                this.paginationContainer = $('.portfolio-pagination');
+                this.buttonEvents();
+                this.chipComponentEvent();
+                this.paginationEvents();
+                this.init();
+            }
+
+            buttonEvents() {
+                $(document).on('click', '.portfolio-content .btnPlayIcon', (event) => this.playButtonClicked(event));
+                $(document).on('click', '.portfolio-content .btnShareIcon', (event) => this.shareButtonClicked(event));
+            }
+
+            cardAnimation() {
+                if (window?.modules?.CardAnimationEffect) {
+                    window.modules.CardAnimationEffect.enableAnimationCardHover();
+                    window.modules.CardAnimationEffect.enableHoverShowButtonsCardPreview();
+                }
+            }
+
+            chipComponentEvent() {
+                $('.chip-component').on('click', (event) => {
+                    const tag = $(event.currentTarget).data('chip-tag');
+                    this.sortCategory(tag);
+                });
+            }
+
+            paginationEvents() {
+                this.paginationContainer.on('click', '.portfolio-page-btn', (event) => {
+                    const page = Number($(event.currentTarget).data('page'));
+                    if (!page || page === this.currentPage) return;
+                    this.currentPage = page;
+                    this.render();
+                });
+            }
+
+            init() {
+                $(document).ready(() => {
+                    this.render();
+                });
+            }
+
+            playButtonClicked(event) {
+                const portfolioId = $(event.currentTarget).data('portfolio-id');
+                const listOverlay = document.getElementById('modalOverlay1');
+                const detailOverlay = document.getElementById('modalOverlay2');
+                const detailModal = document.getElementById('modal-block-2');
+
+                if (listOverlay) listOverlay.classList.add('hidden');
+                if (detailOverlay) detailOverlay.classList.remove('hidden');
+                $('.modal-ext-container-2').removeClass('hidden');
+
+                if (detailModal) {
+                    detailModal.classList.remove('portfolio-swipe-right-enter', 'portfolio-swipe-right-exit');
+                    requestAnimationFrame(() => detailModal.classList.add('portfolio-swipe-right-enter'));
+                }
+
+                window.modules.State.addObject('portfolioId', portfolioId);
+            }
+
+            shareButtonClicked(event) {
+                const portfolioId = String($(event.currentTarget).data('portfolio-id') || '');
+                const portfolio = portfolios.find((item) => String(item.id) === portfolioId);
+                const projectLink = portfolio?.video_url || portfolio?.url || '';
+                if (!projectLink) return;
+
+                const copyWithFallback = () => {
+                    const textArea = document.createElement('textarea');
+                    textArea.value = projectLink;
+                    textArea.setAttribute('readonly', '');
+                    textArea.style.position = 'absolute';
+                    textArea.style.left = '-9999px';
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    const copied = document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    return copied;
+                };
+
+                if (navigator?.clipboard?.writeText) {
+                    navigator.clipboard.writeText(projectLink)
+                        .then(() => this.showCopyNotification())
+                        .catch(() => {
+                            if (copyWithFallback()) this.showCopyNotification();
+                        });
+                } else {
+                    if (copyWithFallback()) this.showCopyNotification();
+                }
+            }
+
+            showCopyNotification() {
+                const toast = $('#portfolioCopyToast');
+                toast.addClass('show');
+
+                if (this.copyToastTimer) window.clearTimeout(this.copyToastTimer);
+                this.copyToastTimer = window.setTimeout(() => {
+                    toast.removeClass('show');
+                }, 1800);
+            }
+
+            sortCategory(tag = 'all') {
+                this.currentTag = tag || 'all';
+                this.currentPage = 1;
+                this.render();
+            }
+
+            getFilteredPortfolios() {
+                return portfolios.filter((portfolio) => portfolio.tag === this.currentTag || this.currentTag === 'all');
+            }
+
+            render() {
+                const filteredPortfolios = this.getFilteredPortfolios();
+                const totalPages = Math.max(1, Math.ceil(filteredPortfolios.length / this.itemsPerPage));
+                if (this.currentPage > totalPages) this.currentPage = totalPages;
+
+                const start = (this.currentPage - 1) * this.itemsPerPage;
+                const pageItems = filteredPortfolios.slice(start, start + this.itemsPerPage);
+                this.renderPortfolioCards(pageItems);
+                this.renderPagination(totalPages, filteredPortfolios.length);
+                this.cardAnimation();
+            }
+
+            renderPortfolioCards(items) {
+                this.portfolioContent.empty();
+                items.forEach((portfolio) => {
+                    const portfolioHtmlClone = $('#tempPortfolio').children().clone();
+                    portfolioHtmlClone.find('.subtitle').text(portfolio.subtitle);
+                    portfolioHtmlClone.find('.title').text(portfolio.title);
+                    portfolioHtmlClone.find('.icon-btn').attr('data-portfolio-id', portfolio.id);
+                    portfolioHtmlClone.find('.card-preview').attr(
+                        'style',
+                        portfolio?.url ? `background-image: url('${ portfolio.url }');` : ''
+                    );
+                    portfolioHtmlClone.find('.card').attr('style', portfolio?.color ? `background-color: ${ portfolio.color };` : '');
+                    this.portfolioContent.append(portfolioHtmlClone);
+                });
+
+                this.portfolioContent.scrollTop(0);
+            }
+
+            getVisiblePages(totalPages) {
+                if (totalPages <= 5) {
+                    return Array.from({ length: totalPages }, (_, index) => index + 1);
+                }
+
+                const pages = [];
+                let start = Math.max(1, this.currentPage - 1);
+                let end = Math.min(totalPages, start + 4);
+                start = Math.max(1, end - 4);
+
+                if (start > 1) {
+                    pages.push(1);
+                    if (start > 2) pages.push('dots-start');
+                }
+
+                for (let page = start; page <= end; page += 1) {
+                    pages.push(page);
+                }
+
+                if (end < totalPages) {
+                    if (end < totalPages - 1) pages.push('dots-end');
+                    pages.push(totalPages);
+                }
+
+                return pages;
+            }
+
+            renderPagination(totalPages, totalItems) {
+                if (totalItems <= this.itemsPerPage) {
+                    this.paginationContainer.addClass('hidden').empty();
+                    return;
+                }
+
+                const pages = this.getVisiblePages(totalPages);
+                const pageButtons = pages.map((page) => {
+                    if (typeof page !== 'number') {
+                        return '<span class="portfolio-page-dots" aria-hidden="true">…</span>';
+                    }
+
+                    const activeClass = page === this.currentPage ? 'is-active' : '';
+                    return `<button type="button" class="portfolio-page-btn ${ activeClass }" data-page="${ page }">${ page }</button>`;
+                }).join('');
+
+                const prevDisabled = this.currentPage === 1 ? 'disabled' : '';
+                const nextDisabled = this.currentPage === totalPages ? 'disabled' : '';
+
+                this.paginationContainer
+                    .removeClass('hidden')
+                    .html(`
+                        <button type="button" class="portfolio-page-btn portfolio-page-nav" data-page="${ this.currentPage - 1 }" ${ prevDisabled }>Prev</button>
+                        ${ pageButtons }
+                        <button type="button" class="portfolio-page-btn portfolio-page-nav" data-page="${ this.currentPage + 1 }" ${ nextDisabled }>Next</button>
+                    `);
+            }
+        }
+
+        $(document).ready(() => {
+            window.modules = window.modules || {};
+            window.modules.PortfolioIndex = new PortfolioIndex();
+        });
+    })();
+</script>

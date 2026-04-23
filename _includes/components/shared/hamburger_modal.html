@@ -1,14 +1,21 @@
 <div id="modalOverlay3" class="modal-wrapper-overlay hidden">
     <div class="modal" id="hamburger-modal-block">
-            <div class="modal-container container ">
-                <div id="hamburgerModalControllerWrapper" class="modal-container-wrapper hamburger-menubar">
-                    <ul class="hamburger-menu-list">
-                        <li><a href="javascript: void();">1</a></li>
-                        <li><a href="javascript: void();">2</a></li>
-                        <li><a href="javascript: void();">3</a></li>
-                        <li><a href="javascript: void();">4</a></li>
-                    </ul>
+        <div class="modal-container container">
+            <button type="button" class="hamburger-close-icon" aria-label="Close menu"></button>
+            <div id="hamburgerModalControllerWrapper" class="modal-container-wrapper hamburger-menubar">
+                <ul class="hamburger-menu-list">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="/skills/">Skills</a></li>
+                    <li><a href="/portfolio/">Portfolio</a></li>
+                </ul>
+                <div class="hamburger-menu-actions">
+                    {% include navbar/action_links.html resume_extra_class="hamburger-action-btn" hire_extra_class="hamburger-action-btn" %}
+                </div>
+                <div class="hamburger-menu-social">
+                    {% include navbar/social_links.html list_class="nav-menus hamburger-nav-menus" %}
                 </div>
             </div>
         </div>
+    </div>
 </div>

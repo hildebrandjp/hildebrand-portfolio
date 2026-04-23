@@ -1,6 +1,9 @@
 import { ModalPage } from "@/interface/ModalPage";
+import { MODAL_PAGES } from "@/constants/modal";
 
 export default class Modal {
+    private _aboutResizeObserver: ResizeObserver | null = null;
+
     constructor() {}
 
     init() {
@@ -14,11 +17,14 @@ export default class Modal {
         if (modalBlock) modalBlock.classList.add('hidden');
         if (modalOverlay) modalOverlay.classList.add('hidden');
         const dataAttributes = this.getAllDataAttrbFromWrapper() as NodeListOf<HTMLElement>;
-        
+
         dataAttributes.forEach((element) => {
             element.classList.remove('show');
             element.classList.add('hidden');
         });
+
+        this._aboutResizeObserver?.disconnect();
+        this._aboutResizeObserver = null;
     }
 
     open(name : ModalPage) {
@@ -27,7 +33,7 @@ export default class Modal {
         if (!modalBlock || !modalOverlay) return;
 
         const dataAttributes = this.getAllDataAttrbFromWrapper() as NodeListOf<HTMLElement>;
-        
+
         dataAttributes.forEach((element) => {
             const pageName = element.dataset.modalPage;
             if (pageName !== name) return;
@@ -36,6 +42,36 @@ export default class Modal {
             modalBlock.classList.remove('hidden');
             element.classList.remove('hidden');
             element.classList.add('show');
+
+            if (name === MODAL_PAGES.ABOUT_INDEX) {
+                requestAnimationFrame(() => {
+                    this.syncAboutRightHeight(element);
+                    this.refreshAboutTimeline();
+                });
+            }
+        });
+    }
+
+    private syncAboutRightHeight(container: HTMLElement) {
+        const modalParent = document.querySelector<HTMLElement>('.modal-about-container');
+        const right = container.querySelector<HTMLElement>('.about-me-right-container');
+        if (!modalParent || !right) return;
+
+        const applyHeight = () => {
+            right.style.maxHeight = `${ modalParent.offsetHeight - 110 }px`;
+            this.refreshAboutTimeline();
+        };
+
+        applyHeight();
+
+        this._aboutResizeObserver?.disconnect();
+        this._aboutResizeObserver = new ResizeObserver(applyHeight);
+        this._aboutResizeObserver.observe(modalParent);
+    }
+
+    private refreshAboutTimeline() {
+        requestAnimationFrame(() => {
+            window.modules?.ListBulletStyleHtml?.init();
         });
     }
 

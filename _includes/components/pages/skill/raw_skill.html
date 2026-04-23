@@ -1,12 +1,25 @@
 <div class="raw-skill-container">
-    <h4>Raw Skill</h4>
+    {% assign raw_skill = site.data.skill.raw %}
+    <h4>{{ raw_skill.title | default: "Raw Skill" }}</h4>
 
     <div class="inner-raw-skill">
-        {% include components/shared/circular_progress_bar.html percent=30 size="120px" %}
-        {% include components/shared/circular_progress_bar.html percent=30 size="120px" %}
-        {% include components/shared/circular_progress_bar.html percent=30 size="120px" %}
-        {% include components/shared/circular_progress_bar.html percent=30 size="120px" %}
-        {% include components/shared/circular_progress_bar.html percent=30 size="120px" %}
-        {% include components/shared/circular_progress_bar.html percent=30 size="120px" %}
+        {% if raw_skill.items and raw_skill.items.size > 0 %}
+            {% for item in raw_skill.items %}
+                {% include components/shared/circular_progress_bar.html
+                    percent=item.percent
+                    size="120px"
+                    color=item.color
+                    icon=item.icon
+                    alt=item.alt
+                    title=item.title %}
+            {% endfor %}
+        {% else %}
+            {% include components/shared/circular_progress_bar.html percent=30 size="120px" %}
+            {% include components/shared/circular_progress_bar.html percent=30 size="120px" %}
+            {% include components/shared/circular_progress_bar.html percent=30 size="120px" %}
+            {% include components/shared/circular_progress_bar.html percent=30 size="120px" %}
+            {% include components/shared/circular_progress_bar.html percent=30 size="120px" %}
+            {% include components/shared/circular_progress_bar.html percent=30 size="120px" %}
+        {% endif %}
     </div>
 </div>

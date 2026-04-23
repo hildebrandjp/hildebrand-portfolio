@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prebuild": "node -e \"require('fs').mkdirSync('_site/assets/js', {recursive: true})\"",
+    "build:skill-data": "node scripts/generate-skill-data.js",
+    "prebuild": "npm run build:skill-data && node -e \"require('fs').mkdirSync('_site/assets/js', {recursive: true})\"",
     "build-js:dev": "npm run prebuild && cross-env NODE_ENV=development rspack --config rspack.config.js",
     "build-js:prod": "npm run prebuild && cross-env NODE_ENV=production rspack --config rspack.config.js",
     "watch-js:dev": "npm run prebuild && cross-env NODE_ENV=development rspack --watch --config rspack.config.js",

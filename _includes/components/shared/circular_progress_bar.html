@@ -5,7 +5,7 @@ Parameters:
 - size: circle size (default: 120px)
 - thickness: progress bar thickness (default: 12px)
 - rotation: rotation angle (default: 90deg)
-- icon: icon URL (default: Figma logo)
+- icon: icon URL (default: /assets/icons/shine.svg)
 - alt: icon alt text (default: icon)
 {% endcomment %}
 
@@ -13,16 +13,24 @@ Parameters:
 {% assign color = include.color | default: "#a855f7" %}
 {% assign thickness = include.thickness | default: "12px" %}
 {% assign rotation = include.rotation | default: "90deg" %}
-{% assign icon = include.icon | default: "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" %}
+{% assign icon = include.icon | default: "/assets/icons/shine.svg" %}
 {% assign alt = include.alt | default: "icon" %}
 {% assign size = include.size | default: "120px" %}
+{% if icon contains '://' %}
+  {% assign icon_src = icon %}
+{% else %}
+  {% assign icon_src = icon | relative_url %}
+{% endif %}
 
-<div class="progress-container"
-  style="--size: {{ size }}; --thickness: {{ thickness }}; --percent: {{ percent }}%; --rotation: {{ rotation }}; --color: {{ color }};">
-  <div class="progress-circle">
-    <div class="center-content">
-      <img src="{{ icon }}" alt="{{ alt }}">
+<div class="progress-container">
+  <div class="progress-container"
+    style="--size: {{ size }}; --thickness: {{ thickness }}; --percent: {{ percent }}%; --rotation: {{ rotation }}; --color: {{ color }};">
+    <div class="progress-circle">
+      <div class="center-content">
+        <img src="{{ icon_src }}" alt="{{ alt }}">
+      </div>
     </div>
+    <div class="progress-label">{{ percent }}%</div>
   </div>
-  <div class="progress-label">{{ percent }}%</div>
+  <span class="progress-title">{{ include.title | default: "Progress" }}</span>
 </div>

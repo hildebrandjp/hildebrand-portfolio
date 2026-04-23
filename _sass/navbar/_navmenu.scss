@@ -43,6 +43,25 @@
     align-items: center;
     column-gap: 1.25rem;
 
+    > .resume-nav-btn {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--app-violet-600);
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid var(--app-border);
+        border-radius: 999px;
+        padding: 0.65rem 1.1rem;
+        transition: transform 180ms ease, box-shadow 180ms ease, color 180ms ease;
+    }
+
+    > .resume-nav-btn:hover {
+        transform: translateY(-2px);
+        color: var(--app-text-primary);
+        box-shadow: 0 10px 20px var(--app-shadow);
+    }
+
     > .hire-me {
         font-size: 14px;
         font-weight: 700;

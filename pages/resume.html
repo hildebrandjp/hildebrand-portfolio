@@ -1,0 +1,114 @@
+---
+layout: section_page
+title: "Resume | Hildebrand"
+permalink: /resume/
+description: "Preview and download Hildebrand's resume."
+keywords: "resume, cv, hildebrand, download"
+canonical: "http://localhost:4000/resume/"
+og_url: "http://localhost:4000/resume/"
+og_type: "website"
+og_title: "Hildebrand Resume"
+---
+<div class="modal-ext-container resume-page-container">
+    <div class="resume-preview-wrapper">
+        <div class="resume-preview-header">
+            <div class="resume-preview-title-group">
+                <h2 class="resume-preview-title">Resume Preview</h2>
+                <p class="resume-preview-subtitle">Hildebrand Ligtas Resume 2026</p>
+            </div>
+            <a class="resume-download-btn" href="/assets/pdfs/Hildebrand_Ligtas_Resume_2026.pdf" download>
+                Download PDF
+            </a>
+        </div>
+        <div id="resumePdfPages" class="resume-pdf-pages" aria-label="Resume PDF pages">
+            <div class="resume-pdf-loading">Loading resume preview...</div>
+        </div>
+    </div>
+</div>
+<button id="resumeBackToTop" class="resume-back-to-top" type="button" aria-label="Back to top">↑</button>
+
+<script type="module">
+    (() => {
+        const pdfUrl = '/assets/pdfs/Hildebrand_Ligtas_Resume_2026.pdf';
+        const container = document.getElementById('resumePdfPages');
+        const backToTopButton = document.getElementById('resumeBackToTop');
+        const scrollContainer = document.getElementById('sectionModalControllerWrapper');
+        if (!container) return;
+
+        const renderError = () => {
+            container.innerHTML = `
+                <div class="resume-pdf-fallback">
+                    <_p>Preview failed to load.</_p>
+                    <a href="${ pdfUrl }" target="_blank" rel="noopener noreferrer">Open PDF in new tab</a>
+                </div>
+            `;
+        };
+
+        const renderPages = async () => {
+            try {
+                const pdfjsLib = await import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.4.168/build/pdf.min.mjs');
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.4.168/build/pdf.worker.min.mjs';
+
+                const loadingTask = pdfjsLib.getDocument(pdfUrl);
+                const pdf = await loadingTask.promise;
+
+                container.innerHTML = '';
+                for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
+                    const page = await pdf.getPage(pageNumber);
+                    const viewport = page.getViewport({ scale: 1.8 });
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    if (!context) continue;
+
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    canvas.className = 'resume-pdf-canvas';
+                    canvas.setAttribute('aria-label', `Resume page ${ pageNumber }`);
+
+                    await page.render({
+                        canvasContext: context,
+                        viewport,
+                    }).promise;
+
+                    const pageWrapper = document.createElement('div');
+                    pageWrapper.className = 'resume-pdf-page';
+                    pageWrapper.appendChild(canvas);
+                    container.appendChild(pageWrapper);
+                }
+            } catch (error) {
+                renderError();
+            }
+        };
+
+        const initBackToTop = () => {
+            if (!backToTopButton) return;
+
+            const onScroll = () => {
+                const scrolled = scrollContainer?.scrollTop ?? window.scrollY ?? document.documentElement.scrollTop ?? 0;
+                if (scrolled > 1000) {
+                    backToTopButton.classList.add('show');
+                    return;
+                }
+                backToTopButton.classList.remove('show');
+            };
+
+            if (scrollContainer) {
+                scrollContainer.addEventListener('scroll', onScroll, { passive: true });
+            } else {
+                window.addEventListener('scroll', onScroll, { passive: true });
+            }
+
+            backToTopButton.addEventListener('click', () => {
+                if (scrollContainer) {
+                    scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            onScroll();
+        };
+
+        initBackToTop();
+        renderPages();
+    })();
+</script>

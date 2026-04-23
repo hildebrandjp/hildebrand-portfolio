@@ -28,22 +28,27 @@ export default class ListBulletStyleHtml {
                 (line as HTMLElement).style.top = `${top}px`;
                 (line as HTMLElement).style.height = `${bottom - top}px`;
         
-                this.bulletCircle(items, container);
+                this.bulletCircle(items);
             }
         });
     }
 
-    private bulletCircle(items: NodeListOf<Element>, parentContainer: Element) {
+    private bulletCircle(items: NodeListOf<Element>) {
       const BULLET = "bullet"
       items.forEach(item => {
         const amruYearElement = item.querySelector(".amru-year");
-        if (amruYearElement && !amruYearElement.querySelector(`.${BULLET}`)) {
-          const div = document.createElement('div');
-          const topPadding = this.getTopPaddingFromParent(amruYearElement, parentContainer);
-          div.className = BULLET;
+        if (amruYearElement) {
+          let div = item.querySelector(`.${BULLET}`) as HTMLElement | null;
+          if (!div) {
+            div = document.createElement('div');
+            div.className = BULLET;
+            item.appendChild(div);
+          }
+          // The bullet is positioned absolutely inside `.amru-item`, so
+          // compute `top` relative to the same item for correct offsets.
+          const topPadding = this.getTopPaddingFromParent(amruYearElement, item);
           div.style.top = `${topPadding}px`;
-          div.style.left = "-4px";
-          item.appendChild(div);
+          div.style.left = "-16px";
         }
       });
     }

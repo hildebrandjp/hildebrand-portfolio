@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', Arial, sans-serif; background: #ffffff; color: #1a1a1a; font-size: 9pt; line-height: 1.45; }
+  .page { width: 210mm; min-height: 297mm; padding: 14mm; }
+  .header { border-bottom: 2.5px solid #1a1a1a; padding-bottom: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .name { font-size: 26pt; font-weight: 500; letter-spacing: -0.03em; line-height: 1; color: #1a1a1a; }
+  .title-badge { display: inline-block; font-size: 7.5pt; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 500; background: #1D9E75; color: #ffffff; padding: 4px 12px; border-radius: 2px; margin-top: 5px; }
+  .contact-block { text-align: right; display: flex; flex-direction: column; gap: 3px; }
+  .contact-block span { font-size: 7.5pt; color: #555555; }
+  .contact-block a { font-size: 7.5pt; color: #1D9E75; text-decoration: none; }
+  .layout { display: grid; grid-template-columns: 1fr 80mm; gap: 14px; align-items: start; }
+  .left { padding-right: 12px; border-right: 0.5px solid #e0e0e0; }
+  .right { padding-left: 12px; }
+  .section { margin-bottom: 1rem; }
+  .sec-label { font-size: 6.5pt; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; color: #555555; border-bottom: 0.5px solid #cccccc; padding-bottom: 2px; margin-bottom: 6px; margin-top: 10px; }
+  .sec-label:first-child { margin-top: 0; }
+  .profile-text { font-size: 8.5pt; color: #555555; line-height: 1.6; }
+  .job { margin-bottom: 9px; }
+  .job-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 4px; }
+  .job-title { font-size: 9pt; font-weight: 500; color: #1a1a1a; }
+  .job-co { font-size: 8pt; color: #777777; font-style: italic; margin-top: 1px; }
+  .job-date { font-size: 7.5pt; color: #777777; font-family: 'DM Mono', 'Courier New', monospace; white-space: nowrap; padding-top: 1px; }
+  .job-desc { font-size: 8pt; color: #555555; line-height: 1.55; margin-top: 3px; }
+  .job-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+  .tag { font-size: 7pt; padding: 2px 7px; border-radius: 3px; background: #E1F5EE; color: #0F6E56; font-family: 'DM Mono', 'Courier New', monospace; }
+  .sub-sec { font-size: 6.5pt; font-weight: 500; color: #777777; text-transform: uppercase; letter-spacing: 0.08em; margin: 7px 0 4px 0; border-top: 0.5px solid #eeeeee; padding-top: 6px; }
+  .divider { height: 0.5px; background: #dddddd; margin: 7px 0; }
+  .edu-school { font-size: 8.5pt; font-weight: 500; color: #1a1a1a; }
+  .edu-degree { font-size: 8pt; color: #555555; margin-top: 2px; }
+  .edu-year { font-size: 7.5pt; color: #777777; font-family: 'DM Mono', 'Courier New', monospace; margin-top: 2px; margin-bottom: 4px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 6px; }
+  .pill { font-size: 7pt; padding: 2px 7px; border-radius: 20px; background: #f4f4f4; color: #444444; }
+  .pill.hi { background: #1D9E75; color: #ffffff; font-weight: 500; }
+  @page { size: A4; margin: 0; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div>
+      <div class="name">Hildebrand Elias C. Ligtas</div>
+      <div class="title-badge">Software Engineer</div>
+    </div>
+    <div class="contact-block">
+      <span>09700551910</span>
+      <a href="mailto:hildebrandlig11@gmail.com">hildebrandlig11@gmail.com</a>
+      <span>Brgy. Agus, Lapu-lapu City, Cebu, Philippines</span>
+      <a href="https://www.linkedin.com/in/hildebrand-elias-ligtas-895473203/">linkedin.com/in/hildebrand-elias-ligtas</a>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="left">
+
+      <div class="sec-label" style="margin-top:0">Profile</div>
+      <div class="profile-text">Software Engineer with 5+ years of experience in web and mobile development. Self-taught and highly motivated, with a strong passion for coding, problem-solving, and building software applications. Skilled in collaborating with clients to gather requirements, propose solutions, and deliver user-focused products. 3+ years of experience on Japanese projects, delivering complex full-stack and mobile applications end-to-end.</div>
+
+      <div class="sec-label">Experience</div>
+
+      <div class="job">
+        <div class="job-row">
+          <div><div class="job-title">Software Engineer</div><div class="job-co">Hipe</div></div>
+          <div class="job-date">2022 – 2025</div>
+        </div>
+        <div class="job-desc">Developed and maintained web and mobile applications across multiple Japanese client projects. Led cloud infrastructure on GCP, built REST APIs, automated CI/CD pipelines, and wrote unit, integration, and end-to-end test suites.</div>
+        <div class="job-tags"><span class="tag">Ruby on Rails</span><span class="tag">Vue.js</span><span class="tag">React Native</span><span class="tag">Laravel</span><span class="tag">Docker</span><span class="tag">GCP</span><span class="tag">Next.js</span><span class="tag">AWS</span></div>
+      </div>
+
+      <div class="sub-sec">Selected Projects at Hipe</div>
+
+      <div class="job">
+        <div class="job-row">
+          <div><div class="job-title">Business Succession Advisory Platform</div></div>
+          <div class="job-date">2026/01 – 03</div>
+        </div>
+        <div class="job-desc">SME succession planning tool with CRM, company valuation, inheritance tax simulation, and AI-assisted A4 report generation. Built a 25+ question dynamic assessment form with conditional branching.</div>
+        <div class="job-tags"><span class="tag">JavaScript</span><span class="tag">Laravel</span><span class="tag">Livewire</span><span class="tag">MySQL</span><span class="tag">Docker</span><span class="tag">Claude AI</span></div>
+      </div>
+
+      <div class="job">
+        <div class="job-row">
+          <div><div class="job-title">O2O Location-based Campaign Platform</div></div>
+          <div class="job-date">2023/07 – 2025/04</div>
+        </div>
+        <div class="job-desc">Map-based store and campaign discovery. Optimized map pin loading to sub-second. Built web scraping tools and managed GCP App Engine and Compute Engine infrastructure.</div>
+        <div class="job-tags"><span class="tag">Ruby</span><span class="tag">Vue.js</span><span class="tag">CoffeeScript</span><span class="tag">MySQL</span><span class="tag">Redis</span><span class="tag">GCP</span><span class="tag">Puppeteer</span></div>
+      </div>
+
+      <div class="job">
+        <div class="job-row">
+          <div><div class="job-title">Company Quiz &amp; Rewards Mobile App</div></div>
+          <div class="job-date">2023/01 – 06</div>
+        </div>
+        <div class="job-desc">Cross-platform iOS/Android app with news feed, employee quizzes with Amazon gift card rewards, and leaderboard. Integrated Firebase FCM and OAuth 2.0 authentication.</div>
+        <div class="job-tags"><span class="tag">React Native</span><span class="tag">Laravel</span><span class="tag">Firebase</span><span class="tag">Expo</span><span class="tag">MySQL</span></div>
+      </div>
+
+      <div class="job">
+        <div class="job-row">
+          <div><div class="job-title">LINE Marketing Communication Platform</div></div>
+          <div class="job-date">2023/01 – 03</div>
+        </div>
+        <div class="job-desc">B2C multi-channel marketing tool on LINE. Wrote unit/integration tests, measured code coverage, and executed DB migrations via Docker in test environments.</div>
+        <div class="job-tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Jest</span><span class="tag">Docker</span><span class="tag">AWS Redshift</span></div>
+      </div>
+
+      <div class="job">
+        <div class="job-row">
+          <div><div class="job-title">Event Booking Web Application (Japan)</div></div>
+          <div class="job-date">2022/10 – 2023/01</div>
+        </div>
+        <div class="job-desc">Japan prefectural event booking platform with Stripe payment integration. Improved search speed by 3x and resolved Japanese text localization issues.</div>
+        <div class="job-tags"><span class="tag">Vue 2</span><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">MySQL</span><span class="tag">Stripe</span></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="job">
+        <div class="job-row">
+          <div><div class="job-title">Freelance Software Engineer</div><div class="job-co">Self-employed</div></div>
+          <div class="job-date">2020 – 2022</div>
+        </div>
+        <div class="job-desc">Built web and mobile apps for clients. Angular apps with Firebase auth and PayMongo payments, React Native apps deployed to Google Play, automated workflows with Google Sheets scripting and GCP APIs.</div>
+        <div class="job-tags"><span class="tag">Angular</span><span class="tag">React Native</span><span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">Firebase</span><span class="tag">GCP</span><span class="tag">Heroku</span></div>
+      </div>
+
+    </div>
+
+    <div class="right">
+
+      <div class="sec-label" style="margin-top:0">Education</div>
+      <div class="edu-school">Cebu Institute of Technology – University (CIT-U)</div>
+      <div class="edu-degree">BS Electronics Engineering (BSECE)</div>
+      <div class="edu-year">2015 – 2021</div>
+
+      <div class="sec-label">Languages</div>
+      <div class="pills">
+        <span class="pill hi">JavaScript</span><span class="pill hi">TypeScript</span><span class="pill hi">PHP</span><span class="pill hi">Ruby</span><span class="pill">Python</span><span class="pill">Java</span><span class="pill">Swift</span><span class="pill">HTML</span><span class="pill">CSS</span>
+      </div>
+
+      <div class="sec-label">Frameworks</div>
+      <div class="pills">
+        <span class="pill hi">Laravel</span><span class="pill hi">Ruby on Rails</span><span class="pill hi">Vue.js</span><span class="pill hi">React</span><span class="pill hi">React Native</span><span class="pill">Next.js</span><span class="pill">Angular</span><span class="pill">Express.js</span><span class="pill">Django</span><span class="pill">Spring Boot</span><span class="pill">Expo</span><span class="pill">Livewire</span>
+      </div>
+
+      <div class="sec-label">Databases</div>
+      <div class="pills">
+        <span class="pill hi">MySQL</span><span class="pill hi">PostgreSQL</span><span class="pill">MongoDB</span><span class="pill">Redis</span><span class="pill">AWS Redshift</span><span class="pill">Aurora DB</span>
+      </div>
+
+      <div class="sec-label">Cloud &amp; DevOps</div>
+      <div class="pills">
+        <span class="pill hi">GCP</span><span class="pill hi">AWS</span><span class="pill hi">Docker</span><span class="pill">GitHub Actions</span><span class="pill">Jenkins</span><span class="pill">Firebase</span><span class="pill">Heroku</span><span class="pill">Terraform</span><span class="pill">Nginx</span>
+      </div>
+
+      <div class="sec-label">Testing</div>
+      <div class="pills">
+        <span class="pill">Jest</span><span class="pill">Puppeteer</span><span class="pill">Unit</span><span class="pill">Integration</span><span class="pill">E2E</span>
+      </div>
+
+      <div class="sec-label">Other Skills</div>
+      <div class="pills">
+        <span class="pill">REST API Design</span><span class="pill">CI/CD</span><span class="pill">System Design</span><span class="pill">Requirements Analysis</span><span class="pill">Web Scraping</span><span class="pill">WordPress</span><span class="pill">WooCommerce</span><span class="pill">Shopify</span><span class="pill">Shell Scripting</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

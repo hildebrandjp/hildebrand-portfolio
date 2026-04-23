@@ -1,0 +1,34 @@
+<div class="skill-container">
+    <div class="upper-skill-container">
+        <div class="about-me-left-uppermost-container">
+            {% include components/shared/profile_title_img.html %}
+        </div>
+
+        <div class="about-me-left-middle-container">
+            {% include components/shared/profile_description.html %}
+        </div>
+    </div>
+    <div class="skill-legend-container-spacer"></div>
+    <div class="skill-legend-container" role="note" aria-label="Skill score legend">
+        <strong>Legend:</strong>
+        <span>100% means most confident with strong hands-on delivery and vast project experience.</span>
+        <span>0% means lowest confidence with little to no hands-on project experience yet.</span>
+        <span>Values in between represent relative confidence and practical exposure.</span>
+    </div>
+    <div class="mid-pos-skill-container">
+        {% assign skill_sections = site.data.skill.sections %}
+        {% if skill_sections and skill_sections.size > 0 %}
+            {% for section in skill_sections %}
+                {% case section.type %}
+                    {% when "raw" %}
+                        {% include components/pages/skill/raw_skill.html %}
+                    {% when "coding" %}
+                        {% include components/pages/skill/coding_skill.html %}
+                {% endcase %}
+            {% endfor %}
+        {% else %}
+            {% include components/pages/skill/raw_skill.html %}
+            {% include components/pages/skill/coding_skill.html %}
+        {% endif %}
+    </div>
+</div>

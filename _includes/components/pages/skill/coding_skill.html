@@ -1,10 +1,19 @@
 <div class="coding-skill-container">
-    <h4>Coding Skills</h4>
+    {% assign coding_skill = site.data.skill.coding %}
+    <h4>{{ coding_skill.title | default: "Coding Skills" }}</h4>
 
     <div class="inner-coding-skill">
-        {% include components/shared/horizontal_progress_bar.html percent=30 size="120px" %}
-        {% include components/shared/horizontal_progress_bar.html percent=30 size="120px" %}
-        {% include components/shared/horizontal_progress_bar.html percent=30 size="120px" %}
-        {% include components/shared/horizontal_progress_bar.html percent=30 size="120px" %}
+        {% if coding_skill.items and coding_skill.items.size > 0 %}
+            {% for item in coding_skill.items %}
+                {% include components/shared/horizontal_progress_bar.html
+                    percent=item.percent
+                    label=item.label %}
+            {% endfor %}
+        {% else %}
+            {% include components/shared/horizontal_progress_bar.html percent=30 size="120px" %}
+            {% include components/shared/horizontal_progress_bar.html percent=30 size="120px" %}
+            {% include components/shared/horizontal_progress_bar.html percent=30 size="120px" %}
+            {% include components/shared/horizontal_progress_bar.html percent=30 size="120px" %}
+        {% endif %}
     </div>
 </div>

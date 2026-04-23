@@ -1,6 +1,8 @@
 $card_width: 220px;
 
 .portfolio-container {
+    position: relative;
+
     .chip-tags-title {
         display: flex;
         justify-content: center;
@@ -23,6 +25,7 @@ $card_width: 220px;
 }
 
 .portfolio-content {
+    padding: 16px 0px;
     font-family: 'Outfit', sans-serif;
     display: flex;
     align-items: center;
@@ -32,6 +35,82 @@ $card_width: 220px;
     gap: 32px;
     max-height: 600px;
     overflow-y: auto;
+}
+
+.portfolio-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+}
+
+.portfolio-page-btn {
+    min-width: 42px;
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid var(--app-border);
+    background: var(--app-surface-strong);
+    color: var(--app-text-secondary);
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.portfolio-page-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px var(--app-shadow);
+    color: var(--app-text-primary);
+}
+
+.portfolio-page-btn.is-active {
+    background: linear-gradient(135deg, var(--app-violet-600), #8f60e6);
+    color: var(--app-cream-50);
+    border-color: transparent;
+    box-shadow: 0 12px 22px rgba(89, 47, 162, 0.3);
+}
+
+.portfolio-page-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.portfolio-page-nav {
+    min-width: 70px;
+}
+
+.portfolio-page-dots {
+    color: var(--app-text-secondary);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.portfolio-copy-toast {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%) translateY(8px);
+    opacity: 0;
+    pointer-events: none;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--app-violet-600), #8f60e6);
+    color: var(--app-cream-50);
+    font-size: 0.84rem;
+    font-weight: 600;
+    box-shadow: 0 12px 24px rgba(89, 47, 162, 0.28);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 4;
+}
+
+.portfolio-copy-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
 
 .portfolio-content::-webkit-scrollbar {
@@ -138,4 +217,29 @@ $card_width: 220px;
 
 .hide {
     display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .portfolio-content {
+        gap: 22px;
+        max-height: none;
+    }
+
+    .portfolio-pagination {
+        gap: 8px;
+        margin-top: 22px;
+    }
+
+    .portfolio-page-btn {
+        min-width: 38px;
+        height: 38px;
+        padding: 0 12px;
+        font-size: 0.86rem;
+    }
+
+    .portfolio-copy-toast {
+        bottom: 2px;
+        font-size: 0.8rem;
+        padding: 9px 12px;
+    }
 }

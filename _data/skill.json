@@ -1,0 +1,285 @@
+{
+  "meta": {
+    "source": "assets/pdfs/Hildebrand_Ligtas_Resume.html",
+    "generated_on": "2026-04-23T09:50:52.293Z",
+    "sections_extracted": [
+      "Languages",
+      "Frameworks",
+      "Databases",
+      "Cloud & DevOps",
+      "Testing",
+      "Other Skills"
+    ]
+  },
+  "sections": [
+    {
+      "type": "raw"
+    },
+    {
+      "type": "coding"
+    }
+  ],
+  "raw": {
+    "title": "Core Skills",
+    "items": [
+      {
+        "title": "REST API Design",
+        "percent": 90,
+        "color": "#1D9E75",
+        "icon": "/assets/icons/shine.svg",
+        "alt": "REST API Design",
+        "abbr": "RAD"
+      },
+      {
+        "title": "CI/CD",
+        "percent": 88,
+        "color": "#1D9E75",
+        "icon": "/assets/icons/shine.svg",
+        "alt": "CI/CD",
+        "abbr": "CI/"
+      },
+      {
+        "title": "System Design",
+        "percent": 86,
+        "color": "#1D9E75",
+        "icon": "/assets/icons/shine.svg",
+        "alt": "System Design",
+        "abbr": "SD"
+      },
+      {
+        "title": "Requirements Analysis",
+        "percent": 84,
+        "color": "#1D9E75",
+        "icon": "/assets/icons/shine.svg",
+        "alt": "Requirements Analysis",
+        "abbr": "RA"
+      },
+      {
+        "title": "Web Scraping",
+        "percent": 82,
+        "color": "#1D9E75",
+        "icon": "/assets/icons/shine.svg",
+        "alt": "Web Scraping",
+        "abbr": "WS"
+      },
+      {
+        "title": "WordPress",
+        "percent": 80,
+        "color": "#1D9E75",
+        "icon": "/assets/icons/shine.svg",
+        "alt": "WordPress",
+        "abbr": "WOR"
+      }
+    ]
+  },
+  "coding": {
+    "title": "Coding Skills",
+    "items": [
+      {
+        "label": "JavaScript",
+        "percent": 96,
+        "section": "Languages"
+      },
+      {
+        "label": "TypeScript",
+        "percent": 96,
+        "section": "Languages"
+      },
+      {
+        "label": "PHP",
+        "percent": 96,
+        "section": "Languages"
+      },
+      {
+        "label": "Ruby",
+        "percent": 96,
+        "section": "Languages"
+      },
+      {
+        "label": "Python",
+        "percent": 86,
+        "section": "Languages"
+      },
+      {
+        "label": "Java",
+        "percent": 86,
+        "section": "Languages"
+      },
+      {
+        "label": "Swift",
+        "percent": 86,
+        "section": "Languages"
+      },
+      {
+        "label": "HTML",
+        "percent": 86,
+        "section": "Languages"
+      },
+      {
+        "label": "CSS",
+        "percent": 86,
+        "section": "Languages"
+      },
+      {
+        "label": "Laravel",
+        "percent": 94,
+        "section": "Frameworks"
+      },
+      {
+        "label": "Ruby on Rails",
+        "percent": 94,
+        "section": "Frameworks"
+      },
+      {
+        "label": "Vue.js",
+        "percent": 94,
+        "section": "Frameworks"
+      },
+      {
+        "label": "React",
+        "percent": 94,
+        "section": "Frameworks"
+      },
+      {
+        "label": "React Native",
+        "percent": 94,
+        "section": "Frameworks"
+      },
+      {
+        "label": "Next.js",
+        "percent": 84,
+        "section": "Frameworks"
+      },
+      {
+        "label": "Angular",
+        "percent": 84,
+        "section": "Frameworks"
+      },
+      {
+        "label": "Express.js",
+        "percent": 84,
+        "section": "Frameworks"
+      },
+      {
+        "label": "Django",
+        "percent": 84,
+        "section": "Frameworks"
+      },
+      {
+        "label": "Spring Boot",
+        "percent": 84,
+        "section": "Frameworks"
+      },
+      {
+        "label": "Expo",
+        "percent": 84,
+        "section": "Frameworks"
+      },
+      {
+        "label": "Livewire",
+        "percent": 84,
+        "section": "Frameworks"
+      },
+      {
+        "label": "MySQL",
+        "percent": 90,
+        "section": "Databases"
+      },
+      {
+        "label": "PostgreSQL",
+        "percent": 90,
+        "section": "Databases"
+      },
+      {
+        "label": "MongoDB",
+        "percent": 80,
+        "section": "Databases"
+      },
+      {
+        "label": "Redis",
+        "percent": 80,
+        "section": "Databases"
+      },
+      {
+        "label": "AWS Redshift",
+        "percent": 80,
+        "section": "Databases"
+      },
+      {
+        "label": "Aurora DB",
+        "percent": 80,
+        "section": "Databases"
+      },
+      {
+        "label": "GCP",
+        "percent": 88,
+        "section": "Cloud & DevOps"
+      },
+      {
+        "label": "AWS",
+        "percent": 88,
+        "section": "Cloud & DevOps"
+      },
+      {
+        "label": "Docker",
+        "percent": 88,
+        "section": "Cloud & DevOps"
+      },
+      {
+        "label": "GitHub Actions",
+        "percent": 78,
+        "section": "Cloud & DevOps"
+      },
+      {
+        "label": "Jenkins",
+        "percent": 78,
+        "section": "Cloud & DevOps"
+      },
+      {
+        "label": "Firebase",
+        "percent": 78,
+        "section": "Cloud & DevOps"
+      },
+      {
+        "label": "Heroku",
+        "percent": 78,
+        "section": "Cloud & DevOps"
+      },
+      {
+        "label": "Terraform",
+        "percent": 78,
+        "section": "Cloud & DevOps"
+      },
+      {
+        "label": "Nginx",
+        "percent": 78,
+        "section": "Cloud & DevOps"
+      },
+      {
+        "label": "Jest",
+        "percent": 74,
+        "section": "Testing"
+      },
+      {
+        "label": "Puppeteer",
+        "percent": 74,
+        "section": "Testing"
+      },
+      {
+        "label": "Unit",
+        "percent": 74,
+        "section": "Testing"
+      },
+      {
+        "label": "Integration",
+        "percent": 74,
+        "section": "Testing"
+      },
+      {
+        "label": "E2E",
+        "percent": 74,
+        "section": "Testing"
+      }
+    ]
+  }
+}

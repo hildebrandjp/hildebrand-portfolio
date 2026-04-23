@@ -23,7 +23,7 @@ Parameters:
     {% elsif include.type == "menu" %}
         {% include components/pages/home/card_menu_profile.html data=include.data %}
     {% else %}
-    <div class="card-default">
+    <div class="card-default" style="height: 100% !important;">
         {% if include.slot %}
             {{ include.slot }}
         {% endif %}

@@ -1,6 +1,14 @@
 <div class="modal-ext-container modal-ext-container-2 modal-portfolio-container hidden" data-modal-page="portfolio-show">
     <div class="portfolio-container">
-        <button onclick="window.modules.PortfolioShow.back()" class="btn-back-modal">< Back</button>
+        <button type="button" onclick="window.modules.PortfolioShow.close()" class="portfolio-detail-close" aria-label="Close portfolio detail"></button>
+        <nav class="portfolio-breadcrumb" aria-label="Portfolio breadcrumb">
+            <ol class="portfolio-breadcrumb-list">
+                <li class="portfolio-breadcrumb-item">
+                    <button type="button" onclick="window.modules.PortfolioShow.back()" class="portfolio-breadcrumb-link" aria-label="Back to portfolio list">Portfolio</button>
+                </li>
+                <li id="portfolioBreadcrumbCurrent" class="portfolio-breadcrumb-item portfolio-breadcrumb-current" aria-current="page">Detail</li>
+            </ol>
+        </nav>
         <div class="portfolio-show-wrapper">
             <div class="portfolio-img-src">
                 <img id="portfolioInfoImg" src="" alt="">
@@ -9,14 +17,19 @@
             <div class="portfolio-divider-2">
                 <div class="portfolio-show-content-wrapper">
                     <h4 id="portfolioInfoTitle" class="portfolio-title">...</h4>
-                    <span id="portfolioInfoDesc">...</span>
+                    <p id="portfolioInfoSubtitle" class="portfolio-subtitle">...</p>
+                    <p id="portfolioInfoDesc" class="portfolio-desc">...</p>
+                    <div class="portfolio-link-box">
+                        <span class="portfolio-link-label">Project URL</span>
+                        <a id="portfolioInfoLink" class="portfolio-url-link" href="#" target="_blank" rel="noopener noreferrer">No URL available</a>
+                    </div>
                 </div>
 
                 <div class="portfolio-useful-links-wrapper">
-                    <h4 class="portfolio-useful-links">USEFUL LINKS</h4>
+                    <h4 class="portfolio-useful-links">RELATED PROJECTS</h4>
                     <ul class="ul-useful-links">
                         {% for portfolio in site.data.portfolio.data %}
-                        <li><a href="javascript: (0);">{{ portfolio.title }}</a></li>
+                        <li><a href="javascript: (0);" data-portfolio-id="{{ portfolio.id }}">{{ portfolio.title }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -38,7 +51,30 @@
             }
 
             back() {
-                document.getElementById('modalOverlay2').classList.add('hidden');
+                const listOverlay = document.getElementById('modalOverlay1');
+                const detailOverlay = document.getElementById('modalOverlay2');
+                const detailModal = document.getElementById('modal-block-2');
+
+                if (!detailOverlay || !detailModal) return;
+
+                detailModal.classList.remove('portfolio-swipe-right-enter');
+                detailModal.classList.add('portfolio-swipe-right-exit');
+
+                window.setTimeout(() => {
+                    detailOverlay.classList.add('hidden');
+                    detailModal.classList.remove('portfolio-swipe-right-exit');
+                    if (listOverlay) listOverlay.classList.remove('hidden');
+                }, 240);
+            }
+
+            close() {
+                const listOverlay = document.getElementById('modalOverlay1');
+                const detailOverlay = document.getElementById('modalOverlay2');
+                const detailModal = document.getElementById('modal-block-2');
+
+                if (detailOverlay) detailOverlay.classList.add('hidden');
+                if (listOverlay) listOverlay.classList.add('hidden');
+                if (detailModal) detailModal.classList.remove('portfolio-swipe-right-enter', 'portfolio-swipe-right-exit');
             }
 
             init() {
@@ -46,21 +82,45 @@
                     this.loadPortfolio(state);
                     this.loadUsefulLinks();
                 });
+
+                $(document).on('click', '.ul-useful-links a[data-portfolio-id]', (event) => {
+                    event.preventDefault();
+                    const portfolioId = $(event.currentTarget).data('portfolio-id');
+                    if (!portfolioId) return;
+                    window.modules.State.addObject('portfolioId', String(portfolioId));
+                });
             }
 
             loadPortfolio(state) {
                 const portfolio = portfolios.find(portfolio => portfolio.id == state.portfolioId);
+                if (!portfolio) return;
+
                 this.selectedPortfolioId = portfolio.id;
                 $('#portfolioInfoImg').attr('src', portfolio.url);
                 $('#portfolioInfoTitle').text(portfolio.title);
+                $('#portfolioInfoSubtitle').text(portfolio.subtitle);
                 $('#portfolioInfoDesc').text(portfolio.description);
+                $('#portfolioBreadcrumbCurrent').text(portfolio.title || 'Detail');
+
+                const externalLink = portfolio.video_url || portfolio.url || '';
+                const portfolioLink = $('#portfolioInfoLink');
+                if (!externalLink) {
+                    portfolioLink.text('No URL available');
+                    portfolioLink.attr('href', '#');
+                    portfolioLink.addClass('is-disabled');
+                    return;
+                }
+
+                portfolioLink.text(externalLink);
+                portfolioLink.attr('href', externalLink);
+                portfolioLink.removeClass('is-disabled');
             }
 
             loadUsefulLinks() {
                 const ul = $('.ul-useful-links');
                 ul.empty();
                 portfolios.filter(portfolio => portfolio.id != this.selectedPortfolioId).forEach(portfolio => {
-                    ul.append(`<li><a href="javascript: (0);">${portfolio.title}</a></li>`);
+                    ul.append(`<li><a href="javascript: (0);" data-portfolio-id="${portfolio.id}">${portfolio.title}</a></li>`);
                 });
             }
         }

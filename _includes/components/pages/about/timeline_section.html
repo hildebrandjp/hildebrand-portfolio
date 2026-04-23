@@ -1,0 +1,18 @@
+{% assign section = include.section %}
+{% if section %}
+<h3>{{ section.title }}</h3>
+<div class="amru-inner-container vert-line">
+    <span class="line"></span>
+    {% for entry in section.entries %}
+    <div class="amru-item">
+        <span class="amru-year">{{ entry.year }}</span>
+        <div>
+            {% for item in entry.items %}
+            <h4 class="amru-jobtitle">{{ item.title }}</h4>
+            <p class="amru-position">{{ item.position }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

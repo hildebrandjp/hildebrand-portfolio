@@ -172,10 +172,25 @@ $modal_close_icon_size: 42px;
                         }
                     }
 
+                    > .about-me-divider-hr {
+                            margin: 32px 0 16px 0;
+                            border: 1px solid var(--app-blue);
+                            opacity: 0.3;
+                    }
+
                     > .about-me-left-lowest-container {
                         padding-top: 16px;
                         display: flex;
                         column-gap: 1.2rem;
+
+                        > .card {
+                            min-height: unset;
+                            height: auto;
+
+                            > .card-default {
+                                height: auto;
+                            }
+                        }
 
                         div > div > .custom-sm-card {
                             background-color: var(--app-surface-muted);
@@ -212,10 +227,10 @@ $modal_close_icon_size: 42px;
                     width: 100%;
                     flex-direction: column;
                     padding-left: 12px;
-                    overflow-y: scroll;
-                    max-height: 500px;
+                    overflow-y: auto;
                     margin-top: 20px;
                     scrollbar-width: thin;
+                    max-height: 500px;
                     scrollbar-color: rgba(119, 67, 219, 0.36) rgba(119, 67, 219, 0.08);
 
                     > .about-me-right-uppermost-container {
@@ -227,8 +242,31 @@ $modal_close_icon_size: 42px;
                         > .amru-inner-container {
                             position: relative;
 
+                            > .line {
+                                position: absolute;
+                                left: 5px;
+                                width: 1.5px;
+                                border-radius: 999px;
+                                background: var(--app-border);
+                                pointer-events: none;
+                            }
+
                             > .amru-item {
-                                padding-left: 24px;
+                                position: relative;
+                                padding-left: 30px;
+
+                                > .bullet {
+                                    position: absolute;
+                                    width: 10px;
+                                    height: 10px;
+                                    border-radius: 50%;
+                                    background: var(--app-surface-strong);
+                                    border: 2px solid var(--app-violet-600);
+                                    box-shadow: 0 0 0 1px var(--app-border);
+                                    left: 1px;
+                                    transform: translateY(-50%);
+                                    pointer-events: none;
+                                }
 
                                 > .amru-year {
                                     color: var(--app-violet-600);
@@ -318,9 +356,34 @@ $modal_close_icon_size: 42px;
                     }
                 }
 
+                .skill-legend-container {
+                    margin-top: 20px;
+                    padding: 14px 16px;
+                    border: 1px solid var(--app-border);
+                    border-left: 4px solid var(--app-violet-600);
+                    border-radius: 12px;
+                    background: var(--app-surface-muted);
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 6px;
+                    font-size: 13px;
+                    line-height: 1.45;
+                    color: var(--app-text-secondary);
+
+                    > strong {
+                        font-size: 14px;
+                        color: var(--app-text-primary);
+                    }
+                }
+
+                .skill-legend-container-spacer {
+                    border-top: 2px solid var(--app-border);
+                    margin-top: 32px;
+                    padding-top: 32px;
+                }
+
                 .mid-pos-skill-container {
                     display: flex;
-                    border-top: 2px solid var(--app-border);
                     margin-top: 32px;
                     padding-top: 32px;
                     gap: 32px;

@@ -1,0 +1,53 @@
+<div class="about-me-container">
+    {% assign about_data = site.data.cards.cards.about %}
+    <div class="about-me-left-container">
+
+        <div class="about-me-left-uppermost-container">
+            {% include components/shared/profile_title_img.html data=site.data.cards.cards.profile %}
+        </div>
+
+        <div class="about-me-left-middle-container">
+            {% include components/shared/profile_description.html %}
+        </div>
+
+        <div class="about-me-left-low-container">
+            <div class="about-me-work-with-brands-container">
+                <h6>{{ about_data.work_with_brands_headline | default: "Work With 60+ Brands Worldwide" }}</h6>
+                <div class="about-me-work-divider-hr">
+                    <span class="hr"></span>
+                </div>
+            </div>
+            {% include components/shared/grid_images.html images=site.data.work_company %}
+        </div>
+
+        <hr class="about-me-divider-hr"/>
+
+        <div class="about-me-left-lowest-container">
+            {% for highlight_achievement in about_data.highlight_achievements %}
+            
+                {% capture highlight_slot %}
+                    <div class="custom-sm-card">
+                        <h1 class="highlight-title">{{ highlight_achievement.title }}</h1>
+                        <p class="highlight-sub-title">{{ highlight_achievement.description }}</p>
+                    </div>
+                {% endcapture %}
+
+                {% include components/shared/card.html
+                    type="default" style="width: 172px; overflow: hidden; background-color: var(--app-gray-darklight);"
+                    slot=highlight_slot
+                %}
+                
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <div class="about-me-right-container">
+        <div class="about-me-right-uppermost-container">
+            {% for section in about_data.timeline_sections %}
+                {% include components/pages/about/timeline_section.html section=section %}
+                {% unless forloop.last %}<br/><br/><br/>{% endunless %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

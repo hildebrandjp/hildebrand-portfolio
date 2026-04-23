@@ -15,9 +15,4 @@ $grid_image_size: 86px;
         object-fit: contain;
     }
 
-    > .grid-image:nth-child(4) > img,
-    > .grid-image:nth-child(5) > img,
-    > .grid-image:nth-child(6) > img {
-        scale: 1.15;
-    }
 }

@@ -1,0 +1,12 @@
+{% assign resume_class = "resume-nav-btn" %}
+{% if include.resume_extra_class %}
+    {% assign resume_class = resume_class | append: " " | append: include.resume_extra_class %}
+{% endif %}
+
+{% assign hire_class = "hire-me" %}
+{% if include.hire_extra_class %}
+    {% assign hire_class = hire_class | append: " " | append: include.hire_extra_class %}
+{% endif %}
+
+<a href="/resume/" class="{{ resume_class }}">Resume</a>
+<a href="/contact/" class="{{ hire_class }}">Hire Me</a>

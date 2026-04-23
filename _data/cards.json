@@ -1,16 +1,16 @@
 {
     "cards": {
         "profile": {
-            "name": "John Doe",
-            "title": "Web Developer",
-            "description": "A passionate web developer with a knack for creating dynamic and responsive websites.",
+            "name": "Hildebrand Elias C. Ligtas",
+            "title": "Software Engineer",
+            "description": "Software Engineer with 5+ years of experience in web and mobile development. Self-taught and highly motivated, with strong problem-solving skills and 3+ years delivering Japanese full-stack and mobile applications end-to-end.",
             "age": "27 Years",
             "job_title": "Software Engineer",
-            "citizenship": "USA",
+            "citizenship": "Philippines",
             "email": "hildebrandlig11@gmail.com",
-            "phone": "+1 234 567 890",
+            "phone": "09700551910",
             "image_path": "/assets/images/profile.jpg",
-            "position": "UX/UI Designer & Front-end Developer",
+            "position": "Software Engineer",
             "color_background": {
                 "profile_img": "#F7EFE5",
                 "description": "#7743DB"
@@ -50,50 +50,62 @@
                 "path": "/contact/"
             }
         ],
-        "highlight_achievements": [
-            {
-                "title": "10+",
-                "description": "Years of Experience"
-            },
-            {
-                "title": "155+",
-                "description": "Project Completed On 15 Countries"
-            },
-            {
-                "title": "10+",
-                "description": "Project Completed 15 Countries"
-            }
-        ],
-        "education_or_experience": [
-            {
-                "year": "2020 - Present",
-                "jobs": [
-                    {
-                        "title": "Bachelor of Science in Computer Science",
-                        "institution": "University of Technology",
-                        "position": "UX/UI Designer & Front-end Developer",
-                        "description": "Graduated with honors, specializing in software development and web technologies."
-                    },
-                    {
-                        "title": "Bachelor of Science in Computer Science",
-                        "institution": "University of Technology",
-                        "position": "UX/UI Designer & Front-end Developer",
-                        "description": "Graduated with honors, specializing in software development and web technologies."
-                    }
-                ]
-            },
-            {
-                "year": "2015 - 2019",
-                "jobs": [
-                    {
-                        "title": "Bachelor of Science in Computer Science",
-                        "institution": "University of Technology",
-                        "position": "UX/UI Designer & Front-end Developer",
-                        "description": "Graduated with honors, specializing in software development and web technologies."
-                    }
-                ]
-            }
-        ],
+        "about": {
+            "work_with_brands_headline": "Work With 5+ Brands Worldwide",
+            "highlight_achievements": [
+                {
+                    "title": "5+",
+                    "description": "Years of Software Engineering Experience"
+                },
+                {
+                    "title": "3+",
+                    "description": "Years Delivering Japanese Client Projects"
+                },
+                {
+                    "title": "10+",
+                    "description": "End-to-End Web and Mobile Applications Delivered"
+                }
+            ],
+            "timeline_sections": [
+                {
+                    "title": "Experience",
+                    "entries": [
+                        {
+                            "year": "2022 - 2025",
+                            "items": [
+                                {
+                                    "title": "Software Engineer",
+                                    "position": "Hipe"
+                                }
+                            ]
+                        },
+                        {
+                            "year": "2020 - 2022",
+                            "items": [
+                                {
+                                    "title": "Freelance Software Engineer",
+                                    "position": "Self-employed"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Education",
+                    "entries": [
+                        {
+                            "year": "2015 - 2021",
+                            "items": [
+                                {
+                                    "title": "BS Electronics Engineering (BSECE)",
+                                    "position": "Cebu Institute of Technology - University (CIT-U)"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
         "default": {
             "inner_color": "#FFFBF5",
             "header_color": "#2E1E4E",

@@ -1,3 +1,11 @@
+.progress-outer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
 .progress-container {
     position: relative;
     width: var(--size);
@@ -22,6 +30,13 @@
     height: calc(var(--size) - (2 * var(--thickness)));
     background: #fff;
     border-radius: 50%;
+}
+
+.progress-title {
+    margin-top: 16px;
+    display: block;
+    width: 100%;
+    text-align: center;
 }
 
 .center-content {
