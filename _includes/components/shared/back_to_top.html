@@ -1,0 +1,28 @@
+{% assign _btn_id = include.button_id | default: "backToTop" %}
+{% assign _container_id = include.scroll_container_id | default: "" %}
+{% assign _threshold = include.threshold | default: 1000 %}
+
+<button id="{{ _btn_id }}" class="back-to-top" type="button" aria-label="Back to top">↑</button>
+<script>
+(function () {
+    var btn = document.getElementById('{{ _btn_id }}');
+    var containerId = '{{ _container_id }}';
+    var container = containerId ? document.getElementById(containerId) : null;
+    var threshold = {{ _threshold }};
+
+    if (!btn) return;
+
+    function onScroll() {
+        var scrolled = container ? container.scrollTop : (window.scrollY || document.documentElement.scrollTop || 0);
+        btn.classList.toggle('show', scrolled > threshold);
+    }
+
+    (container || window).addEventListener('scroll', onScroll, { passive: true });
+
+    btn.addEventListener('click', function () {
+        (container || window).scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    onScroll();
+}());
+</script>

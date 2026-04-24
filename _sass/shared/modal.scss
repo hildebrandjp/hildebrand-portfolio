@@ -105,7 +105,7 @@ $modal_close_icon_size: 42px;
         }
 
         .modal-container-wrapper > .modal-ext-container {
-            padding: 42px;
+            padding: 64px;
 
             > .about-me-container {
                 display: flex;
@@ -306,7 +306,6 @@ $modal_close_icon_size: 42px;
                     > .about-me-right-container {
                         padding-left: 0;
                         max-height: 230px;
-                        overflow-y: scroll;
                         margin-top: 12px;
                     }
 
@@ -379,13 +378,11 @@ $modal_close_icon_size: 42px;
                 .skill-legend-container-spacer {
                     border-top: 2px solid var(--app-border);
                     margin-top: 32px;
-                    padding-top: 32px;
                 }
 
                 .mid-pos-skill-container {
                     display: flex;
                     margin-top: 32px;
-                    padding-top: 32px;
                     gap: 32px;
 
                     > div {
@@ -418,11 +415,18 @@ $modal_close_icon_size: 42px;
                     .raw-skill-container {
                         .inner-raw-skill {
                             padding-top: 32px;
-                            display: flex;
-                            flex-direction: row;
-                            flex-wrap: wrap;
+                            display: grid;
+                            grid-template-columns: repeat(3, 1fr);
                             gap: 32px;
+                            justify-items: center;
+                            align-items: center;
                         }
+                    }
+                }
+
+                @media (max-width: 768px) {
+                    .mid-pos-skill-container {
+                        flex-direction: column;
                     }
                 }
             }
@@ -465,7 +469,12 @@ $modal_close_icon_size: 42px;
             }
 
             .modal-container-wrapper > .modal-ext-container {
-                padding: 28px 22px;
+                padding: 48px;
+
+                .skill-container .mid-pos-skill-container .raw-skill-container .inner-raw-skill {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 24px;
+                }
             }
         }
     }
@@ -499,9 +508,25 @@ $modal_close_icon_size: 42px;
 
             .modal-container-wrapper > .modal-ext-container {
                 padding: 22px 14px;
+
+                .skill-container .mid-pos-skill-container .raw-skill-container .inner-raw-skill {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 16px;
+                }
             }
         }
     }
+}
+
+@media (max-width: 480px) {
+    .upper-skill-container {
+        padding-top: 16px;
+        flex-direction: column;
+    }
+    .inner-raw-skill {
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+    
 }
 
 @media (min-width: 1800px) {

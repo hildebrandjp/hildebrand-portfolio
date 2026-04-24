@@ -40,3 +40,16 @@
         }
     }
 }
+
+@media (max-width: 1199px) {
+    .profile-title-img-container {
+        align-items: center;;
+    }
+}
+
+@media (max-width: 991px) {
+    .profile-title-img-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

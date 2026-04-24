@@ -8,8 +8,11 @@
 
 .progress-container {
     position: relative;
+    display: block;
     width: var(--size);
     height: var(--size);
+    margin: 0 auto;
+    text-align: center;
 }
 
 .progress-circle {
@@ -49,8 +52,8 @@
 }
 
 .center-content img {
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
 }
 
 .progress-label {

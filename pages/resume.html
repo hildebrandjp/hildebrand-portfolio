@@ -25,14 +25,16 @@ og_title: "Hildebrand Resume"
         </div>
     </div>
 </div>
-<button id="resumeBackToTop" class="resume-back-to-top" type="button" aria-label="Back to top">↑</button>
+{% include components/shared/back_to_top.html
+    button_id="resumeBackToTop"
+    scroll_container_id="sectionModalControllerWrapper"
+    threshold=1000
+%}
 
 <script type="module">
     (() => {
         const pdfUrl = '/assets/pdfs/Hildebrand_Ligtas_Resume_2026.pdf';
         const container = document.getElementById('resumePdfPages');
-        const backToTopButton = document.getElementById('resumeBackToTop');
-        const scrollContainer = document.getElementById('sectionModalControllerWrapper');
         if (!container) return;
 
         const renderError = () => {
@@ -80,35 +82,6 @@ og_title: "Hildebrand Resume"
             }
         };
 
-        const initBackToTop = () => {
-            if (!backToTopButton) return;
-
-            const onScroll = () => {
-                const scrolled = scrollContainer?.scrollTop ?? window.scrollY ?? document.documentElement.scrollTop ?? 0;
-                if (scrolled > 1000) {
-                    backToTopButton.classList.add('show');
-                    return;
-                }
-                backToTopButton.classList.remove('show');
-            };
-
-            if (scrollContainer) {
-                scrollContainer.addEventListener('scroll', onScroll, { passive: true });
-            } else {
-                window.addEventListener('scroll', onScroll, { passive: true });
-            }
-
-            backToTopButton.addEventListener('click', () => {
-                if (scrollContainer) {
-                    scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
-                    return;
-                }
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-            onScroll();
-        };
-
-        initBackToTop();
         renderPages();
     })();
 </script>

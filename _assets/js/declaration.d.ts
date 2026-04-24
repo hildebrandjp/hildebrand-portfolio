@@ -12,6 +12,8 @@ declare global {
             Modal?: import("@/modules/Modal").default;
             State?: import("@/modules/State").default;
             HamburgerMenu?: import("@/modules/HamburgerMenu").default;
+            PortfolioShow?: import("@/pages/portfolio/PortfolioShow").default;
+            EdgeIconPositioner?: import("@/modules/EdgeIconPositioner").default;
         }
         const: any;
     }

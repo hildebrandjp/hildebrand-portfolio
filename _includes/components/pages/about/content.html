@@ -3,7 +3,7 @@
     <div class="about-me-left-container">
 
         <div class="about-me-left-uppermost-container">
-            {% include components/shared/profile_title_img.html data=site.data.cards.cards.profile %}
+            {% include components/shared/profile_title_img.html data=site.data.cards.cards.profile size=32 %}
         </div>
 
         <div class="about-me-left-middle-container">
@@ -46,7 +46,7 @@
         <div class="about-me-right-uppermost-container">
             {% for section in about_data.timeline_sections %}
                 {% include components/pages/about/timeline_section.html section=section %}
-                {% unless forloop.last %}<br/><br/><br/>{% endunless %}
+                {% unless forloop.last %}<br/><br/>{% endunless %}
             {% endfor %}
         </div>
     </div>

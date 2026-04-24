@@ -2,16 +2,16 @@
     <div class="contact-info-aboutme">
         <div class="contact-img-and-name-wrapper">
             <div class="contact-img-and-pinfo-wrapper">
-                {% include components/shared/profile_title_img.html %}
+                {% include components/shared/profile_title_img.html data=site.data.cards.cards.profile size=32 %}
             </div>
             <div class="contact-personal-info-wrapper">
                 {% include components/shared/profile_description.html %}
             </div>
         </div>
         <div class="contact-more-details">
-            {% include components/shared/contact_card.html label_title="Email" label_value="userthemes@gmail.com" img_src="/assets/icons/email.svg" %}
-            {% include components/shared/contact_card.html label_title="Phone" label_value="(888) 777-6666" img_src="/assets/icons/tel.svg" %}
-            {% include components/shared/contact_card.html label_title="Address" label_value="San Francisco, USA" img_src="/assets/icons/location.svg" %}
+            {% include components/shared/contact_card.html label_title="Email" label_value=site.data.cards.cards.profile.email img_src="/assets/icons/email.svg" %}
+            {% include components/shared/contact_card.html label_title="Phone" label_value=site.data.cards.cards.profile.phone img_src="/assets/icons/tel.svg" %}
+            {% include components/shared/contact_card.html label_title="Address" label_value=site.data.cards.cards.profile.address img_src="/assets/icons/location.svg" %}
         </div>
     </div>
     <form class="contact-send-inquiry-container">

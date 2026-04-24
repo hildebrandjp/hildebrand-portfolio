@@ -41,6 +41,11 @@
     text-align: center;
     width: 100%;
     box-sizing: border-box;
+
+    &:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
 }
 
 .hamburger-menu-social {
@@ -48,7 +53,7 @@
 }
 
 .hamburger-nav-menus {
-    justify-content: flex-start;
+    justify-content: center;
     column-gap: 10px;
 }
 

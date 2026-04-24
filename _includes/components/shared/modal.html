@@ -4,10 +4,15 @@
                 <button type="button" onclick="window.modules.Modal.close()" class="modal-close-icon" aria-label="Close modal"></button>
                 <div id="modalControllerWrapper" class="modal-container-wrapper">
                     {% include components/modals/contact/index.html %}
-                    {% include components/modals/about/index.html %}    
+                    {% include components/modals/about/index.html %}
                     {% include components/modals/skill/index.html %}
                     {% include components/modals/portfolio/index.html %}
                 </div>
             </div>
         </div>
 </div>
+{% include components/shared/back_to_top.html
+    button_id="modalBackToTop"
+    scroll_container_id="modalControllerWrapper"
+    threshold=1000
+%}

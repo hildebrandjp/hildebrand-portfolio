@@ -77,10 +77,28 @@ $default_margin: 24px;
             padding-top: 0.4rem;
         }
 
-        > .profile-additional-info {
-            padding-top: 1.4rem;
-            color: var(--app-cream-50);
-            list-style: none;
+        > .profile-additional-wrapper {
+            --icon-size: clamp(20px, 10vw, 80px);
+            position: relative;
+            padding-top: calc(var(--icon-size) / 2 + 0.1rem);
+
+            > .edge-icon {
+                width: calc(var(--icon-size) * 2.5);
+                height: var(--icon-size);
+                position: absolute;
+                left: -1rem;
+            }
+
+            @media (max-width: 480px) {
+                > .edge-icon {
+                   height: calc(var(--icon-size) * 2);
+                }
+            }
+
+            > .profile-additional-info {
+                color: var(--app-cream-50);
+                list-style: none;
+            }
         }
     }
 

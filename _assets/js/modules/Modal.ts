@@ -25,6 +25,8 @@ export default class Modal {
 
         this._aboutResizeObserver?.disconnect();
         this._aboutResizeObserver = null;
+        this.scrollToTopOfModal();
+        document.getElementById('modalBackToTop')?.classList.remove('show');
     }
 
     open(name : ModalPage) {
@@ -43,12 +45,23 @@ export default class Modal {
             element.classList.remove('hidden');
             element.classList.add('show');
 
+            this.scrollToTopOfModal();
+
             if (name === MODAL_PAGES.ABOUT_INDEX) {
                 requestAnimationFrame(() => {
                     this.syncAboutRightHeight(element);
                     this.refreshAboutTimeline();
                 });
             }
+        });
+    }
+
+    private scrollToTopOfModal() {
+        const wrapper = document.getElementById('modalControllerWrapper');
+        const modalContainers = document.querySelectorAll(".modal-ext-container *");
+        if (wrapper) wrapper.scrollTop = 0;
+        Array.from(modalContainers).forEach((container: Element) => {
+            if (container && container instanceof HTMLElement) (container as HTMLElement).scrollTop = 0;
         });
     }
 

@@ -1,7 +1,7 @@
 {
   "meta": {
     "source": "assets/pdfs/Hildebrand_Ligtas_Resume.html",
-    "generated_on": "2026-04-23T09:50:52.293Z",
+    "generated_on": "2026-04-24T02:11:23.309Z",
     "sections_extracted": [
       "Languages",
       "Frameworks",
@@ -26,7 +26,7 @@
         "title": "REST API Design",
         "percent": 90,
         "color": "#1D9E75",
-        "icon": "/assets/icons/shine.svg",
+        "icon": "/assets/icons/Rest_api_design.png",
         "alt": "REST API Design",
         "abbr": "RAD"
       },
@@ -34,7 +34,7 @@
         "title": "CI/CD",
         "percent": 88,
         "color": "#1D9E75",
-        "icon": "/assets/icons/shine.svg",
+        "icon": "/assets/icons/CI_CD.png",
         "alt": "CI/CD",
         "abbr": "CI/"
       },
@@ -42,7 +42,7 @@
         "title": "System Design",
         "percent": 86,
         "color": "#1D9E75",
-        "icon": "/assets/icons/shine.svg",
+        "icon": "/assets/icons/System_Design.png",
         "alt": "System Design",
         "abbr": "SD"
       },
@@ -50,7 +50,7 @@
         "title": "Requirements Analysis",
         "percent": 84,
         "color": "#1D9E75",
-        "icon": "/assets/icons/shine.svg",
+        "icon": "/assets/icons/Requirements_Analysis.png",
         "alt": "Requirements Analysis",
         "abbr": "RA"
       },
@@ -58,7 +58,7 @@
         "title": "Web Scraping",
         "percent": 82,
         "color": "#1D9E75",
-        "icon": "/assets/icons/shine.svg",
+        "icon": "/assets/icons/web_scraping2.png",
         "alt": "Web Scraping",
         "abbr": "WS"
       },
@@ -66,7 +66,7 @@
         "title": "WordPress",
         "percent": 80,
         "color": "#1D9E75",
-        "icon": "/assets/icons/shine.svg",
+        "icon": "/assets/icons/wordpress.png",
         "alt": "WordPress",
         "abbr": "WOR"
       }
