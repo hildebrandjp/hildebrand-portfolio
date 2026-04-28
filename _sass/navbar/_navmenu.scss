@@ -62,6 +62,24 @@
         box-shadow: 0 10px 20px var(--app-shadow);
     }
 
+    > .all-in-one-btn {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--app-text-primary);
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid var(--app-border);
+        border-radius: 999px;
+        padding: 0.65rem 1.1rem;
+        transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    > .all-in-one-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px var(--app-shadow);
+    }
+
     > .hire-me {
         font-size: 14px;
         font-weight: 700;

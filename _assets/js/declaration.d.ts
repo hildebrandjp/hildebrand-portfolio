@@ -4,7 +4,8 @@ declare global {
     interface Window {
         pages: {
             StarIcon?: import("@/pages/home/StarIcon").default;
-            CardMenuProfile?: import("@/pages/home/CardMenuProfile").default;   
+            CardMenuProfile?: import("@/pages/home/CardMenuProfile").default;
+            LandingPage?: import("@/pages/landing").default;
         },
         modules: {
             ListBulletStyleHtml?: import("@/modules/ListBulletStyleHtml").default;

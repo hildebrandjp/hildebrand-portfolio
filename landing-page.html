@@ -1,0 +1,182 @@
+---
+layout: base
+title: "All in One | Hildebrand"
+permalink: /landing-page/
+description: "All-in-one page for Hildebrand: about, skills, portfolio, and contact."
+keywords: "landing page, about, skills, portfolio, contact, hildebrand"
+canonical: "http://localhost:4000/landing-page/"
+og_url: "http://localhost:4000/landing-page/"
+og_type: "website"
+og_title: "Hildebrand All in One"
+---
+<div class="bg-image-mask landing-page-shell">
+    {% include navbar.html %}
+
+    {% assign profile = site.data.cards.cards.profile %}
+    {% assign about = site.data.cards.cards.about %}
+    {% assign skill_raw = site.data.skill.raw.items %}
+    {% assign skill_code = site.data.skill.coding.items %}
+    {% assign portfolio_items = site.data.portfolio.data %}
+
+    <main class="container lp-root" id="landingPageRoot">
+        <div class="lp-bg-orbs" aria-hidden="true">
+            <span class="lp-orb lp-orb-a"></span>
+            <span class="lp-orb lp-orb-b"></span>
+            <span class="lp-orb lp-orb-c"></span>
+        </div>
+
+        <section class="lp-hero lp-reveal">
+            <div class="lp-hero-copy">
+                <p class="lp-kicker">All In One</p>
+                <h1>{{ profile.name }}</h1>
+                <p class="lp-role">{{ profile.title }}</p>
+                <p class="lp-summary">{{ profile.description }}</p>
+                <div class="lp-hero-actions">
+                    <a href="#lpAbout" class="lp-btn lp-btn-primary">Explore</a>
+                    <a href="#lpContact" class="lp-btn lp-btn-ghost">Contact</a>
+                </div>
+            </div>
+            <div class="lp-hero-aside">
+                <img src="/assets/img/profile.png" alt="{{ profile.name }} profile photo" />
+                <div class="lp-hero-chip-list">
+                    <span>{{ profile.citizenship }}</span>
+                    <span>{{ profile.age }}</span>
+                    <span>{{ profile.position }}</span>
+                </div>
+            </div>
+        </section>
+
+        <nav class="lp-anchor-nav lp-reveal" aria-label="Landing sections">
+            <a href="#lpAbout" class="lp-anchor-link is-active" data-lp-anchor="lpAbout">About</a>
+            <a href="#lpSkills" class="lp-anchor-link" data-lp-anchor="lpSkills">Skills</a>
+            <a href="#lpPortfolio" class="lp-anchor-link" data-lp-anchor="lpPortfolio">Portfolio</a>
+            <a href="#lpContact" class="lp-anchor-link" data-lp-anchor="lpContact">Contact</a>
+        </nav>
+
+        <section id="lpAbout" class="lp-section lp-reveal">
+            <div class="lp-section-head">
+                <h2>About</h2>
+                <p>Experience and education timeline</p>
+            </div>
+            <div class="lp-about-grid">
+                <div class="lp-block">
+                    <h3>Highlights</h3>
+                    <div class="lp-metric-grid">
+                        {% for metric in about.highlight_achievements %}
+                            <article class="lp-metric">
+                                <strong>{{ metric.title }}</strong>
+                                <span>{{ metric.description }}</span>
+                            </article>
+                        {% endfor %}
+                    </div>
+                    <h3>Brands</h3>
+                    <div class="lp-brand-grid">
+                        {% for brand in site.data.work_company %}
+                            <article class="lp-brand-item lp-float">
+                                <img src="{{ brand.icon }}" alt="{{ brand.name }} logo" />
+                                <span>{{ brand.name }}</span>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="lp-block">
+                    {% for timeline in about.timeline_sections %}
+                        <h3>{{ timeline.title }}</h3>
+                        <div class="lp-timeline">
+                            {% for entry in timeline.entries %}
+                                <article class="lp-timeline-item">
+                                    <p class="lp-year">{{ entry.year }}</p>
+                                    {% for item in entry.items %}
+                                        <p class="lp-item-title">{{ item.title }}</p>
+                                        <p class="lp-item-subtitle">{{ item.position }}</p>
+                                    {% endfor %}
+                                </article>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section id="lpSkills" class="lp-section lp-reveal">
+            <div class="lp-section-head">
+                <h2>Skills</h2>
+                <p>Core capabilities and coding stack</p>
+            </div>
+            <div class="lp-about-grid">
+                <div class="lp-block">
+                    <h3>Core Skills</h3>
+                    <div class="lp-skill-list">
+                        {% for skill in skill_raw limit: 6 %}
+                            <article class="lp-skill-item">
+                                <div class="lp-skill-title-row">
+                                    <span>{{ skill.title }}</span>
+                                    <span>{{ skill.percent }}%</span>
+                                </div>
+                                <div class="lp-bar">
+                                    <span style="width: {{ skill.percent }}%;"></span>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="lp-block">
+                    <h3>Top Coding Skills</h3>
+                    <div class="lp-chip-cloud">
+                        {% for skill in skill_code limit: 18 %}
+                            <span class="lp-chip">{{ skill.label }} · {{ skill.percent }}%</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="lpPortfolio" class="lp-section lp-reveal">
+            <div class="lp-section-head">
+                <h2>Portfolio</h2>
+                <p>Selected work snapshots</p>
+            </div>
+            <div class="lp-portfolio-grid">
+                {% for project in portfolio_items limit: 6 %}
+                    <article class="lp-project-card lp-float">
+                        <div class="lp-project-preview" style="{% if project.url != '' %}background-image: url('{{ project.url }}');{% else %}background-image: none;{% endif %}">
+                            {% if project.url == '' %}<span>{{ project.tag | replace: '_', ' ' }}</span>{% endif %}
+                        </div>
+                        <div class="lp-project-meta">
+                            <p>{{ project.subtitle }}</p>
+                            <h3>{{ project.title }}</h3>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="lpContact" class="lp-section lp-reveal">
+            <div class="lp-section-head">
+                <h2>Contact</h2>
+                <p>Let’s build something practical and useful</p>
+            </div>
+            <div class="lp-about-grid">
+                <div class="lp-block">
+                    <h3>Direct Contact</h3>
+                    <div class="lp-contact-list">
+                        <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+                        <a href="tel:{{ profile.phone }}">{{ profile.phone }}</a>
+                        <p>{{ profile.address }}</p>
+                    </div>
+                </div>
+                <div class="lp-block">
+                    <h3>Services</h3>
+                    <div class="lp-chip-cloud">
+                        {% for service in site.data.contact.services_options limit: 8 %}
+                            <span class="lp-chip">{{ service.label }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% include components/shared/back_to_top.html threshold=450 %}
+    {% include footer.html %}
+</div>
