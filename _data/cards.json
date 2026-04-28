@@ -2,16 +2,16 @@
     "cards": {
         "profile": {
             "name": "Hildebrand Elias C. Ligtas",
-            "title": "Software Engineer",
-            "description": "Software Engineer with 5+ years of experience in web and mobile development. Self-taught and highly motivated, with strong problem-solving skills and 3+ years delivering Japanese full-stack and mobile applications end-to-end.",
+            "title": "Senior Software Engineer",
+            "description": "Senior Software Engineer with 5+ years of experience in web and mobile development. Self-taught and highly motivated, with strong problem-solving skills and 3+ years delivering Japanese full-stack and mobile applications end-to-end.",
             "age": "27 Years",
-            "job_title": "Software Engineer",
+            "job_title": "Senior Software Engineer",
             "citizenship": "Philippines",
             "email": "hildebrandlig11@gmail.com",
             "phone": "09700551910",
             "address": "Cebu, Philippines",
             "image_path": "/assets/images/profile.jpg",
-            "position": "Software Engineer",
+            "position": "Senior Software Engineer",
             "color_background": {
                 "profile_img": "#F7EFE5",
                 "description": "#7743DB"
@@ -76,6 +76,14 @@
                             "items": [
                                 {
                                     "title": "Software Engineer",
+                                    "position": "Hipe"
+                                },
+                                {
+                                    "title": "Mid-Level Software Engineer",
+                                    "position": "Hipe"
+                                },
+                                {
+                                    "title": "Senior Software Engineer",
                                     "position": "Hipe"
                                 }
                             ]

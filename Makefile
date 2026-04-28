@@ -89,7 +89,7 @@ docker-run: docker-build ## Build image then run container
 	docker run -p $(DOCKER_PORT) $(DOCKER_IMAGE)
 
 docker-up: ## Start services via docker-compose
-	docker-compose -f $(COMPOSE_FILE) up
+	docker-compose -f $(COMPOSE_FILE) up -d
 
 docker-down: ## Stop docker-compose services
 	docker-compose -f $(COMPOSE_FILE) down
@@ -102,4 +102,4 @@ docker-rebuild: ## Rebuild and restart docker-compose services
 # ==============================================================================
 permission-override: ## Override permissions for WSL / Linux users
 	@echo "Overriding permissions for WSL..."
-	@sudo chown -R $(USER):$(USER) ./*
+	@sudo chown -R $(USER):$(USER) .
