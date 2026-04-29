@@ -88,14 +88,14 @@ docker-build: ## Build Docker image
 docker-run: docker-build ## Build image then run container
 	docker run -p $(DOCKER_PORT) $(DOCKER_IMAGE)
 
-docker-up: ## Start services via docker-compose
-	docker-compose -f $(COMPOSE_FILE) up -d
+docker-up: ## Start services via docker compose
+	docker compose -f $(COMPOSE_FILE) up -d
 
-docker-down: ## Stop docker-compose services
-	docker-compose -f $(COMPOSE_FILE) down
+docker-down: ## Stop docker compose services
+	docker compose -f $(COMPOSE_FILE) down
 
-docker-rebuild: ## Rebuild and restart docker-compose services
-	docker-compose -f $(COMPOSE_FILE) up --build
+docker-rebuild: ## Rebuild and restart docker compose services
+	docker compose -f $(COMPOSE_FILE) up --build
 
 # ==============================================================================
 # WSL Permission - Quick fix for permission issues when running Docker in WSL

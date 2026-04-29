@@ -1,0 +1,12 @@
+{% assign add_class = "all-in-one-btn" %}
+{% if include.add_extra_class %}
+    {% assign add_class = add_class | append: " " | append: include.add_extra_class %}
+{% endif %}
+
+{% assign amaze_class = "amaze-me-btn" %}
+{% if include.add_extra_class %}
+    {% assign amaze_class = amaze_class | append: " " | append: include.add_extra_class %}
+{% endif %}
+
+<a href="/landing-page/" class="{{ add_class }}">All in One</a>
+<a href="/amaze-me/" class="{{ amaze_class }}">Amaze Me</a>

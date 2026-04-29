@@ -13,11 +13,14 @@ const DISABLE_COMMENTS_AND_CONSOLE_LOG = false;
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-    entry: './_assets/js/app.ts',  // Your main JavaScript file
+    entry: {
+        app: './_assets/js/app.ts',
+        'amaze-me': './_assets/js/pages/amaze-me/index.ts',
+    },
     output: {
-        path: path.resolve(__dirname, 'assets/js/dist'),  // Output transpiled files to Jekyll's _site folder
-        filename: 'app.js',  // Output bundle name
-        clean: true,  // Clean output directory before each build
+        path: path.resolve(__dirname, 'assets/js/dist'),
+        filename: '[name].js',
+        clean: true,
     },
     mode: isProduction ? 'production' : 'development',  // Switch based on NODE_ENV
     devtool: isProduction ? false : 'source-map',

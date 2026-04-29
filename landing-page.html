@@ -81,7 +81,7 @@ og_title: "Hildebrand All in One"
                 </div>
                 <div class="lp-block">
                     {% for timeline in about.timeline_sections %}
-                        <h3>{{ timeline.title }}</h3>
+                        <h3 class="{% unless forloop.first %}pt-4{% endunless %}">{{ timeline.title }}</h3>
                         <div class="lp-timeline">
                             {% for entry in timeline.entries %}
                                 <article class="lp-timeline-item">
@@ -156,7 +156,7 @@ og_title: "Hildebrand All in One"
                 <h2>Contact</h2>
                 <p>Let’s build something practical and useful</p>
             </div>
-            <div class="lp-about-grid">
+            <div class="lp-contact-grid">
                 <div class="lp-block">
                     <h3>Direct Contact</h3>
                     <div class="lp-contact-list">
@@ -172,6 +172,24 @@ og_title: "Hildebrand All in One"
                             <span class="lp-chip">{{ service.label }}</span>
                         {% endfor %}
                     </div>
+                </div>
+                <div class="lp-block">
+                    <h3 class="mt-4">Send a Message</h3>
+                    <form class="lp-contact-form" action="#" method="post">
+                        <div class="lp-field">
+                            <label for="lpContactName">Name</label>
+                            <input class="lp-input" type="text" id="lpContactName" name="name" placeholder="Your name" autocomplete="name" />
+                        </div>
+                        <div class="lp-field">
+                            <label for="lpContactEmail">Email</label>
+                            <input class="lp-input" type="email" id="lpContactEmail" name="email" placeholder="Your email" autocomplete="email" />
+                        </div>
+                        <div class="lp-field">
+                            <label for="lpContactMessage">Message</label>
+                            <textarea class="lp-textarea" id="lpContactMessage" name="message" placeholder="How can I help?"></textarea>
+                        </div>
+                        <button type="submit" class="lp-btn lp-btn-primary">Send</button>
+                    </form>
                 </div>
             </div>
         </section>

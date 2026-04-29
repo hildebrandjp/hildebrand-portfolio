@@ -80,6 +80,26 @@
         box-shadow: 0 10px 20px var(--app-shadow);
     }
 
+    > .amaze-me-btn {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #00cc44;
+        background: rgba(0, 20, 10, 0.92);
+        border: 1px solid rgba(0, 255, 65, 0.45);
+        border-radius: 999px;
+        padding: 0.65rem 1.1rem;
+        transition: transform 180ms ease, box-shadow 180ms ease, color 180ms ease, border-color 180ms ease;
+    }
+
+    > .amaze-me-btn:hover {
+        transform: translateY(-2px);
+        color: #00ff41;
+        border-color: rgba(0, 255, 65, 0.9);
+        box-shadow: 0 8px 24px rgba(0, 255, 65, 0.22);
+    }
+
     > .hire-me {
         font-size: 14px;
         font-weight: 700;

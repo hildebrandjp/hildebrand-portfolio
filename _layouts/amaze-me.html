@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}" />
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            width: 100%;
+            background: #070512;
+            overflow-x: hidden;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        #am-canvas-wrapper {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        #am-scroll-driver {
+            position: relative;
+            z-index: 1;
+            height: 600vh;
+            pointer-events: none;
+        }
+
+        #am-hud {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            pointer-events: none;
+        }
+
+        .am-back-btn {
+            pointer-events: all;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 1rem;
+            background: rgba(129, 140, 248, 0.08);
+            border: 1px solid rgba(129, 140, 248, 0.4);
+            border-radius: 999px;
+            color: #818cf8;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background 200ms ease, border-color 200ms ease;
+        }
+
+        .am-back-btn:hover {
+            background: rgba(129, 140, 248, 0.18);
+            border-color: rgba(129, 140, 248, 0.85);
+        }
+
+        #am-section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            color: rgba(129, 140, 248, 0.7);
+            text-transform: uppercase;
+        }
+
+        #am-progress-track {
+            position: fixed;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .am-progress-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(129, 140, 248, 0.25);
+            border: 1px solid rgba(129, 140, 248, 0.4);
+            transition: background 300ms ease, transform 300ms ease;
+        }
+
+        .am-progress-dot.active {
+            background: #818cf8;
+            box-shadow: 0 0 8px rgba(129, 140, 248, 0.8);
+            transform: scale(1.4);
+        }
+
+        #am-scroll-hint {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            opacity: 1;
+            transition: opacity 600ms ease;
+            pointer-events: none;
+        }
+
+        #am-scroll-hint.hidden { opacity: 0; }
+
+        .am-scroll-hint-text {
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            color: rgba(129, 140, 248, 0.5);
+            text-transform: uppercase;
+        }
+
+        .am-scroll-hint-arrow {
+            width: 1px;
+            height: 28px;
+            background: linear-gradient(to bottom, rgba(0,255,65,0.5), transparent);
+            animation: am-pulse-down 1.4s ease-in-out infinite;
+        }
+
+        @keyframes am-pulse-down {
+            0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        @media (max-width: 600px) {
+            #am-progress-track { display: none; }
+        }
+    </style>
+</head>
+<body>
+    {{ content }}
+    <script src="/assets/js/dist/amaze-me.js"></script>
+</body>
+</html>
