@@ -7,88 +7,31 @@ import {
     MathUtils,
 } from 'three';
 import { MatrixRain } from './MatrixRain';
+import { GlobeSection } from './GlobeSection';
 import { SectionPanel } from './SectionPanel';
 import { CameraAnimator } from './CameraAnimator';
 import { PostProcessor } from './PostProcessor';
-import type { SectionData } from './SectionPanel';
-import type { IDisposable } from './interfaces';
+import type { IDisposable } from '@/interface/AmazeMe';
 import {
-    SECTION_SPACING,
     CAM_FOV, CAM_NEAR, CAM_FAR, CAM_Z,
     MAX_PIXEL_RATIO,
     SCENE_BG_COLOR, SCENE_AMBIENT_COLOR,
     RAIN_MESH_Z, PANEL_FADE_DISTANCE,
+    GLOBE_WHEEL_TOTAL_PX, GLOBE_WHEEL_UNLOCK_RATIO,
+    ZOOM_WHEEL_TOTAL_PX,
+    RESUME_SECTIONS,
+    SECTION_LABELS,
+    SECTION_GLOBE_INDEX,
+    SECTION_PANEL_INDEX_OFFSET,
+    SECTION_INITIAL_INDEX,
+    SECTION_SPACING,
+    SCROLL_PROGRESS_MIN,
+    SCROLL_PROGRESS_MAX,
+    RENDERER_CLEAR_ALPHA,
+    ESCAPE_REDIRECT_URL,
+    PANEL_WORLD_W,
+    PANEL_VIEWPORT_FILL,
 } from '../../constants/amaze-me';
-
-const RESUME_SECTIONS: SectionData[] = [
-    {
-        title: '> HILDEBRAND E. LIGTAS',
-        xPos: 0,
-        lines: [
-            '  Senior Software Engineer',
-            '',
-            '  5+ years of software engineering experience',
-            '  Full-stack & mobile development specialist',
-            '  3+ years delivering Japanese client projects',
-            '  Cebu, Philippines',
-        ],
-    },
-    {
-        title: '> EXPERIENCE',
-        xPos: SECTION_SPACING,
-        lines: [
-            '#2022 — 2025  ·  Hipe',
-            '  Software Engineer → Mid → Senior',
-            '  Full-stack web & mobile applications',
-            '',
-            '#2020 — 2022  ·  Self-employed',
-            '  Freelance Software Engineer',
-        ],
-    },
-    {
-        title: '> EDUCATION',
-        xPos: SECTION_SPACING * 2,
-        lines: [
-            '#2015 — 2021',
-            '  BS Electronics Engineering (BSECE)',
-            '  Cebu Institute of Technology — CIT-U',
-            '',
-            '  Self-taught full-stack developer',
-            '  Continuous learner & problem solver',
-        ],
-    },
-    {
-        title: '> TECHNICAL SKILLS',
-        xPos: SECTION_SPACING * 3,
-        lines: [
-            '#Languages:   JS  TS  PHP  Ruby  Python  Swift',
-            '#Frameworks:  Laravel  Rails  Vue  React  RN',
-            '#Databases:   MySQL  PostgreSQL  MongoDB  Redis',
-            '#Cloud/DevOps: AWS  GCP  Docker  CI/CD',
-            '#Testing:     Jest  Puppeteer  Unit  E2E',
-        ],
-    },
-    {
-        title: '> CONTACT',
-        xPos: SECTION_SPACING * 4,
-        lines: [
-            '  hildebrandlig11@gmail.com',
-            '  09700551910',
-            '  Cebu, Philippines',
-            '',
-            '#Open to:',
-            '  Senior / Lead Engineering Roles',
-        ],
-    },
-];
-
-const SECTION_LABELS = [
-    '// 01 · PROFILE',
-    '// 02 · EXPERIENCE',
-    '// 03 · EDUCATION',
-    '// 04 · SKILLS',
-    '// 05 · CONTACT',
-];
 
 export class AmazeMeApp implements IDisposable {
     private readonly renderer: WebGLRenderer;
@@ -96,6 +39,7 @@ export class AmazeMeApp implements IDisposable {
     private readonly scene: Scene;
     private readonly clock: Clock;
     private readonly matrixRain: MatrixRain;
+    private readonly globeSection: GlobeSection;
     private readonly panels: SectionPanel[];
     private readonly cameraAnimator: CameraAnimator;
     private readonly postProcessor: PostProcessor;
@@ -104,15 +48,20 @@ export class AmazeMeApp implements IDisposable {
     private readonly hudLabel: HTMLElement | null;
     private readonly dots: NodeListOf<Element>;
     private readonly scrollHint: HTMLElement | null;
+    private readonly continueCard: HTMLElement | null;
 
     private animationId = 0;
-    private lastSectionIndex = -1;
+    private lastSectionIndex = SECTION_INITIAL_INDEX;
+    private globeWheelAccum  = 0;   // accumulated wheel-delta while globe is locked
+    private globeUnlocked    = false; // true once globe has rotated to Philippines
+    private zoomWheelAccum   = 0;   // accumulated wheel-delta during zoom lock phase
+    private zoomUnlocked     = false; // true once intro zoom has completed
 
     constructor(wrapper: HTMLElement) {
         this.renderer = new WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_PIXEL_RATIO));
         this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setClearColor(SCENE_BG_COLOR, 1);
+        this.renderer.setClearColor(SCENE_BG_COLOR, RENDERER_CLEAR_ALPHA);
         this.renderer.domElement.style.pointerEvents = 'none';
         wrapper.appendChild(this.renderer.domElement);
 
@@ -136,15 +85,21 @@ export class AmazeMeApp implements IDisposable {
         this.matrixRain.getMesh().position.set(0, 0, RAIN_MESH_Z);
         this.scene.add(this.matrixRain.getMesh());
 
+        this.globeSection = new GlobeSection(0);
+        this.scene.add(this.globeSection.getGroup());
+
         this.panels = RESUME_SECTIONS.map(data => {
             const panel = new SectionPanel(data);
             this.scene.add(panel.getGroup());
             return panel;
         });
+        const initScale = this._panelScale(window.innerWidth, window.innerHeight);
+        this.panels.forEach(p => p.resize(initScale));
+        const numSections = this.panels.length + SECTION_PANEL_INDEX_OFFSET;
 
         this.cameraAnimator = new CameraAnimator(
             this.camera,
-            RESUME_SECTIONS.length,
+            numSections,
             SECTION_SPACING,
         );
 
@@ -154,8 +109,9 @@ export class AmazeMeApp implements IDisposable {
         this.hudLabel  = document.getElementById('am-section-label');
         this.dots      = document.querySelectorAll('.am-progress-dot');
         this.scrollHint = document.getElementById('am-scroll-hint');
+        this.continueCard = document.getElementById('am-section-continue-card');
 
-        this._updateHud(0);
+        this._updateHud(SECTION_GLOBE_INDEX);
         this._setupEvents();
         this._animate();
     }
@@ -163,12 +119,77 @@ export class AmazeMeApp implements IDisposable {
     private _setupEvents(): void {
         window.addEventListener('scroll', this._onScroll, { passive: true });
         window.addEventListener('resize', this._onResize);
+        window.addEventListener('keydown', this._onKeyDown);
+        window.addEventListener('wheel', this._onWheel, { passive: false });
     }
+
+    private readonly _onKeyDown = (e: KeyboardEvent): void => {
+        if (e.key === 'ArrowRight') {
+            // Bypass both intro wheel-locks when navigating via keyboard
+            if (this.cameraAnimator.getSectionIndex() === SECTION_GLOBE_INDEX) {
+                this._completeGlobeIntro();
+            }
+            this.cameraAnimator.scrollToSection(this.cameraAnimator.getSectionIndex() + SECTION_PANEL_INDEX_OFFSET);
+            this._hideScrollHint();
+        } else if (e.key === 'ArrowLeft') {
+            this.cameraAnimator.scrollToSection(this.cameraAnimator.getSectionIndex() - SECTION_PANEL_INDEX_OFFSET);
+            this._hideScrollHint();
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            window.location.href = ESCAPE_REDIRECT_URL;
+        }
+    };
+
+    private readonly _onWheel = (e: WheelEvent): void => {
+        if (this.cameraAnimator.getSectionIndex() === SECTION_GLOBE_INDEX && this.zoomUnlocked) {
+            this._prepareGlobeReentry();
+        }
+
+        // Both intro locks passed — let native scroll handle things
+        if (this.zoomUnlocked) return;
+
+        // If camera has somehow drifted past section 0, release both locks
+        if (this.cameraAnimator.getSectionIndex() !== SECTION_GLOBE_INDEX) {
+            this.globeUnlocked = true;
+            this.zoomUnlocked  = true;
+            return;
+        }
+
+        e.preventDefault();
+
+        if (!this.globeUnlocked) {
+            // Phase 1: globe rotation lock — bidirectional
+            this.globeWheelAccum = MathUtils.clamp(this.globeWheelAccum + e.deltaY, SCROLL_PROGRESS_MIN, GLOBE_WHEEL_TOTAL_PX);
+            const rotProgress = this.globeWheelAccum / GLOBE_WHEEL_TOTAL_PX;
+            this.globeSection.setRotationProgress(rotProgress);
+            if (rotProgress >= GLOBE_WHEEL_UNLOCK_RATIO) {
+                this.globeUnlocked = true;
+            }
+            return;
+        }
+
+        // Phase 2: zoom lock — bidirectional; backward scroll past zero re-enters phase 1
+        this.zoomWheelAccum = MathUtils.clamp(this.zoomWheelAccum + e.deltaY, SCROLL_PROGRESS_MIN, ZOOM_WHEEL_TOTAL_PX);
+        const zoomProgress = this.zoomWheelAccum / ZOOM_WHEEL_TOTAL_PX;
+        this.globeSection.setZoomProgress(zoomProgress);
+        if (this.zoomWheelAccum === SCROLL_PROGRESS_MIN) {
+            this.globeUnlocked = false; // slip back into phase 1 on next wheel event
+        }
+        if (zoomProgress >= SCROLL_PROGRESS_MAX) {
+            this.zoomUnlocked = true;
+            this.cameraAnimator.scrollToSection(SECTION_PANEL_INDEX_OFFSET);
+        }
+    };
 
     private readonly _onScroll = (): void => {
         this.cameraAnimator.onScroll();
-        if (this.scrollHint) this.scrollHint.classList.add('hidden');
+        this._hideScrollHint();
     };
+
+    private _panelScale(w: number, h: number): number {
+        const visW = 2 * Math.tan(MathUtils.DEG2RAD * CAM_FOV / 2) * CAM_Z * (w / h);
+        return (visW * PANEL_VIEWPORT_FILL) / PANEL_WORLD_W;
+    }
 
     private readonly _onResize = (): void => {
         const w = window.innerWidth;
@@ -177,6 +198,8 @@ export class AmazeMeApp implements IDisposable {
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(w, h);
         this.postProcessor.resize(w, h);
+        const scale = this._panelScale(w, h);
+        this.panels.forEach(p => p.resize(scale));
     };
 
     private readonly _animate = (): void => {
@@ -191,24 +214,51 @@ export class AmazeMeApp implements IDisposable {
         this.cameraAnimator.update(delta, elapsed);
 
         const progress = this.cameraAnimator.getScrollProgress();
-        const numSections = this.panels.length;
 
+        const globeDist = Math.abs(progress - SECTION_GLOBE_INDEX);
+        this.globeSection.setTargetOpacity(MathUtils.clamp(SCROLL_PROGRESS_MAX - globeDist / PANEL_FADE_DISTANCE, SCROLL_PROGRESS_MIN, SCROLL_PROGRESS_MAX));
+        this.globeSection.update(delta, elapsed);
+
+        // Text panels occupy indices 1..N
         this.panels.forEach((panel, i) => {
-            const sectionProgress = i / (numSections - 1);
+            const sectionProgress = (i + SECTION_PANEL_INDEX_OFFSET) / this.panels.length;
             const distance = Math.abs(progress - sectionProgress);
-            const opacity = MathUtils.clamp(1 - distance / PANEL_FADE_DISTANCE, 0, 1);
+            const opacity = MathUtils.clamp(SCROLL_PROGRESS_MAX - distance / PANEL_FADE_DISTANCE, SCROLL_PROGRESS_MIN, SCROLL_PROGRESS_MAX);
             panel.setTargetOpacity(opacity);
             panel.update(delta, elapsed);
         });
 
         const currentIndex = this.cameraAnimator.getSectionIndex();
         if (currentIndex !== this.lastSectionIndex) {
+            if (currentIndex === SECTION_GLOBE_INDEX && this.lastSectionIndex > SECTION_GLOBE_INDEX) {
+                this._prepareGlobeReentry();
+            }
             this._updateHud(currentIndex);
             this.lastSectionIndex = currentIndex;
         }
 
         this.postProcessor.render();
     };
+
+    private _prepareGlobeReentry(): void {
+        this.globeWheelAccum = GLOBE_WHEEL_TOTAL_PX;
+        this.zoomWheelAccum = ZOOM_WHEEL_TOTAL_PX;
+        this.globeUnlocked = true;
+        this.zoomUnlocked = false;
+        this.globeSection.setRotationProgress(SCROLL_PROGRESS_MAX);
+        this.globeSection.setZoomProgress(SCROLL_PROGRESS_MAX);
+    }
+
+    private _completeGlobeIntro(): void {
+        this.globeUnlocked = true;
+        this.zoomUnlocked = true;
+        this.globeSection.setRotationProgress(SCROLL_PROGRESS_MAX);
+        this.globeSection.setZoomProgress(SCROLL_PROGRESS_MAX);
+    }
+
+    private _hideScrollHint(): void {
+        this.scrollHint?.classList.add('hidden');
+    }
 
     private _updateHud(index: number): void {
         if (this.hudLabel) {
@@ -217,13 +267,17 @@ export class AmazeMeApp implements IDisposable {
         this.dots.forEach((dot, i) => {
             dot.classList.toggle('active', i === index);
         });
+        this.continueCard?.classList.toggle('hidden', index !== SECTION_GLOBE_INDEX);
     }
 
     dispose(): void {
         cancelAnimationFrame(this.animationId);
         window.removeEventListener('scroll', this._onScroll);
         window.removeEventListener('resize', this._onResize);
+        window.removeEventListener('keydown', this._onKeyDown);
+        window.removeEventListener('wheel', this._onWheel);
         this.matrixRain.dispose();
+        this.globeSection.dispose();
         this.panels.forEach(p => p.dispose());
         this.cameraAnimator.dispose();
         this.postProcessor.dispose();

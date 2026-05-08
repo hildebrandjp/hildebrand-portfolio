@@ -4,7 +4,7 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { VignetteShader } from 'three/addons/shaders/VignetteShader.js';
-import type { IDisposable, IResizable } from './interfaces';
+import type { IDisposable, IResizable } from '@/interface/AmazeMe';
 import {
     BLOOM_STRENGTH, BLOOM_RADIUS, BLOOM_THRESHOLD,
     VIGNETTE_OFFSET, VIGNETTE_DARKNESS,

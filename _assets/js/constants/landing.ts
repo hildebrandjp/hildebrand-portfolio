@@ -51,4 +51,14 @@ export const LANDING_PAGE_ORB_PATTERN_INTERVAL_MS = 6000;
 export const LANDING_PAGE_ORB_FLOAT = {
     amplitudes: [10, 14, 12],
     speeds: [0.0007, 0.0005, 0.0006],
+    defaultAmplitude: 10,
+    defaultSpeed: 0.0006,
 };
+
+export const LANDING_PAGE_ACTIVE_SECTION = {
+    topOffset: 180,
+};
+
+export const LANDING_PAGE_ORB_COUNT = 3;
+export const LANDING_PAGE_SCROLL_RATIO_MAX = 1;
+export const LANDING_PAGE_SCROLL_RATIO_MIN = 0;

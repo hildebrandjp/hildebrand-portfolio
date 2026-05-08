@@ -1,18 +1,20 @@
 import { PerspectiveCamera, MathUtils } from 'three';
-import type { IAnimatable } from './interfaces';
+import type { IAnimatable } from '@/interface/AmazeMe';
 import {
     CAM_LERP_BASE,
     CAM_BREATHE_SPEED, CAM_BREATHE_AMPLITUDE,
     CAM_SWAY_SPEED, CAM_SWAY_AMPLITUDE, CAM_LOOK_SWAY_SPEED,
-    SNAP_FORWARD_THRESHOLD, SNAP_DEBOUNCE_MS, SNAP_FALLBACK_MS,
+    SNAP_FORWARD_THRESHOLD, SNAP_BACKWARD_THRESHOLD, SNAP_DEBOUNCE_MS, SNAP_FALLBACK_MS,
     SNAP_ARRIVAL_PX, SNAP_INTERRUPT_PX,
+    SCROLL_PROGRESS_MIN, SCROLL_PROGRESS_MAX, SECTION_PANEL_INDEX_OFFSET,
 } from '../../constants/amaze-me';
 
 export class CameraAnimator implements IAnimatable {
     private readonly camera: PerspectiveCamera;
-    private readonly numSections: number;
     private readonly sectionSpacing: number;
+    private readonly maxSectionIndex: number;
     private scrollProgress = 0;
+    private scrollDirection: 1 | -1 = 1;
     private currentX = 0;
     private targetX = 0;
 
@@ -24,15 +26,19 @@ export class CameraAnimator implements IAnimatable {
 
     constructor(camera: PerspectiveCamera, numSections: number, sectionSpacing: number) {
         this.camera = camera;
-        this.numSections = numSections;
         this.sectionSpacing = sectionSpacing;
+        this.maxSectionIndex = numSections - SECTION_PANEL_INDEX_OFFSET;
     }
 
     onScroll(): void {
         const scrollTop = window.scrollY;
         const scrollMax = document.body.scrollHeight - window.innerHeight;
-        this.scrollProgress = scrollMax > 0 ? MathUtils.clamp(scrollTop / scrollMax, 0, 1) : 0;
-        this.targetX = this.scrollProgress * (this.numSections - 1) * this.sectionSpacing;
+        const prev = this.scrollProgress;
+        this.scrollProgress = scrollMax > 0
+            ? MathUtils.clamp(scrollTop / scrollMax, SCROLL_PROGRESS_MIN, SCROLL_PROGRESS_MAX)
+            : SCROLL_PROGRESS_MIN;
+        if (this.scrollProgress !== prev) this.scrollDirection = this.scrollProgress > prev ? 1 : -1;
+        this.targetX = this.scrollProgress * this.maxSectionIndex * this.sectionSpacing;
 
         if (this.isSnapping) {
             const deviation = Math.abs(scrollTop - this.snapTargetY);
@@ -64,21 +70,30 @@ export class CameraAnimator implements IAnimatable {
         const scrollMax = document.body.scrollHeight - window.innerHeight;
         if (scrollMax <= 0) return;
 
-        const sectionFloat = this.scrollProgress * (this.numSections - 1);
+        const sectionFloat = this.scrollProgress * this.maxSectionIndex;
         const base = Math.floor(sectionFloat);
         const frac = sectionFloat - base;
+        const threshold = this.scrollDirection > 0 ? SNAP_FORWARD_THRESHOLD : SNAP_BACKWARD_THRESHOLD;
         const snapIndex = MathUtils.clamp(
-            frac > SNAP_FORWARD_THRESHOLD ? base + 1 : base,
-            0,
-            this.numSections - 1,
+            frac > threshold ? base + 1 : base,
+            SCROLL_PROGRESS_MIN,
+            this.maxSectionIndex,
         );
 
-        this.snapTargetY = (snapIndex / (this.numSections - 1)) * scrollMax;
+        this._scrollToSnapTarget(snapIndex, scrollMax);
+    }
+
+    scrollToSection(index: number): void {
+        const scrollMax = document.body.scrollHeight - window.innerHeight;
+        if (scrollMax <= 0) return;
+        this._scrollToSnapTarget(MathUtils.clamp(index, SCROLL_PROGRESS_MIN, this.maxSectionIndex), scrollMax);
+    }
+
+    private _scrollToSnapTarget(index: number, scrollMax: number): void {
+        this.snapTargetY = (index / this.maxSectionIndex) * scrollMax;
         this.snapStartY = window.scrollY;
         this.isSnapping = true;
         window.scrollTo({ top: this.snapTargetY, behavior: 'smooth' });
-
-        // Fallback: release lock if scroll events stop arriving (e.g. snap already at target)
         if (this.snapFallbackTimer !== null) clearTimeout(this.snapFallbackTimer);
         this.snapFallbackTimer = setTimeout(() => { this.isSnapping = false; }, SNAP_FALLBACK_MS);
     }
@@ -86,7 +101,7 @@ export class CameraAnimator implements IAnimatable {
     getScrollProgress(): number { return this.scrollProgress; }
 
     getSectionIndex(): number {
-        return Math.round(this.scrollProgress * (this.numSections - 1));
+        return Math.round(this.scrollProgress * this.maxSectionIndex);
     }
 
     update(delta: number, elapsed: number): void {
@@ -99,7 +114,7 @@ export class CameraAnimator implements IAnimatable {
         this.camera.lookAt(
             this.currentX + Math.sin(elapsed * CAM_SWAY_SPEED) * CAM_SWAY_AMPLITUDE,
             Math.sin(elapsed * CAM_LOOK_SWAY_SPEED) * CAM_SWAY_AMPLITUDE,
-            0,
+            SCROLL_PROGRESS_MIN,
         );
     }
 

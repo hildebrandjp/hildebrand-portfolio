@@ -14,7 +14,11 @@
             background: #070512;
             overflow-x: hidden;
             font-family: 'Courier New', Courier, monospace;
+            scrollbar-width: none;
+            cursor: none;
         }
+
+        html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
 
         #am-canvas-wrapper {
             position: fixed;
@@ -26,7 +30,7 @@
         #am-scroll-driver {
             position: relative;
             z-index: 1;
-            height: 600vh;
+            height: 900vh;
             pointer-events: none;
         }
 
@@ -131,18 +135,113 @@
             animation: am-pulse-down 1.4s ease-in-out infinite;
         }
 
+        #am-section-continue-card {
+            position: fixed;
+            left: 1.5rem;
+            bottom: 1.5rem;
+            z-index: 10;
+            max-width: min(320px, calc(100vw - 3rem));
+            padding: 0.9rem 1rem;
+            background: rgba(7, 5, 18, 0.78);
+            border: 1px solid rgba(129, 140, 248, 0.45);
+            border-radius: 6px;
+            color: rgba(228, 232, 255, 0.78);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            transition: opacity 240ms ease, transform 240ms ease;
+            pointer-events: none;
+        }
+
+        #am-section-continue-card.hidden {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
         @keyframes am-pulse-down {
             0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
             50% { opacity: 1; transform: scaleY(1); }
         }
 
+        #am-glob-profile {
+            position: fixed;
+            bottom: 2.5rem;
+            right: 3rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            pointer-events: none;
+        }
+
+        .am-glob-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 2px solid rgba(129,140,248,0.55);
+            object-fit: cover;
+        }
+
+        .am-glob-name {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #a5b4fc;
+        }
+
+        .am-glob-title {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            color: rgba(228,232,255,0.65);
+            margin-top: 4px;
+        }
+
+        .am-glob-loc {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            letter-spacing: 0.08em;
+            color: rgba(129,140,248,0.5);
+            margin-top: 3px;
+        }
+
         @media (max-width: 600px) {
             #am-progress-track { display: none; }
+        }
+
+        #am-cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 10px;
+            height: 18px;
+            background: #4ade80;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            animation: am-cur-blink 1s step-end infinite;
+        }
+
+        @keyframes am-cur-blink {
+            0%, 100% { opacity: 0.85; }
+            50%       { opacity: 0.40;    }
         }
     </style>
 </head>
 <body>
     {{ content }}
+    <div id="am-cursor" style="opacity:0"></div>
+    <script>
+        (function () {
+            var el = document.getElementById('am-cursor');
+            var ready = false;
+            document.addEventListener('mousemove', function (e) {
+                el.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+                if (!ready) { el.style.removeProperty('opacity'); ready = true; }
+            });
+            document.addEventListener('mouseleave', function () { el.style.opacity = '0'; });
+            document.addEventListener('mouseenter', function () { if (ready) el.style.removeProperty('opacity'); });
+        })();
+    </script>
     <script src="/assets/js/dist/amaze-me.js"></script>
 </body>
 </html>

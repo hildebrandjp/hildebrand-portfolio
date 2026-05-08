@@ -4,8 +4,12 @@ import {
     LANDING_PAGE_ORB_PATTERNS,
     LANDING_PAGE_ORB_PATTERN_INTERVAL_MS,
     LANDING_PAGE_REVEAL,
-    LANDING_PAGE_SELECTORS
-} from '@/pages/landing/constants';
+    LANDING_PAGE_SELECTORS,
+    LANDING_PAGE_ACTIVE_SECTION,
+    LANDING_PAGE_ORB_COUNT,
+    LANDING_PAGE_SCROLL_RATIO_MAX,
+    LANDING_PAGE_SCROLL_RATIO_MIN,
+} from '@/constants/landing';
 
 export default class LandingPage {
     private root: HTMLElement | null;
@@ -62,9 +66,9 @@ export default class LandingPage {
         });
 
         const syncActive = () => {
-            const activeSection = sections.find((section) => {
+            const activeSection = [...sections].reverse().find((section) => {
                 const rect = section.getBoundingClientRect();
-                return rect.top <= 180 && rect.bottom > 220;
+                return rect.top <= LANDING_PAGE_ACTIVE_SECTION.topOffset;
             }) || sections[0];
 
             anchorLinks.forEach((anchor) => anchor.classList.remove('is-active'));
@@ -86,7 +90,10 @@ export default class LandingPage {
         const updateParallax = () => {
             const maxOffset = LANDING_PAGE_ORB_PARALLAX.maxOffset;
             const viewportHeight = Math.max(window.innerHeight, 1);
-            const ratio = Math.min(1, Math.max(0, window.scrollY / viewportHeight));
+            const ratio = Math.min(
+                LANDING_PAGE_SCROLL_RATIO_MAX,
+                Math.max(LANDING_PAGE_SCROLL_RATIO_MIN, window.scrollY / viewportHeight),
+            );
 
             orbs.forEach((orb, index) => {
                 const direction = index % 2 === 0 ? 1 : -1;
@@ -102,7 +109,7 @@ export default class LandingPage {
 
     private enableOrbPatternLoop() {
         const orbs = Array.from(document.querySelectorAll<HTMLElement>(LANDING_PAGE_SELECTORS.orbs));
-        if (orbs.length !== 3) return;
+        if (orbs.length !== LANDING_PAGE_ORB_COUNT) return;
 
         let index = 0;
         const applyPattern = (patternIndex: number) => {
@@ -135,8 +142,10 @@ export default class LandingPage {
 
         const tick = (now: number) => {
             orbs.forEach((orb, index) => {
-                const amplitude = LANDING_PAGE_ORB_FLOAT.amplitudes[index] ?? 10;
-                const speed = LANDING_PAGE_ORB_FLOAT.speeds[index] ?? 0.0006;
+                const amplitude = LANDING_PAGE_ORB_FLOAT.amplitudes[index]
+                    ?? LANDING_PAGE_ORB_FLOAT.defaultAmplitude;
+                const speed = LANDING_PAGE_ORB_FLOAT.speeds[index]
+                    ?? LANDING_PAGE_ORB_FLOAT.defaultSpeed;
                 const floatY = Math.sin(now * speed) * amplitude;
                 orb.style.setProperty('--lp-orb-y', `${ floatY }px`);
             });

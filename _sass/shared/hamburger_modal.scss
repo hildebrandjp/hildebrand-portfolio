@@ -48,6 +48,27 @@
     }
 }
 
+.hamburger-menu-actions .amaze-me-btn {
+    color: #a5b4fc;
+    background: rgba(7, 5, 15, 0.92);
+    border: 1px solid rgba(99, 102, 241, 0.5);
+    border-radius: 999px;
+    padding: 0.65rem 1.1rem;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: transform 180ms ease, box-shadow 180ms ease, color 180ms ease, border-color 180ms ease;
+
+    &:hover {
+        text-decoration: none;
+        transform: translateY(-2px);
+        color: rgba(228, 232, 255, 0.92);
+        border-color: rgba(99, 102, 241, 0.9);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.22);
+    }
+}
+
 .hamburger-menu-social {
     margin-top: 14px;
 }

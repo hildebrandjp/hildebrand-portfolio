@@ -7,14 +7,19 @@ import {
     CanvasTexture,
     LinearFilter,
 } from 'three';
-import type { IDisposable, IAnimatable } from './interfaces';
+import type { IDisposable, IAnimatable } from '@/interface/AmazeMe';
 import {
     PANEL_CANVAS_W, PANEL_CANVAS_H,
     PANEL_WORLD_W, PANEL_WORLD_H,
     PANEL_TB_H, PANEL_PB_H, PANEL_SB_H, PANEL_PAD,
     PANEL_FONT_SIZE, PANEL_CHAR_W, PANEL_LINE_H, PANEL_FIRST_LINE_Y,
     PANEL_FONT_SIZE_BRAND, PANEL_FONT_SIZE_PROMPT, PANEL_FONT_SIZE_STATUS,
-    PANEL_TRAFFIC_LIGHT_R,
+    PANEL_TRAFFIC_LIGHT_R, PANEL_CORNER_RADIUS, PANEL_TITLE_CENTER_Y_OFFSET,
+    PANEL_PROMPT_Y_OFFSET, PANEL_PROMPT_GAP, PANEL_DIVIDER_H,
+    PANEL_BORDER_INSET, PANEL_BORDER_W, PANEL_CURSOR_X_OFFSET,
+    PANEL_CURSOR_Y_OFFSET, PANEL_CURSOR_W, PANEL_CURSOR_H_OFFSET,
+    PANEL_STATUS_Y_OFFSET, PANEL_PERCENT_BASE,
+    PANEL_TRAFFIC_LIGHTS,
     PANEL_LERP_BASE, PANEL_STAGGER_MAX, PANEL_SCATTER_X, PANEL_SCATTER_Y,
     PANEL_OPACITY_SCALE, PANEL_OPACITY_OFFSET,
     PANEL_SCATTER_FADE_DIST, PANEL_SCATTER_ALPHA_MIN,
@@ -22,18 +27,21 @@ import {
     PANEL_DRAW_EPSILON,
     PANEL_CURSOR_SHOW_AT, PANEL_CURSOR_BLINK_AT, PANEL_CURSOR_BLINK_INTERVAL,
     PANEL_COLOR_CARD_BG, PANEL_COLOR_TITLEBAR, PANEL_COLOR_PROMPTBAR,
-    PANEL_COLOR_TRAFFIC_RED, PANEL_COLOR_TRAFFIC_YELLOW, PANEL_COLOR_TRAFFIC_GREEN,
     PANEL_COLOR_TITLE_TEXT, PANEL_COLOR_DIVIDER, PANEL_COLOR_STATUS_DIVIDER,
     PANEL_COLOR_PROMPT_USER, PANEL_COLOR_PROMPT_CMD,
     PANEL_COLOR_CHAR_INFLIGHT, PANEL_COLOR_CHAR_LABEL, PANEL_COLOR_CHAR_BODY,
     PANEL_COLOR_CURSOR, PANEL_COLOR_STATUS_TEXT, PANEL_COLOR_BORDER,
+    PANEL_FONT_FAMILY_UI, PANEL_FONT_FAMILY_MONO, PANEL_BRAND_NAME,
+    PANEL_CMD_TEXT, PANEL_RUN_CMD_PREFIX, PANEL_STATUS_DOMAIN,
+    PANEL_STATUS_EXIT_HINT, PANEL_SECTION_TITLE_PATTERN, PANEL_SPACE_PATTERN,
+    PANEL_LABEL_PREFIX, PANEL_RNG_MULTIPLIER, PANEL_RNG_OFFSET,
+    PANEL_RNG_SCALE, PANEL_ROW_SEED, PANEL_SCATTER_SEED_OFFSET,
+    PANEL_HEX_FLICKER_SPEED, PANEL_HEX_FLICKER_X, PANEL_HEX_FLICKER_Y,
+    PANEL_HEX_FLICKER_DELAY, PANEL_DECODE_SPEED, PANEL_DECODE_X,
+    PANEL_DECODE_DELAY, PANEL_DECODE_ALT_SEED, PANEL_DECODE_SETTLE_SPEED,
+    PANEL_DECODE_SETTLE_DELAY,
 } from '../../constants/amaze-me';
-
-export interface SectionData {
-    title: string;
-    lines: string[];
-    xPos: number;
-}
+import type { AmazeMeSectionData } from '../../constants/amaze-me';
 
 interface CharEntry {
     realChar: string;
@@ -47,7 +55,7 @@ interface CharEntry {
 
 // Deterministic seeded PRNG — no Math.random() in hot path
 function rng(n: number): number {
-    const v = Math.sin(n * 127.1 + 311.7) * 43758.5453;
+    const v = Math.sin(n * PANEL_RNG_MULTIPLIER + PANEL_RNG_OFFSET) * PANEL_RNG_SCALE;
     return v - Math.floor(v);
 }
 
@@ -79,7 +87,7 @@ export class SectionPanel implements IDisposable, IAnimatable {
     private lastAnim = -1;
     private needsDraw = true;
 
-    constructor(data: SectionData) {
+    constructor(data: AmazeMeSectionData) {
         this.canvas = document.createElement('canvas');
         this.canvas.width  = PANEL_CANVAS_W;
         this.canvas.height = PANEL_CANVAS_H;
@@ -101,33 +109,35 @@ export class SectionPanel implements IDisposable, IAnimatable {
         this.group.add(this.mesh);
         this.group.position.set(data.xPos, 0, 0);
 
-        this.sectionCmd = data.title.replace(/^>\s*/, '').toLowerCase().replace(/\s+/g, '-');
-        this.cmdText = 'hildebrand@terminal:~$';
+        this.sectionCmd = data.title.replace(PANEL_SECTION_TITLE_PATTERN, '').toLowerCase().replace(PANEL_SPACE_PATTERN, '-');
+        this.cmdText = PANEL_CMD_TEXT;
         this.chars = this._buildChars(data.lines);
         this._draw();
     }
 
     private _buildChars(lines: string[]): CharEntry[] {
-        let total = 0;
-        lines.forEach(l => { total += (l.startsWith('#') ? l.slice(1) : l).length; });
+        const total = lines.reduce(
+            (sum, line) => sum + (line.startsWith(PANEL_LABEL_PREFIX) ? line.slice(PANEL_LABEL_PREFIX.length) : line).length,
+            0,
+        );
 
         const all: CharEntry[] = [];
         let idx = 0;
 
         lines.forEach((line, li) => {
             if (line === '') return;
-            const isLabel = line.startsWith('#');
-            const text = isLabel ? line.slice(1) : line;
+            const isLabel = line.startsWith(PANEL_LABEL_PREFIX);
+            const text = isLabel ? line.slice(PANEL_LABEL_PREFIX.length) : line;
             const fy = PANEL_FIRST_LINE_Y + li * PANEL_LINE_H;
 
             for (let ci = 0; ci < text.length; ci++, idx++) {
-                const seed = li * 300 + ci;
+                const seed = li * PANEL_ROW_SEED + ci;
                 all.push({
                     realChar: text[ci],
                     finalX: PANEL_PAD + ci * PANEL_CHAR_W,
                     finalY: fy,
                     sx: (rng(seed)        - 0.5) * PANEL_SCATTER_X,
-                    sy: (rng(seed + 1000) - 0.5) * PANEL_SCATTER_Y,
+                    sy: (rng(seed + PANEL_SCATTER_SEED_OFFSET) - 0.5) * PANEL_SCATTER_Y,
                     d:  (idx / total) * PANEL_STAGGER_MAX,
                     isLabel,
                 });
@@ -137,6 +147,10 @@ export class SectionPanel implements IDisposable, IAnimatable {
     }
 
     getGroup(): Group { return this.group; }
+
+    resize(scale: number): void {
+        this.group.scale.setScalar(scale);
+    }
 
     // Called by AmazeMeApp with proximity 0–1 (1 = section centred on screen)
     setTargetOpacity(proximity: number): void {
@@ -177,7 +191,7 @@ export class SectionPanel implements IDisposable, IAnimatable {
         // ── CARD BACKGROUND ─────────────────────────────────────────────
         ctx.fillStyle = PANEL_COLOR_CARD_BG;
         ctx.beginPath();
-        ctx.roundRect(0, 0, PANEL_CANVAS_W, PANEL_CANVAS_H, 10);
+        ctx.roundRect(0, 0, PANEL_CANVAS_W, PANEL_CANVAS_H, PANEL_CORNER_RADIUS);
         ctx.fill();
 
         // ── TITLE BAR ───────────────────────────────────────────────────
@@ -185,12 +199,7 @@ export class SectionPanel implements IDisposable, IAnimatable {
         ctx.fillRect(0, 0, PANEL_CANVAS_W, PANEL_TB_H);
 
         // macOS-style traffic lights
-        const lights: [number, string][] = [
-            [22, PANEL_COLOR_TRAFFIC_RED],
-            [46, PANEL_COLOR_TRAFFIC_YELLOW],
-            [70, PANEL_COLOR_TRAFFIC_GREEN],
-        ];
-        lights.forEach(([lx, lcolor]) => {
+        PANEL_TRAFFIC_LIGHTS.forEach(([lx, lcolor]) => {
             ctx.beginPath();
             ctx.arc(lx, PANEL_TB_H / 2, PANEL_TRAFFIC_LIGHT_R, 0, Math.PI * 2);
             ctx.fillStyle = lcolor;
@@ -198,31 +207,31 @@ export class SectionPanel implements IDisposable, IAnimatable {
         });
 
         // Brand name centred in title bar
-        ctx.font = `bold ${PANEL_FONT_SIZE_BRAND}px -apple-system, "Helvetica Neue", Arial, sans-serif`;
+        ctx.font = `bold ${PANEL_FONT_SIZE_BRAND}px ${PANEL_FONT_FAMILY_UI}`;
         ctx.fillStyle = PANEL_COLOR_TITLE_TEXT;
         ctx.textAlign = 'center';
-        ctx.fillText('Hildebrand', PANEL_CANVAS_W / 2, PANEL_TB_H / 2 + 5);
+        ctx.fillText(PANEL_BRAND_NAME, PANEL_CANVAS_W / 2, PANEL_TB_H / 2 + PANEL_TITLE_CENTER_Y_OFFSET);
         ctx.textAlign = 'left';
 
         ctx.fillStyle = PANEL_COLOR_DIVIDER;
-        ctx.fillRect(0, PANEL_TB_H - 1, PANEL_CANVAS_W, 1);
+        ctx.fillRect(0, PANEL_TB_H - PANEL_DIVIDER_H, PANEL_CANVAS_W, PANEL_DIVIDER_H);
 
         // ── PROMPT BAR ──────────────────────────────────────────────────
         ctx.fillStyle = PANEL_COLOR_PROMPTBAR;
         ctx.fillRect(0, PANEL_TB_H, PANEL_CANVAS_W, PANEL_PB_H);
 
-        ctx.font = `bold ${PANEL_FONT_SIZE_PROMPT}px "Courier New", monospace`;
+        ctx.font = `bold ${PANEL_FONT_SIZE_PROMPT}px ${PANEL_FONT_FAMILY_MONO}`;
         ctx.fillStyle = PANEL_COLOR_PROMPT_USER;
-        ctx.fillText(this.cmdText, PANEL_PAD, PANEL_TB_H + 23);
-        const pw = ctx.measureText(this.cmdText).width + 4;
+        ctx.fillText(this.cmdText, PANEL_PAD, PANEL_TB_H + PANEL_PROMPT_Y_OFFSET);
+        const pw = ctx.measureText(this.cmdText).width + PANEL_PROMPT_GAP;
         ctx.fillStyle = PANEL_COLOR_PROMPT_CMD;
-        ctx.fillText(`./run ${this.sectionCmd}`, PANEL_PAD + pw, PANEL_TB_H + 23);
+        ctx.fillText(`${PANEL_RUN_CMD_PREFIX} ${this.sectionCmd}`, PANEL_PAD + pw, PANEL_TB_H + PANEL_PROMPT_Y_OFFSET);
 
         ctx.fillStyle = PANEL_COLOR_DIVIDER;
-        ctx.fillRect(0, PANEL_TB_H + PANEL_PB_H - 1, PANEL_CANVAS_W, 1);
+        ctx.fillRect(0, PANEL_TB_H + PANEL_PB_H - PANEL_DIVIDER_H, PANEL_CANVAS_W, PANEL_DIVIDER_H);
 
         // ── ANIMATED CHARACTERS ─────────────────────────────────────────
-        ctx.font = `${PANEL_FONT_SIZE}px "Courier New", monospace`;
+        ctx.font = `${PANEL_FONT_SIZE}px ${PANEL_FONT_FAMILY_MONO}`;
 
         for (const ch of this.chars) {
             // Per-character local progress (staggered)
@@ -241,17 +250,19 @@ export class SectionPanel implements IDisposable, IAnimatable {
                 glyph = ch.realChar;
             } else if (lp < PANEL_DECODE_START) {
                 // In-flight hex flicker — changes with time so it looks "alive"
-                const fi = Math.floor(p * 28 + ch.finalX * 0.09 + ch.finalY * 0.04);
-                glyph = rng(fi + ch.d * 90) > 0.5 ? hx[0] : hx[1];
+                const fi = Math.floor(p * PANEL_HEX_FLICKER_SPEED + ch.finalX * PANEL_HEX_FLICKER_X + ch.finalY * PANEL_HEX_FLICKER_Y);
+                glyph = rng(fi + ch.d * PANEL_HEX_FLICKER_DELAY) > 0.5 ? hx[0] : hx[1];
             } else {
                 // Decode: probability ramps from 0→1 as lp goes DECODE_START→DECODE_LOCK
                 const dt = (lp - PANEL_DECODE_START) / (1 - PANEL_DECODE_START);
-                const fi = Math.floor(p * 38 + ch.finalX * 0.12 + ch.d * 50);
-                glyph    = rng(fi) < dt * dt ? ch.realChar : (rng(fi + 3) > 0.5 ? hx[0] : hx[1]);
+                const fi = Math.floor(p * PANEL_DECODE_SPEED + ch.finalX * PANEL_DECODE_X + ch.d * PANEL_DECODE_DELAY);
+                glyph    = rng(fi) < dt * dt ? ch.realChar : (rng(fi + PANEL_DECODE_ALT_SEED) > 0.5 ? hx[0] : hx[1]);
             }
 
             // Color: indigo hex during flight, white/violet once decoded
-            const decoded = lp >= PANEL_DECODE_LOCK || (lp > PANEL_CURSOR_BLINK_AT && rng(Math.floor(p * 55) + ch.d * 44) < PANEL_DECODE_SETTLE);
+            const decoded = lp >= PANEL_DECODE_LOCK
+                || (lp > PANEL_CURSOR_BLINK_AT
+                    && rng(Math.floor(p * PANEL_DECODE_SETTLE_SPEED) + ch.d * PANEL_DECODE_SETTLE_DELAY) < PANEL_DECODE_SETTLE);
             ctx.fillStyle = decoded
                 ? (ch.isLabel ? PANEL_COLOR_CHAR_LABEL : PANEL_COLOR_CHAR_BODY)
                 : PANEL_COLOR_CHAR_INFLIGHT;
@@ -269,19 +280,25 @@ export class SectionPanel implements IDisposable, IAnimatable {
             if (last) {
                 ctx.fillStyle = PANEL_COLOR_CURSOR;
                 ctx.fillRect(
-                    last.finalX + PANEL_CHAR_W + 2,
-                    last.finalY - PANEL_FONT_SIZE + 2,
-                    10,
-                    PANEL_FONT_SIZE + 3,
+                    last.finalX + PANEL_CHAR_W + PANEL_CURSOR_X_OFFSET,
+                    last.finalY - PANEL_FONT_SIZE + PANEL_CURSOR_Y_OFFSET,
+                    PANEL_CURSOR_W,
+                    PANEL_FONT_SIZE + PANEL_CURSOR_H_OFFSET,
                 );
             }
         }
 
         // ── CARD BORDER ─────────────────────────────────────────────────
         ctx.strokeStyle = PANEL_COLOR_BORDER;
-        ctx.lineWidth   = 1.5;
+        ctx.lineWidth   = PANEL_BORDER_W;
         ctx.beginPath();
-        ctx.roundRect(0.75, 0.75, PANEL_CANVAS_W - 1.5, PANEL_CANVAS_H - 1.5, 10);
+        ctx.roundRect(
+            PANEL_BORDER_INSET,
+            PANEL_BORDER_INSET,
+            PANEL_CANVAS_W - PANEL_BORDER_W,
+            PANEL_CANVAS_H - PANEL_BORDER_W,
+            PANEL_CORNER_RADIUS,
+        );
         ctx.stroke();
 
         // ── STATUS BAR ──────────────────────────────────────────────────
@@ -289,13 +306,13 @@ export class SectionPanel implements IDisposable, IAnimatable {
         ctx.fillStyle = PANEL_COLOR_TITLEBAR;
         ctx.fillRect(0, sy, PANEL_CANVAS_W, PANEL_SB_H);
         ctx.fillStyle = PANEL_COLOR_STATUS_DIVIDER;
-        ctx.fillRect(0, sy, PANEL_CANVAS_W, 1);
+        ctx.fillRect(0, sy, PANEL_CANVAS_W, PANEL_DIVIDER_H);
 
-        ctx.font = `${PANEL_FONT_SIZE_STATUS}px "Courier New", monospace`;
+        ctx.font = `${PANEL_FONT_SIZE_STATUS}px ${PANEL_FONT_FAMILY_MONO}`;
         ctx.fillStyle = PANEL_COLOR_STATUS_TEXT;
-        const pctStr = Math.round(p * 100).toString();
-        const pct = pctStr.length === 1 ? '00' + pctStr : pctStr.length === 2 ? '0' + pctStr : pctStr;
-        ctx.fillText(`DECODE ${pct}%  ·  hildebrand.dev  ·  ESC to exit`, PANEL_PAD, sy + 20);
+        const pctStr = Math.round(p * PANEL_PERCENT_BASE).toString();
+        const pct = pctStr.length < 3 ? ('00' + pctStr).slice(-3) : pctStr;
+        ctx.fillText(`DECODE ${pct}%  ·  ${PANEL_STATUS_DOMAIN}  ·  ${PANEL_STATUS_EXIT_HINT}`, PANEL_PAD, sy + PANEL_STATUS_Y_OFFSET);
     }
 
     dispose(): void {
